@@ -1,0 +1,18 @@
+server          = SQL5102.site4now.net;
+Initial Catalog = db_a49cbe_littleorange;
+User Id         = db_a49cbe_littleorange_admin;
+Password        = Orange@202202
+
+MVP Tabelas 
+-----------------------------------------------
+01 tblStatus
+02 tblPerfil
+03 tblDominios
+04 tblCondominios
+05 tblUsuarios
+06 tblUsuarioPerfil
+07 tblEspecialidade
+08 tblPrestador
+09 tblPrestadorEspecialidade
+10 tblAvaliacao
+11 tblAssinaturas
