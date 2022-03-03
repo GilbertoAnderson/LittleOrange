@@ -51,6 +51,10 @@ SET ANSI_PADDING OFF
 
 BEGIN-- .......................... apagando todas as tabelas
 
+-- .................................................................... 12 tblCliques
+	if Exists(Select name from sysobjects where name='tblCliques')Begin 
+		drop table dbo.tblCliques
+	End
 
 -- .................................................................... 11 tblAssinaturas
 	if Exists(Select name from sysobjects where name='tblAssinaturas')Begin 
@@ -213,7 +217,14 @@ begin
 	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
 	VALUES('ASSINATURA','ATRASADA', GETDATE(), 1)		
 
-
+-- .................................................................... 12 tblClique
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('CLIQUE','VALIDO', GETDATE(), 1)
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('CLIQUE','INVALIDO', GETDATE(), 1)
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('CLIQUE','EM ANALISE', GETDATE(), 1)
+	
 end
 
 
@@ -443,6 +454,7 @@ begin
 		[Senha]				varchar(020)      not null,
 		[Celular]			varchar(025)      not null,
 		[dtNascimento]		datetime,
+		[CPF_CNPJ]		    varchar(014),
 		[idStatus]			int,
 		CONSTRAINT [PK_tblUsuario] PRIMARY KEY CLUSTERED 
 		(
@@ -707,9 +719,9 @@ begin
 	create table dbo.tblPrestador(
 		[idPrestador]		int identity(1,1) not null,
 		[idCondominio]		int not null,
+		[idCanal]			int not null,
 		[idAbrangencia]		int not null,
 		[Empresa]			varchar(240)      not null,
-		[Logotipo]			varchar(240),
 		[Endereco]			varchar(240),
 		[Complemento]		varchar(100),
 		[Bairro]			varchar(160),
@@ -720,6 +732,7 @@ begin
 		[CodigoIBGE]		varchar(7),
 		[Email]				varchar(240)     not null,
 		[Celular]			varchar(25)      not null,
+		[CPF_CNPJ]		    varchar(014)     , -- CPF: 04305254867 11 casas CNPJ: XX. XXX. XXX/0001-XX
 		[Fone]				varchar(20),
 		Latitude			decimal(9,7),
 		Longitude			decimal(9,7),
@@ -756,6 +769,11 @@ begin
 		
 		
 		ALTER TABLE dbo.tblPrestador
+		ADD CONSTRAINT fk_tblPrestadorCanal
+		FOREIGN KEY (idCanal)
+		REFERENCES tblUsuario(idUsuario)
+		
+		ALTER TABLE dbo.tblPrestador
 		ADD CONSTRAINT fk_tblPrestadorAbrangencia
 		FOREIGN KEY ([idAbrangencia])
 		REFERENCES tblDominios(idDominio)
@@ -770,13 +788,13 @@ begin
 
 
 
-		insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [Logotipo], [Endereco],[Complemento],
-									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular], [CodigoIBGE], Latitude,
+		insert into tblPrestador([idCondominio],  [idAbrangencia], [Empresa], [idCanal],  [Endereco],[Complemento],
+									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular],[cpf_cnpj], [CodigoIBGE], Latitude,
 									Longitude,[Email],[idStatus])
 		values(  1, 
 				(select idDominio from tblDominios where Objeto = 'ABRANGENCIA' and Descricao = 'CONDOMINIO'),
 				'Gatto de Botas',
-				'',-- logotipo
+				(select idUsuario from tblUsuario where Nome      = 'Morador 01 Teste'),
 				'R. Esperico, 74 ',
 		        '',
 		        'Jardim do Mar',
@@ -786,6 +804,7 @@ begin
 		        ' 09750-310',
 				'11 41775596',
 				'11 41775596',
+				'12535141000198',
 				'3548708',
 				-23.6879702,
 				-46.5593572,
@@ -793,13 +812,13 @@ begin
 				(select idStatus   from tblStatus where Objeto = 'PRESTADOR' and Descricao = 'ATIVO'))
 		
 
-				insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [Logotipo], [Endereco],[Complemento],
-									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular], [CodigoIBGE], Latitude,
+				insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [idCanal], [Endereco],[Complemento],
+									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular],[cpf_cnpj], [CodigoIBGE], Latitude,
 									Longitude,[Email],[idStatus])
 				values(  1, 
 				(select idDominio from tblDominios where Objeto = 'ABRANGENCIA' and Descricao = 'CONDOMINIO'),
 				'Hospital Veterinário Cão Bernardo',
-				'',-- logotipo
+				(select idUsuario from tblUsuario where Nome      = 'Morador 03 Teste'),
 				'Rua Municipal, 140 ',
 		        '',
 		        'Centro',
@@ -809,6 +828,7 @@ begin
 		        '09710-210',
 				'(11) 4930-4561',
 				'(11) 4930-4561',
+				'20955677000190',
 				'3548708',
 				-23.7113035,
 				-46.5474405,
@@ -817,13 +837,13 @@ begin
 		
 
 
-		insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [Logotipo], [Endereco],[Complemento],
-									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular], [CodigoIBGE], Latitude,
+		insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [idCanal], [Endereco],[Complemento],
+									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular],[cpf_cnpj], [CodigoIBGE], Latitude,
 									Longitude,[Email],[idStatus])
 				values(  1, 
 				(select idDominio from tblDominios where Objeto = 'ABRANGENCIA' and Descricao = 'CONDOMINIO'),
 				'Total Vet',
-				'',-- logotipo
+				(select idUsuario from tblUsuario where Nome      = 'Morador 03 Teste'),
 				'Av. Turmalina, 133',
 		        '',
 		        'Aclimação',
@@ -833,6 +853,7 @@ begin
 		        '01531-020',
 				'(11) 3209-4624',
 				'(11) 3209-4624',
+				'8652775000153',
 				'3550308',
 				-23.5710487,
 				-46.6312208,
@@ -840,13 +861,13 @@ begin
 				(select idStatus   from tblStatus where Objeto = 'PRESTADOR' and Descricao = 'ATIVO'))
 		
 
-		insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [Logotipo], [Endereco],[Complemento],
-									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular], [CodigoIBGE], Latitude,
+		insert into tblPrestador([idCondominio], [idAbrangencia], [Empresa], [idCanal], [Endereco],[Complemento],
+									[Bairro], [Cidade],[UF], [Pais], [CEP], [Fone], [Celular],[cpf_cnpj], [CodigoIBGE], Latitude,
 									Longitude,[Email],[idStatus])
 				values(  1, 
 				(select idDominio from tblDominios where Objeto = 'ABRANGENCIA' and Descricao = 'CONDOMINIO'),
 				'Hospital Veterinário Quatro Patas',
-				'',-- logotipo
+				(select idUsuario from tblUsuario where Nome      = 'Morador 03 Teste'),
 				'Estr. das Lágrimas, 866',
 		        '',
 		        'Jardim Sao Caetano',
@@ -856,6 +877,7 @@ begin
 		        '09581-360',
 				'(11) 4238-33374',
 				'(11) 4238-3337',
+				'34537160000196',
 				'3548807',
 				-23.5710487,
 				-46.6312208,
@@ -1157,5 +1179,99 @@ begin
 		)
 		
 end
+
+-- .................................................................... 12 tblCliques
+begin 
+
+		if Exists(Select name from sysobjects where name='tblCliques')Begin 
+			drop table dbo.tblCliques
+		End
+		
+		create table dbo.tblCliques(
+		[idClique]			int identity(1,1) not null,
+		[idPrestador]		int not null,
+		[idMorador]			int not null,
+		[dtClique]			datetime,
+		[idStatus]			int not null,
+		
+		CONSTRAINT [PK_tblCliques] PRIMARY KEY CLUSTERED 
+		(
+			[idClique] ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]
+
+
+		ALTER TABLE dbo.tblCliques
+		ADD CONSTRAINT fk_tblCliques_Status
+		FOREIGN KEY (idStatus)
+		REFERENCES tblStatus(idStatus)
+		
+		ALTER TABLE dbo.tblCliques
+		ADD CONSTRAINT fk_tblCliques_Prestador
+		FOREIGN KEY (idPrestador)
+		REFERENCES tblPrestador(idPrestador)
+
+		
+		ALTER TABLE dbo.tblCliques
+		ADD CONSTRAINT fk_tblCliques_Morador
+		FOREIGN KEY (idMorador)
+		REFERENCES tblUsuario(idUsuario)
+				
+
+		insert into tblCliques([idPrestador],[idMorador], [dtClique], [idStatus])		
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				getdate(),	
+				(select idStatus      from tblStatus    where Objeto  = 'CLIQUE'   and Descricao = 'VALIDO')
+		)
+
+		
+		insert into tblCliques([idPrestador],[idMorador], [dtClique], [idStatus])		
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				getdate(),	
+				(select idStatus      from tblStatus    where Objeto  = 'CLIQUE'   and Descricao = 'EM ANALISE')
+		)
+
+		
+		insert into tblCliques([idPrestador],[idMorador], [dtClique], [idStatus])		
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				getdate(),	
+				(select idStatus      from tblStatus    where Objeto  = 'CLIQUE'   and Descricao = 'INVALIDO')
+		)
+		
+		insert into tblCliques([idPrestador],[idMorador], [dtClique], [idStatus])		
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Morador 01 Teste' ),
+				getdate(),	
+				(select idStatus      from tblStatus    where Objeto  = 'CLIQUE'   and Descricao = 'VALIDO')
+		)
+
+		
+		insert into tblCliques([idPrestador],[idMorador], [dtClique], [idStatus])		
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Morador 02 Teste' ),
+				getdate(),	
+				(select idStatus      from tblStatus    where Objeto  = 'CLIQUE'   and Descricao = 'VALIDO')
+		)
+
+
+		
+end
+
+
+
 
 END
