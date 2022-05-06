@@ -1,0 +1,187 @@
+﻿@model TheLittleOrangeChannel.Models.tblPrestador
+
+@{
+    ViewBag.Title = "Planos";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="bg-fundo">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3> @Html.DisplayFor(model => model.Empresa) </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h5> Fone: @Html.DisplayFor(model => model.Celular) </h5>
+                </div>
+                <div class="col-md-10">
+                    <h5>indicado por - @ViewBag.IndicadoPor do @ViewBag.Condominio de @ViewBag.Cidade - @ViewBag.Estado</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>Escolha o melhor plano para sua empresa</h5>
+                </div>
+                <div class="col-md-10">
+                    <h4>@ViewBag.Abrangencia - @ViewBag.ValorPlanoMensal</h4>
+                </div>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.idPrestador)
+            @Html.HiddenFor(model => model.idAbrangencia)
+            @Html.HiddenFor(model => model.idPlano)
+            @Html.HiddenFor(model => model.idFormaPagto)
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8">
+
+                    <div class="list-group-item list-group-item-action list-group-item-orange">
+
+
+                        @if (@ViewBag.Abrangencia == "CIDADE")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=http://pag.ae/7Yeiwb6b3" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+
+                        }
+                        @if (@ViewBag.Abrangencia == "ESTADO")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=http://pag.ae/7Yeix1s9n" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "REGIAO")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=http://pag.ae/7YeixAK9t" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "PAIS")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=http://pag.ae/7YeiyehcJ" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "CONTINENTAL")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=http://pag.ae/7YeiyFDr8" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "GLOBAL")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=http://pag.ae/7Yeiz6EB6" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+
+                        <h4>Mensal</h4>
+                        Parcelas recorrentes de @ViewBag.ValorPlanoMensal<br />
+
+                    </div>
+
+
+                    <div class="list-group-item list-group-item-action list-group-item-orange">
+                        @if (@ViewBag.Abrangencia == "CIDADE")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeiqBZm3" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "ESTADO")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeirBJnR" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "REGIAO")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeisziTR" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "PAIS")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7Yeitaf68" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "CONTINENTAL")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeitW8hR" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "GLOBAL")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeiuoShN" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        <h4>Anual</h4>
+                        1 parcela de @ViewBag.ValorPlanoAnual <br /> <i>(pode ser dividido pelo PagSeguro em 3 vezes)</i>
+                    </div>
+
+                    <div class="list-group-item list-group-item-action list-group-item-orange">
+                        @if (@ViewBag.Abrangencia == "CIDADE")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeirmBHJ" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "ESTADO")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeirT1S7" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "REGIAO")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeisQeKo" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "PAIS")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeitvxHM" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "CONTINENTAL")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7Yeiu8Ajs" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        @if (@ViewBag.Abrangencia == "GLOBAL")
+                        {
+                            <a href="https://api.whatsapp.com/send?phone=55 @ViewBag.Celular &text=https://pag.ae/7YeiuBsGa" target="_blank"> <input type="button" value="PagSeguro" class="btn btn-success" /></a>
+                        }
+                        <h4>3 Anos</h4>
+                        1 parcela de @ViewBag.ValorPlano3Anos <br /> <i>(pode ser dividido pelo PagSeguro em 6 vezes)</i>
+                    </div>
+                    <div class="col-md-2">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*var escolha = "@ViewBag.Abrangencia";
+        if (escolha != "") {
+            Escolha("Abrangencia", escolha);
+        }*@
+
+    });
+
+        function Escolha(Abrangencia)
+        {
+
+            //var cubagem = $("#Cubagem").val();
+            var ln_prestador = document.getElementById("idPrestador").Value;
+            var ls_Abrangecia = Abrangencia;
+            alert(ln_prestador);
+            alert(ls_Abrangecia);
+
+        }
+    
+
+
+      
+
+
+    </script>
+
+
+
+
+}

@@ -1,0 +1,107 @@
+﻿@model TheLittleOrangeChannel.Models.tblPrestador
+
+@{
+    ViewBag.Title = "Pagamento";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="bg-fundo">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3> @Html.DisplayFor(model => model.Empresa) </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h5> Fone: @Html.DisplayFor(model => model.Celular) </h5>
+                </div>
+                <div class="col-md-10">
+                    <h5>indicado por - @ViewBag.IndicadoPor do @ViewBag.Condominio de @ViewBag.Cidade - @ViewBag.Estado</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>Enviar para PagSeguro</h5>
+                </div>
+                <div class="col-md-10">
+                    <h4>@ViewBag.Abrangencia - @ViewBag.Plano - @ViewBag.ValorPlanoTotal</h4>
+                </div>
+            </div>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.idPrestador)
+            @Html.HiddenFor(model => model.idAbrangencia)
+            @Html.HiddenFor(model => model.idPlano)
+            @Html.HiddenFor(model => model.idFormaPagto)
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8">
+                    <a href='@Url.Action("EnvioPagSeguro",  new { id = ViewBag.id,  tipoAbrangencia = ViewBag.Abrangencia , tipoPlano = ViewBag.Plano, valor = ViewBag.ValorPlano,  formaPagto = ViewBag.formaPagto})' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Enviar Pagamento</h4>
+                        Nome :  @Html.DisplayFor(model => model.Empresa) <br />
+                        Produto: Assinatura @ViewBag.Abrangencia - @ViewBag.Plano<br />
+                        Valor:   @ViewBag.ValorPlanoTotal  <br />
+                        Forma Pagamento:   @ViewBag.formaPagto  <br />
+                        <i>(assim que seu pagamento for efetivado iremos validar sua abrangência)</i>
+                    </a>
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*var escolha = "@ViewBag.Abrangencia";
+        if (escolha != "") {
+            Escolha("Abrangencia", escolha);
+        }*@
+
+    });
+
+        function Escolha(Abrangencia)
+        {
+
+            //var cubagem = $("#Cubagem").val();
+            var ln_prestador = document.getElementById("idPrestador").Value;
+            var ls_Abrangecia = Abrangencia;
+            alert(ln_prestador);
+            alert(ls_Abrangecia);
+
+        }
+    
+
+
+      
+
+
+    </script>
+
+
+
+
+}

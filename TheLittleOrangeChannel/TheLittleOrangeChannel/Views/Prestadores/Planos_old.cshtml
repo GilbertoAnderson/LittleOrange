@@ -1,0 +1,380 @@
+﻿@model TheLittleOrangeChannel.Models.tblPrestador
+
+@{
+    ViewBag.Title = "Prestador de Serviços";
+}
+
+
+<h2>@ViewBag.Condominio</h2>
+<h4>indicado por - @ViewBag.IndicadoPor</h4>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h5>
+        @Html.ActionLink("Empresa", "Empresa", "Prestadores", new { id = Model.idPrestador }, null) |
+        @Html.ActionLink("Plano", "Planos", "Prestadores", new { id = Model.idPrestador }, null) |
+        @Html.ActionLink("Historico", "Historico", "Prestadores", new { id = Model.idPrestador }, null) |
+        @Html.ActionLink("Parcelas", "Parcelas", "Prestadores", new { id = Model.idPrestador }, null)
+
+    </h5>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idPrestador)
+    @Html.HiddenFor(model => model.idAbrangencia)
+
+
+    @*@Html.HiddenFor(model => model.idCondominio)
+        @Html.HiddenFor(model => model.idCanal)
+        @Html.HiddenFor(model => model.idStatus)
+        @Html.HiddenFor(model => model.CodigoIBGE)
+        @Html.HiddenFor(model => model.Longitude)
+        @Html.HiddenFor(model => model.Latitude)*@
+
+
+    <!--<div id="divEmpresa" style="display:none">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Empresa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Empresa, new { htmlAttributes = new { @class = "form-control", style = "min-width:760px;" } })
+                @Html.ValidationMessageFor(model => model.Empresa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control", style = "min-width:400px;" } })
+                @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control", style = "min-width:400px;" } })
+                @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control", style = "min-width:400px;" } })
+                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UF, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.UF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UF, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+
+            </div>
+
+            @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", style = "min-width:760px;" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CPF_CNPJ, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.CPF_CNPJ, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CPF_CNPJ, "", new { @class = "text-danger" })
+            </div>-->
+    @*@Html.LabelFor(model => model.CodigoIBGE, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.CodigoIBGE, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CodigoIBGE, "", new { @class = "text-danger" })
+        </div>*@
+    <!--</div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Celular, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.Fone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Fone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Fone, "", new { @class = "text-danger" })
+        </div>
+    </div>-->
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <!--</div>-->
+
+<div id="divPlano" style="display:block">
+
+
+    @Html.Hidden("Abrangencia", new { ViewBag.Abrangencia })
+    @Html.Hidden("Plano", new { ViewBag.Plano })
+    @Html.Hidden("Pagamento", new { ViewBag.Pagamento })
+
+    <h4>
+        <label id="lblEscolha">Escolha - </label> <label id="lblAbrangencia">@ViewBag.Abrangencia</label>  | <label id="lblPlano">@ViewBag.Plano</label>
+        | <label id="lblPagamento">@ViewBag.Pagamento </label>
+        | Valor Total = R$<label id="lblValorTotal">0</label>,00 por ano!
+    </h4>
+    <div class="form-group">
+        <h3>Abrangência</h3>
+        <div class="col-md-10">
+            <div class="divlink" id="divCondominio" onclick="return Escolha('Abrangencia','Condominio')">
+                Condominio<br /><br />
+                Free
+            </div>
+            <div class="divlink" id="divCidade" onclick="return Escolha('Abrangencia','Cidade')">
+                Cidade<br /><br />
+                R$26,00
+            </div>
+            <div class="divlink" id="divEstado" onclick="return Escolha('Abrangencia','Estado')">
+                Estado<br /><br />
+                R$35,00
+            </div>
+            <div class="divlink" id="divRegiao" onclick="return Escolha('Abrangencia','Regiao')">
+                Região<br /><br />
+                R$53,00
+            </div>
+            <div class="divlink" id="divPais" onclick="return Escolha('Abrangencia','Pais')">
+                País<br /><br />
+                R$143,00
+            </div>
+            <div class="divlink" id="divContinente" onclick="return Escolha('Abrangencia','Continente')">
+                Continente<br /><br />
+                R$260,00
+            </div>
+            <div class="divlink" id="divMundial" onclick="return Escolha('Abrangencia','Mundial')">
+                Mundial<br /><br />
+                R$350,00
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3>Planos</h3>
+        <div class="col-md-10">
+            <div class="divlink" id="divMensal" onclick="return Escolha('Plano','Mensal')">
+                <br />Mensal
+            </div>
+            <div class="divlink" id="divUmano" onclick="return Escolha('Plano','Um Ano')">
+                <br />1 Ano
+            </div>
+            <div class="divlink" id="divUmanoparcelado" onclick="return Escolha('Plano','Um Ano Parcelado')">
+                1 Ano<br /><br />Parcelado
+            </div>
+            <div class="divlink" id="divTresanos" onclick="return Escolha('Plano','Tres Anos')">
+                <br />3 Anos
+            </div>
+            <div class="divlink" id="divTresanosparcelado" onclick="return Escolha('Plano','Tres Anos Parcelado')">
+                3 Anos<br /><br />Parcelado
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3>Forma Pagamento</h3>
+        <div class="col-md-10">
+            <div class="divlink" id="divBoleto" onclick="return Escolha('Pagamento','Boleto')">
+                <br />Boleto
+            </div>
+            <div class="divlink" id="divCredito" onclick="return Escolha('Pagamento','Credito')">
+                Cartão de Crédito<br />
+            </div>
+            <div class="divlink" id="divPix" onclick="return Escolha('Pagamento','PIX')">
+                <br />PIX
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+    <div id="divHistorico" style="display:none">
+        Historico
+    </div>
+    <div id="divParcelas" style="display:none">
+        Parcelas
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="@Url.Action("Index")" class="btn btn-warning">Sair sem Salvar</a>
+            <input type="submit" id="btnSalvar" value="Salvar" class="btn btn-success" onclick="return Salvar();" />
+        </div>
+    </div>
+
+
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var escolha = "@ViewBag.Abrangencia";
+        if (escolha != "") {
+            Escolha("Abrangencia", escolha);
+        }
+
+        var escolha2 = "@ViewBag.Plano";
+        if (escolha2 != "") {
+            Escolha("Plano", escolha2);
+        }
+
+        var escolha3 = "@ViewBag.Pagamento";
+        if (escolha3 != "") {
+            Escolha("Pagamento", escolha3);
+        }
+
+    });
+
+
+    function camelize(str) {
+        str = str.replace(" ", "");
+        str = str.replace(" ", "");
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        }
+
+        function Escolha(acao, escolha)
+        {
+            var lnValor = 0;
+            var lnTotal = 0;
+            var lnParcelas = 12;
+            //.................................................
+            var DivNome = "div" + camelize(escolha);
+           // alert(DivNome);
+            //.................................................
+            if (acao == "Abrangencia")
+            {
+                //................. cor inicial para todos
+                document.getElementById("divCondominio").style.backgroundColor = "#FDB53D";
+                document.getElementById("divCidade").style.backgroundColor = "#FDB53D";
+                document.getElementById("divEstado").style.backgroundColor = "#FDB53D";
+                document.getElementById("divRegiao").style.backgroundColor = "#FDB53D";
+                document.getElementById("divPais").style.backgroundColor = "#FDB53D";
+                document.getElementById("divContinente").style.backgroundColor = "#FDB53D";
+                document.getElementById("divMundial").style.backgroundColor = "#FDB53D";
+                //................. cor de selacao para o escolhido
+                document.getElementById(DivNome).style.backgroundColor = "#FE7F18";
+                document.getElementById("Abrangencia").value = escolha;
+                document.getElementById("lblAbrangencia").innerHTML = escolha;
+
+                //.................... define Valor
+                if (DivNome == "divCidade") { lnValor = 25; }
+                if (DivNome == "divEstado") { lnValor = 35; }
+                if (DivNome == "divRegiao") { lnValor = 53; }
+                if (DivNome == "divPais") { lnValor = 143; }
+                if (DivNome == "divContinente") { lnValor = 260; }
+                if (DivNome == "divMundial") { lnValor = 530; }
+
+            }
+            if (acao == "Plano") {
+                //................. cor inicial para todos
+                document.getElementById("divMensal").style.backgroundColor = "#FDB53D";
+                document.getElementById("divUmano").style.backgroundColor = "#FDB53D";
+                document.getElementById("divUmanoparcelado").style.backgroundColor = "#FDB53D";
+                document.getElementById("divTresanos").style.backgroundColor = "#FDB53D";
+                document.getElementById("divTresanosparcelado").style.backgroundColor = "#FDB53D";
+                //................. cor de selacao para o escolhido
+                document.getElementById(DivNome).style.backgroundColor = "#FE7F18";
+                document.getElementById("Plano").value = escolha;
+                document.getElementById("lblPlano").innerHTML = escolha;
+
+
+                //.................... define total
+                if (DivNome == "divMensal") { lnParcelas = 12; }
+                if (DivNome == "divUmano") { lnParcelas = 1; }
+                if (DivNome == "divUmanoparcelado") { lnParcelas = 1; }
+                if (DivNome == "divTresanos") { lnParcelas = 1; }
+                if (DivNome == "divTresanosparcelado") { lnParcelas = 1; }
+
+                lnTotal = lnParcelas * lnValor
+                document.getElementById("lblValorTotal").innerHTML = lnTotal;
+
+
+            }
+            if (acao == "Pagamento") {
+                //................. cor inicial para todos
+                document.getElementById("divBoleto").style.backgroundColor = "#FDB53D";
+                document.getElementById("divCredito").style.backgroundColor = "#FDB53D";
+                document.getElementById("divPix").style.backgroundColor = "#FDB53D";
+                //................. cor de selacao para o escolhido
+                document.getElementById(DivNome).style.backgroundColor = "#FE7F18";
+                document.getElementById("Pagamento").value = escolha;
+                document.getElementById("lblPagamento").innerHTML =  escolha;
+            }
+        }
+
+        //function showEmpresa() {
+        //    document.getElementById("divEmpresa").style.display = 'block';
+        //    document.getElementById("divPlano").style.display = 'none';
+        //    document.getElementById("divHistorico").style.display = 'none';
+        //    document.getElementById("divParcelas").style.display = 'none';
+        //}
+
+
+        //function showPlano() {
+        //    document.getElementById("divEmpresa").style.display = 'none';
+        //    document.getElementById("divPlano").style.display = 'block';
+        //    document.getElementById("divHistorico").style.display = 'none';
+        //    document.getElementById("divParcelas").style.display = 'none';
+        //}
+
+        //function showHistorico() {
+        //    divHistorico.style.display = "block";
+        //}
+
+        //function showParcelas() {
+        //    divParcelas.style.display = "block";
+        //}
+
+
+</script>
+        /**/
+}

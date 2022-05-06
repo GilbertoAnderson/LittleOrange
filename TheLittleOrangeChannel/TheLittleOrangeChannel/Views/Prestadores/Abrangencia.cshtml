@@ -1,0 +1,133 @@
+﻿@using TheLittleOrangeChannel.Controllers.Shared;
+@model TheLittleOrangeChannel.Models.tblPrestador
+@{
+    ViewBag.Title = "Abrangência";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="bg-fundo">
+    @if (SessionProfile.Logado && (SessionProfile.ADM || SessionProfile.Canal))
+    {
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3> @Html.DisplayFor(model => model.Empresa) </h3>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="@Url.Action("Menu", "Prestadores")"> <input type="button" value="Voltar" class="btn btn-default" /></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h5> Fone: @Html.DisplayFor(model => model.Celular) </h5>
+                </div>
+                <div class="col-md-10">
+                    <h5>indicado por - @ViewBag.IndicadoPor do @ViewBag.Condominio de @ViewBag.Cidade - @ViewBag.Estado</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>Escolha até onde você quer ser encontrado</h5>
+                </div>
+                <div class="col-md-10">
+                </div>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.idPrestador)
+            @Html.HiddenFor(model => model.idAbrangencia)
+            @Html.HiddenFor(model => model.idPlano)
+            @Html.HiddenFor(model => model.idFormaPagto)
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8">
+
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Condominio" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Condominio</h4>
+                        Free<br />Somente os moradores do @ViewBag.Condominio poderão te localizar!
+                    </a>
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Cidade" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Cidade</h4>
+                        R$26,00<br />
+                        Todas os usuários da cidade de  @ViewBag.Cidade conseguirão te encontrar!
+                    </a>
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Estado" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Estado</h4>
+                        R$35,00<br />
+                        Todas os usuários do estado de  @ViewBag.Estado conseguirão te encontrar!
+                    </a>
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Regiao" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Região</h4>
+                        R$53,00<br />
+                    </a>
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Pais" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>País</h4>
+                        R$143,00<br />
+                    </a>
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Continente" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Continente</h4>
+                        R$260,00<br />
+                    </a>
+                    <a href='@Url.Action("Planos", new { id = ViewBag.id, tipoAbrangencia = "Mundial" })' class="list-group-item list-group-item-action list-group-item-orange">
+                        <h4>Mundial</h4>
+                        R$350,00<br />
+                    </a>
+
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+
+        </div>
+    }
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*var escolha = "@ViewBag.Abrangencia";
+        if (escolha != "") {
+            Escolha("Abrangencia", escolha);
+        }*@
+
+    });
+
+        function Escolha(Abrangencia)
+        {
+
+            //var cubagem = $("#Cubagem").val();
+            var ln_prestador = document.getElementById("idPrestador").Value;
+            var ls_Abrangecia = Abrangencia;
+            alert(ln_prestador);
+            alert(ls_Abrangecia);
+
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+
+}

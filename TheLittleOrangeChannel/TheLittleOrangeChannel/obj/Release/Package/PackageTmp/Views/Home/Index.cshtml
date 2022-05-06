@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+@using TheLittleOrangeChannel.Controllers.Shared;
+
+@if (SessionProfile.ADM || SessionProfile.Canal)
+{
+    <div class="bg-fundo">
+        <div class="loginForm">
+            <h2>Consulta de clientes </h2>
+            <br />
+            <a href="+ @Url.Action("Prestadores", "~/Prestadores", new { strCriterio = "Prospectado" }) +" class="list-group-item list-group-item-action list-group-item-orange">
+                <h4> Prospectados</h4>
+                Enviamos as mensagens<br />
+            </a>
+            <br />
+            <a href="+ @Url.Action("Prestadores", "~/Prestadores", new { strCriterio = "Oportunidade" }) +" class="list-group-item list-group-item-action list-group-item-orange">
+                <h4> Oportunidade</h4>
+                Responderam as mensagens<br />
+            </a>
+            <br />
+            <a href="+ @Url.Action("Prestadores", "Prestadores", new { strCriterio = "Negociando" }) +" class="list-group-item list-group-item-action list-group-item-orange">
+                <h4> Negociando</h4>
+                Estamos fechando um plano<br />
+            </a>
+            <br />
+            <a href="+ @Url.Action("Prestadores", "Prestadores", new { strCriterio = "Pagamento" }) +" class="list-group-item list-group-item-action list-group-item-orange">
+                <h4> Pagamento</h4>
+                Estão efetuando o pagamento<br />
+            </a>
+            <br />
+            <a href="+ @Url.Action("Prestadores", "Prestadores", new { strCriterio = "Ativo" }) +" class="list-group-item list-group-item-action list-group-item-orange">
+                <h4> Ativos</h4>
+                Já são nossos clientes<br />
+            </a>
+            <br />
+            <a href="+ @Url.Action("Prestadores", "Prestadores", new { strCriterio = "" }) +" class="list-group-item list-group-item-action list-group-item-orange">
+                <h4> Todos</h4>
+                Todos clientes registrados<br />
+            </a>
+
+
+        </div>
+    </div>
+
+}

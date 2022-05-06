@@ -1,0 +1,207 @@
+﻿@using TheLittleOrangeChannel.Controllers.Shared;
+@model TheLittleOrangeChannel.Models.tblPrestador
+
+@{
+    ViewBag.Title = "Planos";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="bg-fundo">
+
+    @if (SessionProfile.Logado && (SessionProfile.ADM || SessionProfile.Canal))
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <h3> @Html.DisplayFor(model => model.Empresa) </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h5> Fone: @Html.DisplayFor(model => model.Celular) </h5>
+            </div>
+            <div class="col-md-10">
+                <h5>indicado por - @ViewBag.IndicadoPor do @ViewBag.Condominio de @ViewBag.Cidade - @ViewBag.Estado</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h5>Escolha o melhor plano para sua empresa</h5>
+            </div>
+            <div class="col-md-10">
+                <h4>@ViewBag.Abrangencia - @ViewBag.ValorPlanoMensal</h4>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idPrestador)
+        @Html.HiddenFor(model => model.idAbrangencia)
+        @Html.HiddenFor(model => model.idPlano)
+        @Html.HiddenFor(model => model.idFormaPagto)
+
+
+        <div class="row">
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+            <div class="col-md-8">
+
+                <div class="list-group-item list-group-item-action list-group-item-orange">
+                    @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "http://pag.ae/7Yeiwb6b3"; }
+                    @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "http://pag.ae/7Yeix1s9n"; }
+                    @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "http://pag.ae/7YeixAK9t"; }
+                    @if (@ViewBag.Abrangencia == "PAIS") { ViewBag.linkPagseguro = "http://pag.ae/7YeiyehcJ"; }
+                    @if (@ViewBag.Abrangencia == "CONTINENTAL") { ViewBag.linkPagseguro = "http://pag.ae/7YeiyFDr8"; }
+                    @if (@ViewBag.Abrangencia == "GLOBAL") { ViewBag.linkPagseguro = "http://pag.ae/7Yeiz6EB6"; }
+
+
+                    <input id="btnPagSeguro" type="button" value="PagSeguro" onclick="return enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Mensal','@ViewBag.ValorPlanoMensal', '@ViewBag.linkPagseguro','@ViewBag.Empresa')" class="btn btn-success" />
+
+                    <h4>Mensal</h4>
+                    Parcelas recorrentes de @ViewBag.ValorPlanoMensal<br />
+
+                </div>
+
+
+                <div class="list-group-item list-group-item-action list-group-item-orange">
+                    @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "https://pag.ae/7YeiqBZm3"; }
+                    @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "https://pag.ae/7YeirBJnR"; }
+                    @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "https://pag.ae/7YeisziTR"; }
+                    @if (@ViewBag.Abrangencia == "PAIS") { ViewBag.linkPagseguro = "https://pag.ae/7Yeitaf68"; }
+                    @if (@ViewBag.Abrangencia == "CONTINENTAL") { ViewBag.linkPagseguro = "https://pag.ae/7YeitW8hR"; }
+                    @if (@ViewBag.Abrangencia == "GLOBAL") { ViewBag.linkPagseguro = "https://pag.ae/7YeiuoShN"; }
+
+
+                    <input id="btnPagSeguro" type="button" value="PagSeguro" onclick="return enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Anual','@ViewBag.ValorPlanoAnual', '@ViewBag.linkPagseguro','@ViewBag.Empresa')" class="btn btn-success" />
+
+                    <h4>Anual</h4>
+                    1 parcela de @ViewBag.ValorPlanoAnual <br /> <i>(pode ser dividido pelo PagSeguro em 3 vezes)</i>
+                </div>
+
+                <div class="list-group-item list-group-item-action list-group-item-orange">
+
+                    @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "https://pag.ae/7YeirmBHJ"; }
+                    @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "https://pag.ae/7YeirT1S7"; }
+                    @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "https://pag.ae/7YeisQeKo"; }
+                    @if (@ViewBag.Abrangencia == "PAIS") { ViewBag.linkPagseguro = "https://pag.ae/7YeitvxHM"; }
+                    @if (@ViewBag.Abrangencia == "CONTINENTAL") { ViewBag.linkPagseguro = "https://pag.ae/7Yeiu8Ajs"; }
+                    @if (@ViewBag.Abrangencia == "GLOBAL") { ViewBag.linkPagseguro = "https://pag.ae/7YeiuBsGa"; }
+
+
+                    <input id="btnPagSeguro" type="button" value="PagSeguro" onclick="return enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', '3 Anos','@ViewBag.ValorPlano3Anos', '@ViewBag.linkPagseguro','@ViewBag.Empresa')" class="btn btn-success" />
+
+                    <h4>3 Anos</h4>
+                    1 parcela de @ViewBag.ValorPlano3Anos <br /> <i>(pode ser dividido pelo PagSeguro em 6 vezes)</i>
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*var escolha = "@ViewBag.Abrangencia";
+        if (escolha != "") {
+            Escolha("Abrangencia", escolha);
+        }*@
+
+    });
+
+        function Escolha(Abrangencia)
+        {
+
+            //var cubagem = $("#Cubagem").val();
+            var ln_prestador = document.getElementById("idPrestador").Value;
+            var ls_Abrangecia = Abrangencia;
+            alert(ln_prestador);
+            alert(ls_Abrangecia);
+
+        }
+
+
+
+        function enviarPlano(celular,  idPrestador, abrangencia, plano, valor, linkPagseguro, empresa) {
+
+            var celular = "55" + celular;
+            var ratreador = addZeroes(idPrestador,6)
+            var texto = "The Little Orange Club \n" +
+                //"Descrição do Pedido \n" +
+                "- - - - - - - - - - - - - - - - - \n" +
+                "Empresa: " + empresa + " \n" +
+                "Abrangência: " + abrangencia + " \n" +
+                "Plano: . . . . . . " + plano + " \n" +
+                "Valor: . . . . . . " + valor + " \n" +
+                "Rastreador : " + ratreador + " \n \n" +
+                "identifique assim o pagto  \n" +
+                "- - - - - - - - - - - - - - - - - \n" +
+                "[" + ratreador + "] - " + empresa + " \n" +
+                "- - - - - - - - - - - - - - - - - \n \n " +
+                "clique no link para ir para PagSeguro  \n  " + linkPagseguro + " \n \n" +
+                "Abrangência será efetivada na confirmação do pagamento!\n" +
+                "Obrigado \n \n" ;
+
+            texto = window.encodeURIComponent(texto);
+            window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
+
+
+            $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("CriarParcelas", "Prestadores")',
+                data: {
+                    "idPrestador": idPrestador,
+                    "abrangencia": abrangencia,
+                    "plano": plano,
+                    "valor": valor,
+                    "canal":Session["idUsuario"]
+
+                },
+                success:
+
+                function (resultado) {
+                    alert(resultado);
+                },
+            });
+            location.reload();
+
+        }
+
+        function addZeroes(num, len) {
+            var numberWithZeroes = String(num);
+            var counter = numberWithZeroes.length;
+
+            while (counter < len) {
+
+                numberWithZeroes = "0" + numberWithZeroes;
+
+                counter++;
+
+            }
+
+        return numberWithZeroes;
+        }
+
+
+
+</script>
+
+
+    }
+
+}

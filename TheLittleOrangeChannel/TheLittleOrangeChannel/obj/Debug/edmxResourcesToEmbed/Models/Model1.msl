@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TheLittleOrangeModelStoreContainer" CdmEntityContainer="TheLittleOrangeEntities">
+    <FunctionImportMapping FunctionImportName="sp_ConvitePrestador" FunctionName="TheLittleOrangeModel.Store.sp_ConvitePrestador" />
+    <FunctionImportMapping FunctionImportName="sp_ConvitePrestadorEmail" FunctionName="TheLittleOrangeModel.Store.sp_ConvitePrestadorEmail" />
+    <FunctionImportMapping FunctionImportName="sp_ConvitePrestadorWhatsapp" FunctionName="TheLittleOrangeModel.Store.sp_ConvitePrestadorWhatsapp" />
+    <EntitySetMapping Name="tblAssinaturas">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblAssinaturas">
+        <MappingFragment StoreEntitySet="tblAssinaturas">
+          <ScalarProperty Name="Log" ColumnName="Log" />
+          <ScalarProperty Name="DiaPagamento" ColumnName="DiaPagamento" />
+          <ScalarProperty Name="ValorContrato" ColumnName="ValorContrato" />
+          <ScalarProperty Name="dtTermino" ColumnName="dtTermino" />
+          <ScalarProperty Name="dtInicio" ColumnName="dtInicio" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idAbrangencia" ColumnName="idAbrangencia" />
+          <ScalarProperty Name="idCanal" ColumnName="idCanal" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+          <ScalarProperty Name="idAssinatura" ColumnName="idAssinatura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAvaliacao">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblAvaliacao">
+        <MappingFragment StoreEntitySet="tblAvaliacao">
+          <ScalarProperty Name="Mensagem" ColumnName="Mensagem" />
+          <ScalarProperty Name="NotaAvaliacao" ColumnName="NotaAvaliacao" />
+          <ScalarProperty Name="dtAvaliacao" ColumnName="dtAvaliacao" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idMorador" ColumnName="idMorador" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+          <ScalarProperty Name="idAvaliacao" ColumnName="idAvaliacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCliques">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblCliques">
+        <MappingFragment StoreEntitySet="tblCliques">
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="dtClique" ColumnName="dtClique" />
+          <ScalarProperty Name="idOrigem" ColumnName="idOrigem" />
+          <ScalarProperty Name="idMorador" ColumnName="idMorador" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+          <ScalarProperty Name="idClique" ColumnName="idClique" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCondominio">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblCondominio">
+        <MappingFragment StoreEntitySet="tblCondominio">
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="CodigoIBGE" ColumnName="CodigoIBGE" />
+          <ScalarProperty Name="Fone" ColumnName="Fone" />
+          <ScalarProperty Name="CEP" ColumnName="CEP" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDominios">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblDominios">
+        <MappingFragment StoreEntitySet="tblDominios">
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Objeto" ColumnName="Objeto" />
+          <ScalarProperty Name="idDominio" ColumnName="idDominio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEspecialidade">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblEspecialidade">
+        <MappingFragment StoreEntitySet="tblEspecialidade">
+          <ScalarProperty Name="Icone" ColumnName="Icone" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="idEspecialidade" ColumnName="idEspecialidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblParcelas">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblParcelas">
+        <MappingFragment StoreEntitySet="tblParcelas">
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="Log" ColumnName="Log" />
+          <ScalarProperty Name="valorPago" ColumnName="valorPago" />
+          <ScalarProperty Name="valorDevido" ColumnName="valorDevido" />
+          <ScalarProperty Name="dataPagamento" ColumnName="dataPagamento" />
+          <ScalarProperty Name="dataVencimento" ColumnName="dataVencimento" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+          <ScalarProperty Name="idAssinatura" ColumnName="idAssinatura" />
+          <ScalarProperty Name="idParcela" ColumnName="idParcela" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPerfil">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPerfil">
+        <MappingFragment StoreEntitySet="tblPerfil">
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPrestador">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPrestador">
+        <MappingFragment StoreEntitySet="tblPrestador">
+          <ScalarProperty Name="idFormaPagto" ColumnName="idFormaPagto" />
+          <ScalarProperty Name="idPlano" ColumnName="idPlano" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="NotaAvaliacao" ColumnName="NotaAvaliacao" />
+          <ScalarProperty Name="QtdeAvaliacao" ColumnName="QtdeAvaliacao" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Fone" ColumnName="Fone" />
+          <ScalarProperty Name="CPF_CNPJ" ColumnName="CPF_CNPJ" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CodigoIBGE" ColumnName="CodigoIBGE" />
+          <ScalarProperty Name="CEP" ColumnName="CEP" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="idAbrangencia" ColumnName="idAbrangencia" />
+          <ScalarProperty Name="idCanal" ColumnName="idCanal" />
+          <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPrestadorEspecialidade">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPrestadorEspecialidade">
+        <MappingFragment StoreEntitySet="tblPrestadorEspecialidade">
+          <ScalarProperty Name="dtValidade" ColumnName="dtValidade" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idEspecialidade" ColumnName="idEspecialidade" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStatus">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblStatus">
+        <MappingFragment StoreEntitySet="tblStatus">
+          <ScalarProperty Name="idAlteracao" ColumnName="idAlteracao" />
+          <ScalarProperty Name="DtAtualizacao" ColumnName="DtAtualizacao" />
+          <ScalarProperty Name="DtCriacao" ColumnName="DtCriacao" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Objeto" ColumnName="Objeto" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsuario">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblUsuario">
+        <MappingFragment StoreEntitySet="tblUsuario">
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="CPF_CNPJ" ColumnName="CPF_CNPJ" />
+          <ScalarProperty Name="dtNascimento" ColumnName="dtNascimento" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsuarioCondominio">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblUsuarioCondominio">
+        <MappingFragment StoreEntitySet="tblUsuarioCondominio">
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsuarioPerfil">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblUsuarioPerfil">
+        <MappingFragment StoreEntitySet="tblUsuarioPerfil">
+          <ScalarProperty Name="dtValidade" ColumnName="dtValidade" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

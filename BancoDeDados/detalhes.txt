@@ -16,3 +16,28 @@ MVP Tabelas
 09 tblPrestadorEspecialidade
 10 tblAvaliacao
 11 tblAssinaturas
+
+
+
+Mensagem whatsapp quando o prestador for cadastrado
+
+Bom dia [Nome Prestador], eu sou a [Atendente] do app The Little Orange.
+Você prestou serviços de [Especialidade] no [Condominio] para [Morador].
+
+O [Morador] te cadastrou em nosso app para divulgar seus trabalho,assim os outros moradores podem te encontrar mais facilmente e você poderá
+fazer novos negócios.
+
+Parabéns, é muito bom que você possa ser encontrado por todos morados do [Condominio].
+
+Agora, imagine se você pudesse ser encontrado por todas as pessoas da vizinhança ou da sua cidade inteira ou ainda do estado?
+
+Entre em contato conosco e conheça os nossos planos.
+Só pra você ter uma idéia, por um valor de [R$ 25,00] mensais, toda a cidade vai ter acesso a você.
+
+Você pode me chamar aqui pelo whatsapp.
+
+[Atendente]
+
+
+
+442236465034600000

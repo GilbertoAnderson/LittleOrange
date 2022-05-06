@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TheLittleOrangeChannel.Models.tblPrestador>
+
+@*@using LeilaoImoveis.Controllers.Shared;*@
+
+@{
+    ViewBag.Title = "Prestadores";
+}
+
+
+<div class="form-group">
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+        @using (Html.BeginForm())
+        {
+            <p>
+                Procurar por : @Html.TextBox("strCriterio") &nbsp;
+                <input type="submit" value="Procurar" class="btn btn-default" /> &nbsp;
+            </p>
+        }
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-12">
+
+        @{
+            var grid = new WebGrid(
+                source: Model,
+                rowsPerPage: 20,
+                canPage: true,
+                canSort: true,
+                defaultSort: "Leiloeiro"
+                );
+        }
+
+        <div id="grid">
+            @grid.GetHtml(
+                tableStyle: "gridTable",
+                headerStyle: "gridHead",
+                footerStyle: "gridFooter",
+                rowStyle: "gridRow",
+                alternatingRowStyle: "gridAltRow",
+                columns: grid.Columns(
+
+                    grid.Column("UF", format: (item) => new HtmlString("<a href=" + @Url.Action("Empresa", new { id = item.idPrestador }) + " title='Consultar' >" + @item.UF + " </a>")),
+                    grid.Column("Cidade",    format: (item) => new HtmlString("<a href=" + @Url.Action("Empresa", new { id = item.idPrestador }) + " title='Consultar' >" + @item.Cidade + " </a>")),
+                    grid.Column("Condominio", format: (item) => new HtmlString("<a href=" + @Url.Action("Empresa", new { id = item.idPrestador }) + " title='Consultar' >" + @item.tblCondominio.Nome + " </a>")),
+                    grid.Column("Empresa", format: (item) => new HtmlString("<a href=" + @Url.Action("Empresa", new { id = item.idPrestador }) + " title='Consultar' >" + @item.Empresa + " </a>")),
+                    grid.Column("Celular", format: (item) => new HtmlString("<a href=" + @Url.Action("Empresa", new { id = item.idPrestador }) + " title='Consultar' >" + @item.Celular + " </a>")),
+                    grid.Column("Status", format: (item) => new HtmlString("<a href=" + @Url.Action("Empresa", new { id = item.idPrestador }) + " title='Consultar' >" + @item.tblStatus.Descricao + " </a>"))
+
+                 )
+            )
+
+
+        </div>
+    </div>
+</div>
+
