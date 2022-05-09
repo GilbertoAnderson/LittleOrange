@@ -10,6 +10,7 @@
     <FunctionImport Name="sp_ConvitePrestadorWhatsapp" ReturnType="Collection(String)">
       <Parameter Name="idPrestador" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tblPrestadorEspecialidade" EntityType="TheLittleOrangeModel.tblPrestadorEspecialidade" />
     <EntitySet Name="tblAssinaturas" EntityType="TheLittleOrangeModel.tblAssinaturas" />
     <EntitySet Name="tblAvaliacao" EntityType="TheLittleOrangeModel.tblAvaliacao" />
     <EntitySet Name="tblCliques" EntityType="TheLittleOrangeModel.tblCliques" />
@@ -19,7 +20,6 @@
     <EntitySet Name="tblParcelas" EntityType="TheLittleOrangeModel.tblParcelas" />
     <EntitySet Name="tblPerfil" EntityType="TheLittleOrangeModel.tblPerfil" />
     <EntitySet Name="tblPrestador" EntityType="TheLittleOrangeModel.tblPrestador" />
-    <EntitySet Name="tblPrestadorEspecialidade" EntityType="TheLittleOrangeModel.tblPrestadorEspecialidade" />
     <EntitySet Name="tblStatus" EntityType="TheLittleOrangeModel.tblStatus" />
     <EntitySet Name="tblUsuario" EntityType="TheLittleOrangeModel.tblUsuario" />
     <EntitySet Name="tblUsuarioCondominio" EntityType="TheLittleOrangeModel.tblUsuarioCondominio" />
@@ -161,6 +161,19 @@
       <End Role="tblUsuarioPerfil" EntitySet="tblUsuarioPerfil" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="tblPrestadorEspecialidade">
+    <Key>
+      <PropertyRef Name="idPrestador" />
+      <PropertyRef Name="idEspecialidade" />
+    </Key>
+    <Property Name="idPrestador" Type="Int32" Nullable="false" />
+    <Property Name="idEspecialidade" Type="Int32" Nullable="false" />
+    <Property Name="idStatus" Type="Int32" Nullable="false" />
+    <Property Name="dtValidade" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblEspecialidade" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Especialidade" FromRole="tblPrestadorEspecialidade" ToRole="tblEspecialidade" />
+    <NavigationProperty Name="tblPrestador" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Prestador" FromRole="tblPrestadorEspecialidade" ToRole="tblPrestador" />
+    <NavigationProperty Name="tblStatus" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidad_Status" FromRole="tblPrestadorEspecialidade" ToRole="tblStatus" />
+  </EntityType>
   <EntityType Name="tblAssinaturas">
     <Key>
       <PropertyRef Name="idAssinatura" />
@@ -170,6 +183,7 @@
     <Property Name="idCanal" Type="Int32" Nullable="false" />
     <Property Name="idAbrangencia" Type="Int32" Nullable="false" />
     <Property Name="idStatus" Type="Int32" Nullable="false" />
+    <Property Name="Rastreador" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="dtInicio" Type="DateTime" Precision="3" />
     <Property Name="dtTermino" Type="DateTime" Precision="3" />
     <Property Name="ValorContrato" Type="Decimal" Precision="18" Scale="2" />
@@ -269,9 +283,10 @@
     <Property Name="idParcela" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idAssinatura" Type="Int32" Nullable="false" />
     <Property Name="idPrestador" Type="Int32" Nullable="false" />
+    <Property Name="Rastreador" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="dataVencimento" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="dataPagamento" Type="DateTime" Precision="3" />
-    <Property Name="valorDevido" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="valorDevido" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="valorPago" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Log" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="idStatus" Type="Int32" Nullable="false" />
@@ -329,19 +344,6 @@
     <NavigationProperty Name="tblUsuario" Relationship="TheLittleOrangeModel.fk_tblPrestadorCanal" FromRole="tblPrestador" ToRole="tblUsuario" />
     <NavigationProperty Name="tblPrestadorEspecialidade" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Prestador" FromRole="tblPrestador" ToRole="tblPrestadorEspecialidade" />
     <NavigationProperty Name="tblStatus" Relationship="TheLittleOrangeModel.fk_tblPrestadorStatus" FromRole="tblPrestador" ToRole="tblStatus" />
-  </EntityType>
-  <EntityType Name="tblPrestadorEspecialidade">
-    <Key>
-      <PropertyRef Name="idPrestador" />
-      <PropertyRef Name="idEspecialidade" />
-    </Key>
-    <Property Name="idPrestador" Type="Int32" Nullable="false" />
-    <Property Name="idEspecialidade" Type="Int32" Nullable="false" />
-    <Property Name="idStatus" Type="Int32" Nullable="false" />
-    <Property Name="dtValidade" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="tblEspecialidade" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Especialidade" FromRole="tblPrestadorEspecialidade" ToRole="tblEspecialidade" />
-    <NavigationProperty Name="tblPrestador" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Prestador" FromRole="tblPrestadorEspecialidade" ToRole="tblPrestador" />
-    <NavigationProperty Name="tblStatus" Relationship="TheLittleOrangeModel.fk_tblPrestadorEspecialidad_Status" FromRole="tblPrestadorEspecialidade" ToRole="tblStatus" />
   </EntityType>
   <EntityType Name="tblStatus">
     <Key>

@@ -16,7 +16,6 @@ namespace TheLittleOrangeChannel.Controllers.Shared
     public static class Helper
     {
 
-
         public static SelectList EstadosBrasil()
         {
             var selectItems = new Dictionary<string, string>

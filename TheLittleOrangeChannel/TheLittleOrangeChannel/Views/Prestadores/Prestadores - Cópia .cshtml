@@ -2,7 +2,7 @@
 
 @model IEnumerable<TheLittleOrangeChannel.Models.tblPrestador>
 @{
-    ViewBag.Title = ViewBag.FiltroStatus;
+    ViewBag.Title = "Prestadores";
 }
 
 @using (Html.BeginForm())
@@ -38,18 +38,39 @@
 
                 @foreach (var item in Model)
                 {
-                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarEscolha('@ViewBag.FiltroStatus', '@item.Celular', '@item.Empresa', '@item.idPrestador', '@item.tblCondominio.Nome','@item.tblCondominio.Cidade');" style="cursor: pointer">
-                    <h4> @Html.DisplayFor(modelItem => item.Empresa)</h4>
-                    @Html.DisplayFor(modelItem => item.UF) &nbsp;  @Html.DisplayFor(modelItem => item.Cidade) &nbsp;  @Html.DisplayFor(modelItem => item.Celular)
 
-                    @if (@ViewBag.FiltroStatus == "Negociando")
-                    {
-                        <a href='@Url.Action("Abrangencia",  new { id = item.idPrestador})'>
-                            <input id="btnNegociando" type="button" value="Negociar" class="btn btn-success" />
-                        </a>
-                    }
 
-                </div>
+                    <div class="list-group-item list-group-item-action list-group-item-orange">
+
+                        <h4> @Html.DisplayFor(modelItem => item.Empresa)</h4>
+                        @Html.DisplayFor(modelItem => item.UF) &nbsp;  @Html.DisplayFor(modelItem => item.Cidade) &nbsp;  @Html.DisplayFor(modelItem => item.Celular)
+                        <i class="bi bi-telephone-fill"></i>
+                        <br />
+                        @Html.DisplayFor(modelItem => item.tblCondominio.Nome)<br />
+                        <!-- Botao para envio do whatsapp -->
+                        @if (@ViewBag.FiltroStatus == "Trafego")
+                        {
+                            <input id="btnTrafego" type="button" value="Enviar Whatsapp" onclick="return enviarTrafego('@item.Celular','@item.Empresa','@item.tblCondominio.Nome','@item.idPrestador')" class="btn btn-success" />
+                        }
+
+                        @if (@ViewBag.FiltroStatus == "Prospectado")
+                        {
+                            <input id="btnProspectado" type="button" value="Enviar Whatsapp" onclick="return enviarProspectado('@item.Celular','@item.Empresa','@item.tblCondominio.Nome','@item.idPrestador', '@item.tblCondominio.Cidade')" class="btn btn-success" />
+                        }
+
+                        @if (@ViewBag.FiltroStatus == "Oportunidade")
+                        {
+                            <input id="btnOportunidade" type="button" value="Enviar Oportunidade" onclick="return enviarOportunidade('@item.Celular','@item.idPrestador')" class="btn btn-success" />
+                        }
+
+                        @if (@ViewBag.FiltroStatus == "Negociando")
+                        {
+                            <a href='@Url.Action("Abrangencia",  new { id = item.idPrestador})'>
+                                <input id="btnNegociando" type="button" value="Negociar" class="btn btn-success" />
+                            </a>
+                        }
+
+                    </div>
                 }
             </div>
             <div class="col-md-2">
@@ -64,7 +85,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
             $(document).ready(function () {
 
@@ -79,37 +100,10 @@
                     Escolha("Abrangencia", escolha);
                 }*@
 
-            });
-
-            function enviarEscolha(status, celular, empresa, idPrestador, condominio, cidade)
-            {
-                if (status == "Trafego") { enviarTrafego(celular, empresa, condominio, idPrestador) };
-                if (status == "Prospectado") { enviarProspectado(celular, empresa, condominio, idPrestador, cidade) };
-                if (status == "Oportunidade") { enviarOportunidade(celular, idPrestador) };
-                if (status == "Negociando") { enviaAbrangencia(idPrestador) };
-            };
+    });
 
 
-            function enviaAbrangencia(idPrestador)
-            {
-                $.ajax(
-                {
-                    type: "POST",
-                    url: '@Url.Action("Abrangencia", "Prestadores")',
-                    data: {
-                        "id": idPrestador
-                    },
-                    success:
-
-                    function (resultado) {
-                        alert(resultado);
-                    },
-                });
-            };
-
-
-
-            function enviarTrafego(celular, empresa, condominio, idPrestador) {
+    function enviarTrafego(celular, empresa, condominio, idPrestador) {
 
                 var celular = "55" + celular;
 
@@ -138,7 +132,7 @@
                 });
                 location.reload();
 
-           };
+            }
 
 
 
@@ -173,11 +167,11 @@
                 });
                 location.reload();
 
-    };
+            }
 
 
 
-    function enviarOportunidade(celular, idPrestador) {
+            function enviarOportunidade(celular,  idPrestador) {
 
                 var celular = "55" + celular;
 
@@ -213,10 +207,10 @@
                 });
                 location.reload();
 
-    };
+            }
 
 
 
-</script>
+    </script>
 }
 

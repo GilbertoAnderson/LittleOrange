@@ -386,11 +386,19 @@ begin
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
 	VALUES('DESCONTO','00','00.00')
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
-	VALUES('DESCONTO','01','00.00')
+	VALUES('DESCONTO','M1','00.00')
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
-	VALUES('DESCONTO','02','10.00')
+	VALUES('DESCONTO','A1','10.00')
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
-	VALUES('DESCONTO','03','20.00')
+	VALUES('DESCONTO','A3','20.00')
+
+	
+	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
+	VALUES('PRAZOPLANO','M1','1')
+	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
+	VALUES('PRAZOPLANO','A1','12')
+	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
+	VALUES('PRAZOPLANO','A3','36')
 
 	
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
@@ -404,11 +412,11 @@ begin
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
 	VALUES('PLANO','00','NOVO')
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
-	VALUES('PLANO','01','MENSAL')
+	VALUES('PLANO','M1','MENSAL')
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
-	VALUES('PLANO','02','1 ANO')
+	VALUES('PLANO','A1','1 ANO')
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
-	VALUES('PLANO','03','3 ANOS')
+	VALUES('PLANO','A3','3 ANOS')
 	
 	INSERT INTO tblDominios(Objeto,Codigo,Descricao)
 	VALUES('FORMAPAGTO','00','NOVO')
@@ -1271,119 +1279,8 @@ begin
 end
 
 
--- .................................................................... 12 tblAssinaturas
-begin 
 
-		if Exists(Select name from sysobjects where name='tblAssinaturas')Begin 
-			drop table dbo.tblAssinaturas
-		End
-		
-		create table dbo.tblAssinaturas(
-		[idAssinatura]		int identity(1,1) not null,
-		[idPrestador]		int not null,
-		[idCanal]			int not null,
-		[idAbrangencia]		int not null,
-		[idStatus]			int not null,
-		[dtInicio]			datetime,
-		[dtTermino]			datetime,
-		[ValorContrato]		decimal(18,2),
-		[DiaPagamento]		int,
-		[Log]				varchar(max),
-		
-		CONSTRAINT [PK_tblAssinaturas] PRIMARY KEY CLUSTERED 
-		(
-			[idAssinatura] ASC
-		)WITH (
-				PAD_INDEX  = OFF, 
-				STATISTICS_NORECOMPUTE  = OFF, 
-				IGNORE_DUP_KEY = OFF,	
-				ALLOW_ROW_LOCKS  = ON, 
-				ALLOW_PAGE_LOCKS  = ON) 
-				ON [PRIMARY]
-		) ON [PRIMARY]
-
-
-		ALTER TABLE dbo.tblAssinaturas
-		ADD CONSTRAINT fk_tblAssinaturas_Status
-		FOREIGN KEY (idStatus)
-		REFERENCES tblStatus(idStatus)
-		
-		ALTER TABLE dbo.tblAssinaturas
-		ADD CONSTRAINT fk_tblAssinaturas_Prestador
-		FOREIGN KEY (idPrestador)
-		REFERENCES tblPrestador(idPrestador)
-				
-		ALTER TABLE dbo.tblAssinaturas
-		ADD CONSTRAINT fk_tblAssinaturas_Canal
-		FOREIGN KEY ([idCanal])
-		REFERENCES tblUsuario([idUsuario])
-		
-		ALTER TABLE dbo.tblAssinaturas
-		ADD CONSTRAINT fk_tblAssinaturas_Abrangencia
-		FOREIGN KEY ([idAbrangencia])
-		REFERENCES tblDominios([idDominio])
-
-
-		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
-		values(
-		        (select idPrestador   from tblPrestador where Empresa = 'Gatto de Botas'),				
-				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
-				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
-				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'ATIVA'),
-				getdate(),
-				dateadd(month,6,GETDATE()),
-				30.00,
-				10,
-				'15/03/2022 assinatura contrato Carol '		
-		)
-
-		
-		
-		
-		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
-		values(
-		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Cão Bernardo'),				
-				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
-				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
-				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'ENTRAR EM CONTATO'),
-				getdate(),
-				dateadd(month,6,GETDATE()),
-				25.00,
-				10,
-				'15/03/2022 assinatura contrato Carol '		
-		)
-		
-		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
-		values(
-		        (select idPrestador   from tblPrestador where Empresa = 'Total Vet'),				
-				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
-				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'ESTADO'),
-				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'EM NEGOCIACAO'),
-				getdate(),
-				dateadd(month,6,GETDATE()),
-				50.00,
-				15,
-				'15/03/2022 assinatura contrato Carol '		
-		)
-
-		
-		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
-		values(
-		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
-				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
-				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
-				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'ATRASADA'),
-				getdate(),
-				dateadd(month,6,GETDATE()),
-				25.00,
-				20,
-				'15/03/2022 assinatura contrato Carol '		
-		)
-		
-end
-
-
--- .................................................................... 13 tblCliques
+-- .................................................................... 12 tblCliques
 begin 
 
 		if Exists(Select name from sysobjects where name='tblCliques')Begin 
@@ -1487,6 +1384,118 @@ begin
 end
 
 
+-- .................................................................... 13 tblAssinaturas
+begin 
+
+		if Exists(Select name from sysobjects where name='tblAssinaturas')Begin 
+			drop table dbo.tblAssinaturas
+		End
+		
+		create table dbo.tblAssinaturas(
+		[idAssinatura]		int identity(1,1) not null,
+		[idPrestador]		int not null,
+		[idCanal]			int not null,
+		[idAbrangencia]		int not null,
+		[idStatus]			int not null,
+		[Rastreador]		varchar(16),
+		[dtInicio]			datetime,
+		[dtTermino]			datetime,
+		[ValorContrato]		decimal(18,2),
+		[DiaPagamento]		int,
+		[Log]				varchar(max),
+		
+		CONSTRAINT [PK_tblAssinaturas] PRIMARY KEY CLUSTERED 
+		(
+			[idAssinatura] ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]
+
+
+		ALTER TABLE dbo.tblAssinaturas
+		ADD CONSTRAINT fk_tblAssinaturas_Status
+		FOREIGN KEY (idStatus)
+		REFERENCES tblStatus(idStatus)
+		
+		ALTER TABLE dbo.tblAssinaturas
+		ADD CONSTRAINT fk_tblAssinaturas_Prestador
+		FOREIGN KEY (idPrestador)
+		REFERENCES tblPrestador(idPrestador)
+				
+		ALTER TABLE dbo.tblAssinaturas
+		ADD CONSTRAINT fk_tblAssinaturas_Canal
+		FOREIGN KEY ([idCanal])
+		REFERENCES tblUsuario([idUsuario])
+		
+		ALTER TABLE dbo.tblAssinaturas
+		ADD CONSTRAINT fk_tblAssinaturas_Abrangencia
+		FOREIGN KEY ([idAbrangencia])
+		REFERENCES tblDominios([idDominio])
+
+
+		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Gatto de Botas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
+				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'ATIVA'),
+				getdate(),
+				dateadd(month,6,GETDATE()),
+				30.00,
+				10,
+				'15/03/2022 assinatura contrato Carol '		
+		)
+
+		
+		
+		
+		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Cão Bernardo'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
+				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'ENTRAR EM CONTATO'),
+				getdate(),
+				dateadd(month,6,GETDATE()),
+				25.00,
+				10,
+				'15/03/2022 assinatura contrato Carol '		
+		)
+		
+		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Total Vet'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'ESTADO'),
+				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'EM NEGOCIACAO'),
+				getdate(),
+				dateadd(month,6,GETDATE()),
+				50.00,
+				15,
+				'15/03/2022 assinatura contrato Carol '		
+		)
+
+		
+		insert into tblAssinaturas([idPrestador],[idCanal],[idAbrangencia],[idStatus],[dtInicio],[dtTermino],[ValorContrato],[DiaPagamento],[Log])
+		values(
+		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),				
+				(select idUsuario     from tblUsuario   where Nome    = 'Canal 01 Teste' ),
+				(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
+				(select idStatus      from tblStatus    where Objeto  = 'ASSINATURA'   and Descricao = 'ATRASADA'),
+				getdate(),
+				dateadd(month,6,GETDATE()),
+				25.00,
+				20,
+				'15/03/2022 assinatura contrato Carol '		
+		)
+		
+end
+
 
 -- .................................................................... 13 tblParcelas
 	begin 
@@ -1499,6 +1508,7 @@ end
 		[idParcela]			int identity(1,1) not null,
 		[idAssinatura]		int not null,
 		[idPrestador]		int not null,
+		[Rastreador]		varchar(16),
 		[dataVencimento]	datetime not null,
 		[dataPagamento]		datetime,
 		[valorDevido]		decimal(18,2),

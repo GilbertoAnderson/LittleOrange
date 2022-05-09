@@ -193,11 +193,19 @@ namespace TheLittleOrangeChannel.Controllers
             var _tblIndicacao = db.tblUsuario.Where(x => x.idUsuario == tblPrestador.idCanal).FirstOrDefault();
             ViewBag.IndicadoPor = _tblIndicacao.Nome;
 
+            // ............... codigo dos planos
+            var _tblPlanoMensal = db.tblDominios.Where(x => x.Objeto == "PLANO" && x.Descricao == "MENSAL").FirstOrDefault();
+            var _tblPlanoAnual = db.tblDominios.Where(x => x.Objeto == "PLANO" && x.Descricao == "1 ANO").FirstOrDefault();
+            var _tblPlano3Anos = db.tblDominios.Where(x => x.Objeto == "PLANO" && x.Descricao == "3 ANOS").FirstOrDefault();
+
+            var codPlanoMensal = _tblPlanoMensal.Codigo;
+            var codPlanoAnual = _tblPlanoAnual.Codigo;
+            var codPlano3Anos = _tblPlano3Anos.Codigo;
 
             var _tblAbrangencia = db.tblDominios.Where(x => x.Objeto == "ABRANGENCIA" && x.Descricao == tipoAbrangencia).FirstOrDefault();
             var _tblValorPlano  = db.tblDominios.Where(x => x.Objeto == "VALORPLANO"  && x.Codigo == _tblAbrangencia.Codigo).FirstOrDefault();
-            var _tblDescontoAno = db.tblDominios.Where(x => x.Objeto == "DESCONTO" && x.Codigo == "02").FirstOrDefault();
-            var _tblDesconto3Ano = db.tblDominios.Where(x => x.Objeto == "DESCONTO" && x.Codigo == "03").FirstOrDefault();
+            var _tblDescontoAno = db.tblDominios.Where(x => x.Objeto == "DESCONTO" && x.Codigo == codPlanoAnual).FirstOrDefault();
+            var _tblDesconto3Ano = db.tblDominios.Where(x => x.Objeto == "DESCONTO" && x.Codigo == codPlano3Anos).FirstOrDefault();
             
             double _vlrPlanoMensal = Convert.ToDouble(_tblValorPlano.Descricao);
             double _percDescontoAno = Convert.ToDouble(_tblDescontoAno.Descricao);
@@ -205,10 +213,19 @@ namespace TheLittleOrangeChannel.Controllers
             double _vlrPlanoAnual = ((_vlrPlanoMensal * 12) - ((_vlrPlanoMensal * 12) * (_percDescontoAno / 100)));
             double _vlrPlano3Anos = ((_vlrPlanoMensal * 36) - ((_vlrPlanoMensal * 36) * (_percDesconto3Anos / 100)));
 
+            ViewBag.codPlanoMensal = codPlanoMensal;
+            ViewBag.codPlanoAnual = codPlanoAnual;
+            ViewBag.codPlano3Anos = codPlano3Anos;
+
             ViewBag.Abrangencia = _tblAbrangencia.Descricao;              
             ViewBag.ValorPlanoMensal = String.Format("{0:C2}", _vlrPlanoMensal);
             ViewBag.ValorPlanoAnual = String.Format("{0:C2}",_vlrPlanoAnual);
             ViewBag.ValorPlano3Anos = String.Format("{0:C2}", _vlrPlano3Anos) ;
+
+            ViewBag.vlPlanoMensal = _vlrPlanoMensal;
+            ViewBag.vlPlanoAnual =  _vlrPlanoAnual;
+            ViewBag.vlPlano3Anos =  _vlrPlano3Anos;
+
             ViewBag.id = id;
             var celular = tblPrestador.Celular;
             celular = celular.Replace(" ","");
@@ -642,32 +659,41 @@ namespace TheLittleOrangeChannel.Controllers
         }
 
        
-        public ActionResult CriarAssinatura(int idPrestador, string abrangencia , string plano, decimal valorContrato, int canal)
+
+        public ActionResult CriarAssinatura(int idPrestador, string abrangencia, string plano, decimal valor, string rastreador, int canal)
         {
             tblPrestador _tblPrestador = db.tblPrestador.Where(x => x.idPrestador == idPrestador).FirstOrDefault();
 
-            // ............................. cria assinatura se não houver
-            tblAssinaturas _tblAssinaturafind = db.tblAssinaturas.Where(x =>x.idPrestador == idPrestador).FirstOrDefault();
+            //............................. cria assinatura se não houver
+            tblAssinaturas _tblAssinaturafind = db.tblAssinaturas.Where(x => x.idPrestador == idPrestador && x.Rastreador == rastreador).FirstOrDefault();
             tblStatus _tblStatusAssinatura = db.tblStatus.Where(x => x.Objeto == "ASSINATURA" && x.Descricao == "EM NEGOCIACAO").FirstOrDefault();
             tblDominios _tblAbrangencia = db.tblDominios.Where(x => x.Objeto == "ABRANGENCIA" && x.Descricao == abrangencia).FirstOrDefault();
+            tblDominios _tblPlano = db.tblDominios.Where(x => x.Objeto == "PLANO" && x.Descricao == plano).FirstOrDefault();
 
-            string _dia = DateTime.Now.AddDays(2).ToString("dd");
 
             if (_tblAssinaturafind == null)
             {
+
+                string _dia = DateTime.Now.AddDays(2).ToString("dd");
+                //'string _ano = DateTime.Now.AddDays(2).ToString("AA");
+                //'string _prestador = idPrestador.ToString("000000");
+                //'string _Plano = _tblPlano.Codigo;
+                //'string _codAssinatura = _ano + _prestador + _Plano + _dia;
 
                 tblAssinaturas _tblAssinatura = new tblAssinaturas();
                 _tblAssinatura.idPrestador = idPrestador;
                 _tblAssinatura.idCanal = canal;
                 _tblAssinatura.idAbrangencia = _tblAbrangencia.idDominio;
                 _tblAssinatura.idStatus = _tblStatusAssinatura.idStatus;
+                _tblAssinatura.Rastreador = rastreador;
                 _tblAssinatura.dtInicio = DateTime.Now;
                 _tblAssinatura.dtTermino = (DateTime.Now).AddDays(2);
-                _tblAssinatura.ValorContrato = valorContrato;
+                _tblAssinatura.ValorContrato = valor;
                 _tblAssinatura.DiaPagamento = Int32.Parse(_dia);
                 _tblAssinatura.Log = "Criado pelo aplicativo Canal";
 
                 db.tblAssinaturas.Add(_tblAssinatura);
+                db.SaveChanges();
             }
             else
             {
@@ -686,14 +712,15 @@ namespace TheLittleOrangeChannel.Controllers
                 _tblAssinaturafind.idStatus = _tblStatusAssinatura.idStatus;
                 _tblAssinaturafind.dtInicio = DateTime.Now;
                 _tblAssinaturafind.dtTermino = (DateTime.Now).AddDays(2);
-                _tblAssinaturafind.ValorContrato = valorContrato;
-                _tblAssinaturafind.DiaPagamento = Int32.Parse(_dia);
+                _tblAssinaturafind.ValorContrato = valor;
                 _tblAssinaturafind.Log = _log;
+                db.SaveChanges();
+
+
             }
-            db.SaveChanges();
 
             tblAssinaturas _tblAssinaturaLast = db.tblAssinaturas.Where(x => x.idPrestador == idPrestador).FirstOrDefault();
-           
+
             // ............................. cria a parcela
             CriarParcela(_tblAssinaturaLast.idAssinatura);
 
@@ -706,24 +733,33 @@ namespace TheLittleOrangeChannel.Controllers
             db.SaveChanges();
 
             return View();
+
         }
 
-        private void CriarParcela(int _idAssinatura)
+
+
+        public void CriarParcela(int _idAssinatura)
         {
 
-            tblAssinaturas _tblAssinatura = db.tblAssinaturas.Where(x => x.idAssinatura == _idAssinatura).FirstOrDefault();
             tblStatus _tblStatus = db.tblStatus.Where(x => x.Objeto == "PARCELA" && x.Descricao == "ABERTA").FirstOrDefault();
+            tblAssinaturas _tblAssinatura = db.tblAssinaturas.Where(x => x.idAssinatura == _idAssinatura).FirstOrDefault();
+            tblParcelas _tblParcelaFind = db.tblParcelas.Where(x => x.idAssinatura == _idAssinatura && x.idStatus == _tblStatus.idStatus).FirstOrDefault();
 
-            tblParcelas _tblParcela = new tblParcelas();
-            _tblParcela.idAssinatura = _tblAssinatura.idAssinatura;
-            _tblParcela.idPrestador = _tblAssinatura.idPrestador;
-            _tblParcela.dataVencimento = (DateTime)_tblAssinatura.dtTermino;
-            decimal? valorContrato = _tblAssinatura.ValorContrato;
-            _tblParcela.valorDevido = (decimal)valorContrato;
-            _tblParcela.idStatus = _tblStatus.idStatus;
+            //.................................... somente cria uma nova se não existir nenhum em aberto
+            if (_tblParcelaFind == null)
+            {
+                tblParcelas _tblParcela = new tblParcelas();
+                _tblParcela.idAssinatura = _tblAssinatura.idAssinatura;
+                _tblParcela.idPrestador = _tblAssinatura.idPrestador;
+                _tblParcela.dataVencimento = (DateTime)_tblAssinatura.dtTermino;
+                decimal? valorContrato = _tblAssinatura.ValorContrato;
+                _tblParcela.valorDevido = (decimal)valorContrato;
+                _tblParcela.Rastreador = _tblAssinatura.Rastreador;
+                _tblParcela.idStatus = _tblStatus.idStatus;
 
-            db.tblParcelas.Add(_tblParcela);
-            db.SaveChanges();
+                db.tblParcelas.Add(_tblParcela);
+                db.SaveChanges();
+            }
 
         }
 

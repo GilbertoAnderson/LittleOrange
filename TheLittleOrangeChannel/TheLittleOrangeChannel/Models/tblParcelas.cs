@@ -17,9 +17,10 @@ namespace TheLittleOrangeChannel.Models
         public int idParcela { get; set; }
         public int idAssinatura { get; set; }
         public int idPrestador { get; set; }
+        public string Rastreador { get; set; }
         public System.DateTime dataVencimento { get; set; }
         public Nullable<System.DateTime> dataPagamento { get; set; }
-        public decimal valorDevido { get; set; }
+        public Nullable<decimal> valorDevido { get; set; }
         public Nullable<decimal> valorPago { get; set; }
         public string Log { get; set; }
         public int idStatus { get; set; }

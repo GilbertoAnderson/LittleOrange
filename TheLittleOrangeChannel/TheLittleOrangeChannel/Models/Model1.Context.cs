@@ -27,6 +27,7 @@ namespace TheLittleOrangeChannel.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tblPrestadorEspecialidade> tblPrestadorEspecialidade { get; set; }
         public virtual DbSet<tblAssinaturas> tblAssinaturas { get; set; }
         public virtual DbSet<tblAvaliacao> tblAvaliacao { get; set; }
         public virtual DbSet<tblCliques> tblCliques { get; set; }
@@ -36,7 +37,6 @@ namespace TheLittleOrangeChannel.Models
         public virtual DbSet<tblParcelas> tblParcelas { get; set; }
         public virtual DbSet<tblPerfil> tblPerfil { get; set; }
         public virtual DbSet<tblPrestador> tblPrestador { get; set; }
-        public virtual DbSet<tblPrestadorEspecialidade> tblPrestadorEspecialidade { get; set; }
         public virtual DbSet<tblStatus> tblStatus { get; set; }
         public virtual DbSet<tblUsuario> tblUsuario { get; set; }
         public virtual DbSet<tblUsuarioCondominio> tblUsuarioCondominio { get; set; }

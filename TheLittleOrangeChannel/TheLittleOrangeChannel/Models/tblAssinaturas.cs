@@ -25,6 +25,7 @@ namespace TheLittleOrangeChannel.Models
         public int idCanal { get; set; }
         public int idAbrangencia { get; set; }
         public int idStatus { get; set; }
+        public string Rastreador { get; set; }
         public Nullable<System.DateTime> dtInicio { get; set; }
         public Nullable<System.DateTime> dtTermino { get; set; }
         public Nullable<decimal> ValorContrato { get; set; }

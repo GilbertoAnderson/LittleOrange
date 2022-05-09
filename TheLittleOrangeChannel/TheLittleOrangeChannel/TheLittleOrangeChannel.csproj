@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ParcelasController.cs" />
     <Compile Include="Controllers\PrestadoresController.cs" />
     <Compile Include="Controllers\Shared\Helper.cs" />
     <Compile Include="Controllers\Shared\SessionProfile.cs" />
@@ -311,6 +312,9 @@
     <Content Include="Views\Prestadores\EnvioPagSeguro.cshtml" />
     <Content Include="Views\Prestadores\EnviaMsgTrafego.cshtml" />
     <Content Include="Views\Prestadores\Planos_old02 .cshtml" />
+    <Content Include="Views\Parcelas\Index.cshtml" />
+    <Content Include="Views\Parcelas\BaixaManual.cshtml" />
+    <Content Include="Views\Prestadores\Prestadores - Cópia .cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,113 @@
+﻿@using TheLittleOrangeChannel.Controllers.Shared;
+
+@model IEnumerable<TheLittleOrangeChannel.Models.tblParcelas>
+@{
+    ViewBag.Title = "Parcelas";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="bg-fundo">
+    @if (SessionProfile.Logado && (SessionProfile.ADM || SessionProfile.Canal))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <h2>@ViewBag.Title</h2>
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        Procurar por : @Html.TextBox("strCriterio") &nbsp;
+                        <input type="submit" value="Procurar" class="btn btn-warning" /> &nbsp;
+                    </p>
+                }
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+            <div class="col-md-8">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="list-group-item list-group-item-action list-group-item-orange" onclick="baixaManual(@item.idParcela, @item.valorDevido);" style="cursor: pointer">
+
+                        <h4> @Html.DisplayFor(modelItem => item.Rastreador)</h4>
+                        <h5> @Html.DisplayFor(modelItem => item.tblPrestador.Empresa) -  @Html.DisplayFor(modelItem => item.dataVencimento) </h5>
+
+
+                    </div>
+
+                }
+            </div>
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+        </div>
+    }
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+<script type="text/javascript">
+
+            $(document).ready(function () {
+
+               //' document.getElementById("btnProspectado").style.display = 'none';
+
+               // var criterio = $("#strCriterio").val();
+               // alert(criterio);
+
+                @*var escolha = "@ViewBag.Abrangencia";
+                if (escolha != "") {
+                document.getElementById("divPropostas").style.display = 'none';
+                    Escolha("Abrangencia", escolha);
+                }*@
+
+            });
+
+            function baixaManual(idParcela, valorDevido) {
+                var valor;
+                var text;
+                var text = prompt("Qual o valor pago:", valorDevido );
+                if (text == null || text == "") {
+                    text = "O valor está incorreto.";
+                } else {
+                    valor = text;
+                }
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: '@Url.Action("BaixaManual", "Parcelas")',
+                        data: {
+                            "id": idParcela,
+                            "Valor": valor,
+                            "operador": @Session["idUsuario"]
+                        },
+                        success:
+
+                        function (resultado) {
+                            alert(resultado);
+                        },
+                    });
+                    location.reload();
+
+            }
+
+
+
+
+
+</script>
+}
+

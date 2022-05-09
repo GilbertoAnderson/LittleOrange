@@ -86,6 +86,9 @@ ls_msg = ls_msg + '[Atendente]'
 
 select * from tblPrestador
 select * from tblStatus where objeto ='prestador'
+
+
+update tblPrestador set idstatus = 34, celular= '11 982581115' where idPrestador  = 1
 -- heber 11 957929260
 -- rafa 11989151146
 -- carol 11940010901
