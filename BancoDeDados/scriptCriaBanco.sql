@@ -1556,25 +1556,23 @@ end
 
 	end
 
+	
 
--- .................................................................... 15 tblContas
-	begin 
 
-		if Exists(Select name from sysobjects where name='tblCliques')Begin 
-			drop table dbo.tblCliques
-		End
+	-- ....................................................................
+	-- tabela Conta
 		
-		create table dbo.tblCliques(
-		[idClique]			int identity(1,1) not null,
-		[idPrestador]		int not null,
-		[idMorador]			int not null,
-		[idOrigem]		    int not null,
-		[dtClique]			datetime,
-		[idStatus]			int not null,
+		drop table dbo.tblConta
 		
-		CONSTRAINT [PK_tblCliques] PRIMARY KEY CLUSTERED 
+		create table dbo.tblConta(
+		idConta		int identity(1,1)	not null,
+		idCelula		int				not null,
+		Descricao		varchar(50)			not null,
+		idStatus		int					not null,
+		
+		CONSTRAINT PK_tblConta PRIMARY KEY CLUSTERED 
 		(
-			[idClique] ASC
+			idConta	  ASC
 		)WITH (
 				PAD_INDEX  = OFF, 
 				STATISTICS_NORECOMPUTE  = OFF, 
@@ -1583,34 +1581,36 @@ end
 				ALLOW_PAGE_LOCKS  = ON) 
 				ON [PRIMARY]
 		) ON [PRIMARY]
-
-
-		ALTER TABLE dbo.tblCliques
-		ADD CONSTRAINT fk_tblCliques_Status
-		FOREIGN KEY (idStatus)
-		REFERENCES tblStatus(idStatus)
-
-	end
-
-
--- .................................................................... 16 tblLancamentos
-	begin 
-
-		if Exists(Select name from sysobjects where name='tblCliques')Begin 
-			drop table dbo.tblCliques
-		End
 		
-		create table dbo.tblCliques(
-		[idClique]			int identity(1,1) not null,
-		[idPrestador]		int not null,
-		[idMorador]			int not null,
-		[idOrigem]		    int not null,
-		[dtClique]			datetime,
-		[idStatus]			int not null,
+		GO
+		SET ANSI_PADDING OFF
+		GO
+	
+	
+		CREATE INDEX idx_Conta
+		ON tblConta (Descricao);
+
 		
-		CONSTRAINT [PK_tblCliques] PRIMARY KEY CLUSTERED 
+		ALTER TABLE tblConta
+		ADD CONSTRAINT fk_tblContaCelula
+		FOREIGN KEY (idCelula)
+		REFERENCES tblCelula(idCelula) 
+		GO
+
+	
+	-- ....................................................................
+	-- tabela Subconta
+		drop table dbo.tblSubconta
+		
+		create table dbo.tblSubconta(
+		idSubconta		int identity(1,1)	not null,
+		Codigo			varchar(10),
+		Descricao		varchar(50)			not null,
+		idStatus			int					not null,
+		
+		CONSTRAINT PK_tblSubconta PRIMARY KEY CLUSTERED 
 		(
-			[idClique] ASC
+			idSubconta	  ASC
 		)WITH (
 				PAD_INDEX  = OFF, 
 				STATISTICS_NORECOMPUTE  = OFF, 
@@ -1619,30 +1619,162 @@ end
 				ALLOW_PAGE_LOCKS  = ON) 
 				ON [PRIMARY]
 		) ON [PRIMARY]
-
-
-		ALTER TABLE dbo.tblCliques
-		ADD CONSTRAINT fk_tblCliques_Status
-		FOREIGN KEY (idStatus)
-		REFERENCES tblStatus(idStatus)
-
-	end
-
-
-
-END
-
-
-/*
-
-ALTER TABLE tblPrestador ALTER column [idFormaPagto]		int null
-ALTER TABLE tblPrestador ALTER column [idPlano]		        int null
 		
-UPDATE tblPrestador SET idPlano =(select idDominio from tblDominios where Objeto = 'PLANO' and Descricao = 'NOVO')
-				
-UPDATE tblPrestador SET idFormaPagto =(select idDominio from tblDominios where Objeto = 'FORMAPAGTO' and Descricao = 'NOVO')
+		GO
+		SET ANSI_PADDING OFF
+		GO	
+
+		
+		CREATE INDEX idx_Subconta
+		ON tblSubconta (Descricao);
+
+			
+
+	-- ....................................................................
+	-- tabela Lancamento
+		drop table dbo.tblLancamento
+		
+		create table dbo.tblLancamento(
+		idLancamento		int identity(1,1)	not null,
+		idConta				int					not null,
+		idSubconta			int					not null,
+		Descricao			varchar(200)		not null,
+		dtPagamento			datetime			null,
+		Valor				decimal(17,2)		not null,
+		Previsto			bit					null,
+
+		CONSTRAINT PK_tblLancamento PRIMARY KEY CLUSTERED 
+		(
+			idLancamento	  ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]		
+		GO
+		SET ANSI_PADDING OFF
+		GO
+
+		ALTER TABLE tblLancamento
+		ADD CONSTRAINT fk_tblLancamentoConta
+		FOREIGN KEY (idConta)
+		REFERENCES tblConta(idConta)
+		GO
+		
+		
+		ALTER TABLE dbo.tblLancamento
+		ADD CONSTRAINT fk_tblLancamentoSubconta
+		FOREIGN KEY (idSubconta)
+		REFERENCES tblSubconta(idSubconta)
+		GO
+
+		
+		CREATE INDEX idx_LancamentoPagamento
+		ON tblLancamento (dtPagamento);
 
 
+		
+-- ....................................................................
+-- Extrato
 
+drop table dbo.tblExtrato
 
-*/
+	create table dbo.tblExtrato(	
+		idExtrato		    int identity(1,1)	not null,
+		idCelula			int					not null,
+		Data				datetime			,
+		Subconta			varchar(30)			,
+		Descricao			varchar(200)		,
+		Valor				decimal(17,2)		,
+		Saldo				decimal(17,2)		,
+		Conta             varchar(50),
+		DtInicio			datetime,
+		DtFim             datetime,
+		Filtro            varchar(150)
+		CONSTRAINT PK_tblExtrato PRIMARY KEY CLUSTERED 
+		(
+			idExtrato ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]
+		GO
+		SET ANSI_PADDING OFF
+		GO
+
+		
+-- ....................................................................
+-- Fluxo
+
+		
+
+	create table dbo.tblFluxoColunas(	
+		idFluxoColuna	    int identity(1,1)	not null,
+		col01				varchar(10)		,
+		col02				varchar(10)		,
+		col03				varchar(10)		,
+		col04				varchar(10)		,
+		col05				varchar(10)		,
+		col06				varchar(10)		,
+		col07				varchar(10)		,
+		col08				varchar(10)		,
+		col09				varchar(10)		,
+		col10				varchar(10)		,
+		col11				varchar(10)		,
+		col12				varchar(10)		    
+		CONSTRAINT PK_tblFluxoColunas PRIMARY KEY CLUSTERED 
+		(
+			idFluxoColuna ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]
+		GO
+		SET ANSI_PADDING OFF
+		GO
+		
+
+	drop table tblFluxo
+	create table dbo.tblFluxo(	
+		idFluxo		    int identity(1,1)	not null,
+		idCelula			int					not null,
+		Subconta			varchar(30)			,
+		col01				decimal(18,2)		,
+		col02				decimal(18,2)		,
+		col03				decimal(18,2)		,
+		col04				decimal(18,2)		,
+		col05				decimal(18,2)		,
+		col06				decimal(18,2)		,
+		col07				decimal(18,2)		,
+		col08				decimal(18,2)		,
+		col09				decimal(18,2)		,
+		col10				decimal(18,2)		,
+		col11				decimal(18,2)		,
+		col12				decimal(18,2)		,
+		Total				decimal(18,2)		
+		CONSTRAINT PK_tblFluxo PRIMARY KEY CLUSTERED 
+		(
+			idFluxo ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]
+		GO
+		SET ANSI_PADDING OFF
+		GO
+

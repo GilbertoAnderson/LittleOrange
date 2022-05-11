@@ -21,12 +21,16 @@ namespace TheLittleOrangeChannel.Controllers
         // GET: Parcelas
         public ActionResult Index(string strCriterio)
         {
+
+            DateTime _dtLimite = DateTime.Now.AddDays(10);
+
             var tblParcelas = db.tblParcelas.Include(t => t.tblPrestador).Include(t => t.tblAssinaturas).Include(t => t.tblStatus);
             if (!String.IsNullOrEmpty(strCriterio))
             {
                 tblParcelas = tblParcelas.Where(h => h.Rastreador.Contains(strCriterio.ToString())
                                             || h.tblPrestador.Empresa.Contains(strCriterio.ToString())
                                             || h.tblStatus.Descricao.Contains(strCriterio.ToString())
+
                                             );
             }
 
@@ -35,6 +39,29 @@ namespace TheLittleOrangeChannel.Controllers
 
         }
 
+        public ActionResult ParcelasemAberto(string strCriterio)
+        {
+            // .......... mostra somente as parcelas em aberto para os proximos 10 dias
+            // com isto evita de dar baixa em parcelas dos proximos meses
+
+            DateTime _dtLimite = DateTime.Now.AddDays(10);
+            tblStatus _tblStatus = db.tblStatus.Where(x => x.Objeto == "PARCELA" && x.Descricao == "ABERTA").FirstOrDefault();
+
+            var tblParcelas = db.tblParcelas.Include(t => t.tblPrestador).Include(t => t.tblAssinaturas).Include(t => t.tblStatus);
+
+            tblParcelas = tblParcelas.Where(h => h.idStatus == _tblStatus.idStatus && h.dataVencimento <= _dtLimite);                           
+
+            if (!String.IsNullOrEmpty(strCriterio))
+            {
+                tblParcelas = tblParcelas.Where(h=>h.Rastreador.Contains(strCriterio.ToString())
+                                              || h.tblPrestador.Empresa.Contains(strCriterio.ToString())
+                                            );
+            }
+
+            ViewBag.FiltroStatus = strCriterio;
+            return View(tblParcelas.ToList());
+
+        }
 
         public ActionResult BaixaManual(int? id, decimal valor, int operador)
         {
@@ -51,7 +78,9 @@ namespace TheLittleOrangeChannel.Controllers
             //.................... valida parcela
 
             baixaParcela(id, valor, operador);
-            return View();
+
+
+            return RedirectToAction("Index", new { strCriterio = "ABERTA" });
 
         }
 
@@ -66,7 +95,7 @@ namespace TheLittleOrangeChannel.Controllers
             _tblParcela.dataPagamento = DateTime.Now;
             _tblParcela.idStatus = _tblStatus.idStatus;
             _tblParcela.valorPago = valor;
-            _tblParcela.Log = _tblParcela.Log + "/n" + _log;
+            _tblParcela.Log = _tblParcela.Log + "chr(13)" + _log;
 
             //....................... renova a Assinatura
             tblStatus _tblStatusAssinatura = db.tblStatus.Where(x => x.Objeto == "ASSINATURA" && x.Descricao == "ATIVA").FirstOrDefault();
@@ -75,12 +104,13 @@ namespace TheLittleOrangeChannel.Controllers
             // ............ calcula data de termino
             string plano = _tblAssinatura.Rastreador.Substring(4, 2);
             tblDominios _tblDuracao = db.tblDominios.Where(x => x.Objeto == "PRAZOPLANO" && x.Codigo == plano).FirstOrDefault();
+            int qtdeMeses = Int32.Parse(_tblDuracao.Descricao);
             DateTime _novoVencto = (DateTime)_tblAssinatura.dtTermino;
-            _novoVencto = _novoVencto.AddMonths(Int32.Parse(_tblDuracao.Descricao));
+            _novoVencto = _novoVencto.AddMonths(qtdeMeses);
 
-            _tblAssinatura.idStatus = _tblStatus.idStatus;
+            _tblAssinatura.idStatus = _tblStatusAssinatura.idStatus;
             _tblAssinatura.dtTermino = _novoVencto;
-            _tblAssinatura.Log = _tblAssinatura.Log + "/n" + _log + " novo vencto: " + _novoVencto.ToString();
+            _tblAssinatura.Log = _tblAssinatura.Log + "chr(13)" + _log + " novo vencto: " + _novoVencto.ToString();
 
 
 

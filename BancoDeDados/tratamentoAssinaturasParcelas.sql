@@ -71,11 +71,20 @@ update tblDominios set Descricao =  '20,00' where idDominio = 71
 
 select prest.Empresa, 
        abra.Descricao 'abrangencia',
-       stat.Descricao 'staus'
+       stat.Descricao 'status'
 from tblPrestador    prest
 inner join tblStatus stat on prest.idStatus = stat.idStatus
 inner join tblDominios abra on prest.idAbrangencia  = abra.idDominio
 where idPrestador = 1
+
+
+
+select prest.Empresa,
+       stat.Descricao 'status'
+from  tblPrestador prest 
+inner join tblStatus    stat  on prest.idStatus = stat.idStatus
+where prest.idPrestador  = 1
+
 
 select prest.Empresa,
        assi.Rastreador,
@@ -93,3 +102,11 @@ inner join tblParcelas  parc on parc.idAssinatura = assi.idAssinatura
 inner join tblStatus    past  on parc.idStatus = past.idStatus
 
 where prest.idPrestador  = 1
+
+select * from  tblStatus
+select * from  tblAssinaturas
+select * from  tblParcelas
+
+
+delete from tblParcelas where idParcela  = 9
+update tblParcelas set idStatus = 36 where idParcela = 7

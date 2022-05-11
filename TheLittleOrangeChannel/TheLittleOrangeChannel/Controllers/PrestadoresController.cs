@@ -38,11 +38,11 @@ namespace TheLittleOrangeChannel.Controllers
             
             }
            
-
             return View(tblPrestador.ToList());
-
-
         }
+
+
+
 
         public class StatusGroup
         {
@@ -76,6 +76,9 @@ namespace TheLittleOrangeChannel.Controllers
         }
 
 
+
+
+
         // GET: Prestadores/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,6 +108,9 @@ namespace TheLittleOrangeChannel.Controllers
             ViewBag.idStatus = new SelectList(db.tblStatus, "idStatus", "Objeto", tblPrestador.idStatus);
             return View(tblPrestador);
         }
+
+
+
 
 
         // GET: Prestadores/Edit/5
@@ -658,8 +664,12 @@ namespace TheLittleOrangeChannel.Controllers
             return View();
         }
 
-       
 
+
+
+
+
+        //public ActionResult CriarAssinatura(int idPrestador, string abrangencia, string plano, decimal valor, string rastreador, int canal)
         public ActionResult CriarAssinatura(int idPrestador, string abrangencia, string plano, decimal valor, string rastreador, int canal)
         {
             tblPrestador _tblPrestador = db.tblPrestador.Where(x => x.idPrestador == idPrestador).FirstOrDefault();

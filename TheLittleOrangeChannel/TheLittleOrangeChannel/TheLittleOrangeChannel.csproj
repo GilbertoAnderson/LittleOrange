@@ -314,7 +314,8 @@
     <Content Include="Views\Prestadores\Planos_old02 .cshtml" />
     <Content Include="Views\Parcelas\Index.cshtml" />
     <Content Include="Views\Parcelas\BaixaManual.cshtml" />
-    <Content Include="Views\Prestadores\Prestadores - Cópia .cshtml" />
+    <Content Include="Views\Prestadores\PrestadoresX.cshtml" />
+    <Content Include="Views\Parcelas\ParcelasemAberto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

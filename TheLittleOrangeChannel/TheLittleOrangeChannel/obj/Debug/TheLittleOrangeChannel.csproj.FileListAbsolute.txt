@@ -88,3 +88,4 @@ C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeCha
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csproj.CopyComplete
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.pdb
+C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csprojAssemblyReference.cache

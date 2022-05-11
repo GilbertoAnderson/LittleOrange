@@ -38,24 +38,27 @@
 
                 @foreach (var item in Model)
                 {
-                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarEscolha('@ViewBag.FiltroStatus', '@item.Celular', '@item.Empresa', '@item.idPrestador', '@item.tblCondominio.Nome','@item.tblCondominio.Cidade');" style="cursor: pointer">
-                    <h4> @Html.DisplayFor(modelItem => item.Empresa)</h4>
-                    @Html.DisplayFor(modelItem => item.UF) &nbsp;  @Html.DisplayFor(modelItem => item.Cidade) &nbsp;  @Html.DisplayFor(modelItem => item.Celular)
 
-                    @if (@ViewBag.FiltroStatus == "Negociando")
-                    {
-                        <a href='@Url.Action("Abrangencia",  new { id = item.idPrestador})'>
-                            <input id="btnNegociando" type="button" value="Negociar" class="btn btn-success" />
-                        </a>
-                    }
+                   <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarEscolha('@ViewBag.FiltroStatus', '@item.Celular', '@item.Empresa', '@item.idPrestador', '@item.tblCondominio.Nome','@item.tblCondominio.Cidade');" style="cursor: pointer">
 
+
+                            <h4> @Html.DisplayFor(modelItem => item.Empresa)</h4>
+                            @Html.DisplayFor(modelItem => item.UF) &nbsp;  @Html.DisplayFor(modelItem => item.Cidade) &nbsp;  @Html.DisplayFor(modelItem => item.Celular)
+
+                            @*@if (@ViewBag.FiltroStatus == "Negociando")
+                            {
+                                <a href='@Url.Action("Abrangencia",  new { id = item.idPrestador})'>
+                                    <input id="btnNegociando" type="button" value="Negociar" class="btn btn-success" />
+                                </a>
+                            }*@
+
+                        </div>
+                        }
+                    </div>
+                    <div class="col-md-2">
+                        &nbsp;
+                    </div>
                 </div>
-                }
-            </div>
-            <div class="col-md-2">
-                &nbsp;
-            </div>
-        </div>
     }
 </div>
 }
@@ -92,19 +95,10 @@
 
             function enviaAbrangencia(idPrestador)
             {
-                $.ajax(
-                {
-                    type: "POST",
-                    url: '@Url.Action("Abrangencia", "Prestadores")',
-                    data: {
-                        "id": idPrestador
-                    },
-                    success:
+               
+                var url = '@Url.Action("Abrangencia", "Prestadores")?id=' + idPrestador;
+                window.open(url,"_self"); 
 
-                    function (resultado) {
-                        alert(resultado);
-                    },
-                });
             };
 
 
@@ -131,7 +125,6 @@
                         "Status": 'Prospectado'
                     },
                     success:
-
                     function (resultado) {
                         alert(resultado);
                     },

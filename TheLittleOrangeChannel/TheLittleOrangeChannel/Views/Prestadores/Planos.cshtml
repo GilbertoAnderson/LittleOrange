@@ -51,8 +51,7 @@
             </div>
             <div class="col-md-8">
 
-                <div class="list-group-item list-group-item-action list-group-item-orange"
-                     onclick="renviarPlano(@ViewBag.Celular, @ViewBag.id, @ViewBag.Abrangencia, 'Mensal',@ViewBag.vlPlanoMensal, @ViewBag.linkPagseguro,@ViewBag.Empresa,  @ViewBag.codPlanoMensal);" style="cursor: pointer">
+                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Mensal', '@ViewBag.vlPlanoMensal', '@ViewBag.linkPagseguro', '@ViewBag.Empresa', '@ViewBag.codPlanoMensal');" style="cursor: pointer">
                     @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "http://pag.ae/7Yeiwb6b3"; }
                     @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "http://pag.ae/7Yeix1s9n"; }
                     @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "http://pag.ae/7YeixAK9t"; }
@@ -69,8 +68,7 @@
                 </div>
 
 
-                <div class="list-group-item list-group-item-action list-group-item-orange"
-                      onclick="renviarPlano(@ViewBag.Celular, @ViewBag.id, @ViewBag.Abrangencia, 'Anual',@ViewBag.vlPlanoMensal, @ViewBag.linkPagseguro,@ViewBag.Empresa,  @ViewBag.codPlanoMensal);" style="cursor: pointer">
+                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Anual', '@ViewBag.vlPlanoAnual', '@ViewBag.linkPagseguro', '@ViewBag.Empresa', '@ViewBag.codPlanoAnual');" style="cursor: pointer">
                    
                     @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "https://pag.ae/7YeiqBZm3"; }
                     @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "https://pag.ae/7YeirBJnR"; }
@@ -86,8 +84,7 @@
                     1 parcela de @ViewBag.ValorPlanoAnual <br /> <i>(pode ser dividido pelo PagSeguro em 3 vezes)</i>
                 </div>
 
-                <div class="list-group-item list-group-item-action list-group-item-orange"
-                      onclick="renviarPlano(@ViewBag.Celular, @ViewBag.id, @ViewBag.Abrangencia, '3 Anos',@ViewBag.vlPlanoMensal, @ViewBag.linkPagseguro,@ViewBag.Empresa,  @ViewBag.codPlanoMensal);" style="cursor: pointer">
+                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', '3 Anos', '@ViewBag.vlPlano3Anos', '@ViewBag.linkPagseguro', '@ViewBag.Empresa', '@ViewBag.codPlano3Anos');" style="cursor: pointer">
                    
 
 
@@ -142,7 +139,9 @@
 
 
 
-        function enviarPlano(celular,  idPrestador, abrangencia, plano, valor, linkPagseguro, empresa, tipoPlano) {
+    function enviarPlano(celular, idPrestador, abrangencia, plano, valor, linkPagseguro, empresa, tipoPlano) {
+
+
 
             var data = new Date(),
                 dia = data.getDate().toString(),
@@ -150,7 +149,7 @@
                 mes = (data.getMonth() + 1).toString(), //+1 pois no getMonth Janeiro começa com zero.
                 mesF = (mes.length == 1) ? '0' + mes : mes,
                 anoF = data.getFullYear();
-            var celular = "55" + celular;          
+            var celular = "55" + celular;
             var rastreador = anoF + tipoPlano + diaF + addZeroes(idPrestador, 6) + mesF;
 
             var texto = "The Little Orange Club \n" +
@@ -172,27 +171,33 @@
             texto = window.encodeURIComponent(texto);
             window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
 
+        
+          $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("CriarAssinatura", "Prestadores")',
+                    data: {
+                        "idPrestador": idPrestador,
+                        "abrangencia": abrangencia,
+                        "plano": plano,
+                        "valor": valor,
+                        "rastreador": rastreador,
+                        "canal": @Session["idUsuario"]
+                    },
+                    success:
+                    function (resultado) {
+                        alert("Assinatura criada com sucesso");
+                    },
+              });
 
-            $.ajax(
-            {
-                type: "POST",
-                url: '@Url.Action("CriarAssinatura", "Prestadores")',
-                data: {
-                    "idPrestador": idPrestador,
-                    "abrangencia": abrangencia,
-                    "plano": plano,
-                    "valor": valor,
-                    "rastreador": rastreador,
-                    "canal": @Session["idUsuario"]
-                },
-                success:
+                var url = '@Url.Action("Menu", "Prestadores")';
+                window.open(url,"_self");
 
-                function (resultado) {
-                    alert(resultado);
-                },
-            });
-            location.reload();
-        }
+
+    }
+
+
+
 
         function addZeroes(num, len) {
             var numberWithZeroes = String(num);
