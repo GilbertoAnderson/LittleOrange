@@ -729,7 +729,7 @@ namespace TheLittleOrangeChannel.Controllers
 
             }
 
-            tblAssinaturas _tblAssinaturaLast = db.tblAssinaturas.Where(x => x.idPrestador == idPrestador).FirstOrDefault();
+            tblAssinaturas _tblAssinaturaLast = db.tblAssinaturas.Where(x => x.idPrestador == idPrestador && x.Rastreador == rastreador ).FirstOrDefault();
 
             // ............................. cria a parcela
             CriarParcela(_tblAssinaturaLast.idAssinatura);

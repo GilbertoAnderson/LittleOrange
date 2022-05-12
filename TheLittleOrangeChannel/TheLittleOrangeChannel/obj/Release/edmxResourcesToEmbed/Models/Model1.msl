@@ -4,6 +4,16 @@
     <FunctionImportMapping FunctionImportName="sp_ConvitePrestador" FunctionName="TheLittleOrangeModel.Store.sp_ConvitePrestador" />
     <FunctionImportMapping FunctionImportName="sp_ConvitePrestadorEmail" FunctionName="TheLittleOrangeModel.Store.sp_ConvitePrestadorEmail" />
     <FunctionImportMapping FunctionImportName="sp_ConvitePrestadorWhatsapp" FunctionName="TheLittleOrangeModel.Store.sp_ConvitePrestadorWhatsapp" />
+    <EntitySetMapping Name="tblPrestadorEspecialidade">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPrestadorEspecialidade">
+        <MappingFragment StoreEntitySet="tblPrestadorEspecialidade">
+          <ScalarProperty Name="dtValidade" ColumnName="dtValidade" />
+          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+          <ScalarProperty Name="idEspecialidade" ColumnName="idEspecialidade" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblAssinaturas">
       <EntityTypeMapping TypeName="TheLittleOrangeModel.tblAssinaturas">
         <MappingFragment StoreEntitySet="tblAssinaturas">
@@ -12,6 +22,7 @@
           <ScalarProperty Name="ValorContrato" ColumnName="ValorContrato" />
           <ScalarProperty Name="dtTermino" ColumnName="dtTermino" />
           <ScalarProperty Name="dtInicio" ColumnName="dtInicio" />
+          <ScalarProperty Name="Rastreador" ColumnName="Rastreador" />
           <ScalarProperty Name="idStatus" ColumnName="idStatus" />
           <ScalarProperty Name="idAbrangencia" ColumnName="idAbrangencia" />
           <ScalarProperty Name="idCanal" ColumnName="idCanal" />
@@ -97,6 +108,7 @@
           <ScalarProperty Name="valorDevido" ColumnName="valorDevido" />
           <ScalarProperty Name="dataPagamento" ColumnName="dataPagamento" />
           <ScalarProperty Name="dataVencimento" ColumnName="dataVencimento" />
+          <ScalarProperty Name="Rastreador" ColumnName="Rastreador" />
           <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
           <ScalarProperty Name="idAssinatura" ColumnName="idAssinatura" />
           <ScalarProperty Name="idParcela" ColumnName="idParcela" />
@@ -139,16 +151,6 @@
           <ScalarProperty Name="idAbrangencia" ColumnName="idAbrangencia" />
           <ScalarProperty Name="idCanal" ColumnName="idCanal" />
           <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
-          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblPrestadorEspecialidade">
-      <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPrestadorEspecialidade">
-        <MappingFragment StoreEntitySet="tblPrestadorEspecialidade">
-          <ScalarProperty Name="dtValidade" ColumnName="dtValidade" />
-          <ScalarProperty Name="idStatus" ColumnName="idStatus" />
-          <ScalarProperty Name="idEspecialidade" ColumnName="idEspecialidade" />
           <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
         </MappingFragment>
       </EntityTypeMapping>

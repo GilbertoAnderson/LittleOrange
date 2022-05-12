@@ -38,10 +38,9 @@
                 {
 
                 <div class="list-group-item list-group-item-action list-group-item-orange" onclick="baixaManual(@item.idParcela, @item.valorDevido);" style="cursor: pointer">
-                    <h3> @Html.DisplayFor(modelItem => item.tblPrestador.Empresa) </h3>
-                    <h4>Rastreador @Html.DisplayFor(modelItem => item.Rastreador)</h4>
-                    <h4>Vencimento @Convert.ToDateTime(item.dataVencimento).ToString("dd/MM/yyyy") </h4>
-                    <h4>Valor de R$ @Html.DisplayFor(modelItem => item.valorDevido)</h4>
+                    <h2> @Html.DisplayFor(modelItem => item.dataVencimento)</h2>
+                      @Convert.ToDateTime(item.dataVencimento).ToString("dd")
+                    <h3> @Html.DisplayFor(modelItem => item.Rastreador) - @Html.DisplayFor(modelItem => item.tblPrestador.Empresa)    </h3>
                 </div>
 
                 }
@@ -75,20 +74,15 @@
 
             });
 
-    function baixaManual(idParcela, valorDevido) {
-
-        alert(valorDevido);
+            function baixaManual(idParcela, valorDevido) {
                 var valor;
                 var text;
                 var text = prompt("Qual o valor pago:", valorDevido );
                 if (text == null || text == "") {
                     text = "O valor está incorreto.";
                 } else {
-                    valor = text.replace('.',',');
+                    valor = text;
                 }
-
-        alert(valor);
-
                 $.ajax(
                     {
                         type: "POST",
@@ -101,7 +95,7 @@
                         success:
 
                         function (resultado) {
-                            alert("Parcela Paga com sucesso!");
+                            alert(resultado);
                         },
                     });
                     location.reload();

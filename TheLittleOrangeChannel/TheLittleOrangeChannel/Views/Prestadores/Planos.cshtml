@@ -12,7 +12,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="bg-fundo">
+<div class="bg-fundo">
 
     @if (SessionProfile.Logado && (SessionProfile.ADM || SessionProfile.Canal))
     {
@@ -51,53 +51,18 @@
             </div>
             <div class="col-md-8">
 
-                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Mensal', '@ViewBag.vlPlanoMensal', '@ViewBag.linkPagseguro', '@ViewBag.Empresa', '@ViewBag.codPlanoMensal');" style="cursor: pointer">
-                    @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "http://pag.ae/7Yeiwb6b3"; }
-                    @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "http://pag.ae/7Yeix1s9n"; }
-                    @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "http://pag.ae/7YeixAK9t"; }
-                    @if (@ViewBag.Abrangencia == "PAIS") { ViewBag.linkPagseguro = "http://pag.ae/7YeiyehcJ"; }
-                    @if (@ViewBag.Abrangencia == "CONTINENTAL") { ViewBag.linkPagseguro = "http://pag.ae/7YeiyFDr8"; }
-                    @if (@ViewBag.Abrangencia == "GLOBAL") { ViewBag.linkPagseguro = "http://pag.ae/7Yeiz6EB6"; }
-
-
-                   @* <input id="btnPagSeguro" type="button" value="PagSeguro" onclick="return enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Mensal','@ViewBag.vlPlanoMensal', '@ViewBag.linkPagseguro','@ViewBag.Empresa',  '@ViewBag.codPlanoMensal')" class="btn btn-success" />*@
-
+                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Mensal', '@ViewBag.vlPlanoMensal', '@ViewBag.Empresa', '@ViewBag.codPlanoMensal');" style="cursor: pointer">
                     <h4>Mensal</h4>
                     Parcelas recorrentes de @ViewBag.ValorPlanoMensal<br />
-
                 </div>
 
 
-                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Anual', '@ViewBag.vlPlanoAnual', '@ViewBag.linkPagseguro', '@ViewBag.Empresa', '@ViewBag.codPlanoAnual');" style="cursor: pointer">
-                   
-                    @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "https://pag.ae/7YeiqBZm3"; }
-                    @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "https://pag.ae/7YeirBJnR"; }
-                    @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "https://pag.ae/7YeisziTR"; }
-                    @if (@ViewBag.Abrangencia == "PAIS") { ViewBag.linkPagseguro = "https://pag.ae/7Yeitaf68"; }
-                    @if (@ViewBag.Abrangencia == "CONTINENTAL") { ViewBag.linkPagseguro = "https://pag.ae/7YeitW8hR"; }
-                    @if (@ViewBag.Abrangencia == "GLOBAL") { ViewBag.linkPagseguro = "https://pag.ae/7YeiuoShN"; }
-
-                    
-                    @*<input id="btnPagSeguro" type="button" value="PagSeguro" onclick="return enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Anual','@ViewBag.vlPlanoAnual', '@ViewBag.linkPagseguro','@ViewBag.Empresa','@ViewBag.codPlanoAnual')" class="btn btn-success" />*@
-
+                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', 'Anual', '@ViewBag.vlPlanoAnual', '@ViewBag.Empresa', '@ViewBag.codPlanoAnual');" style="cursor: pointer">
                     <h4>Anual</h4>
                     1 parcela de @ViewBag.ValorPlanoAnual <br /> <i>(pode ser dividido pelo PagSeguro em 3 vezes)</i>
                 </div>
 
-                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', '3 Anos', '@ViewBag.vlPlano3Anos', '@ViewBag.linkPagseguro', '@ViewBag.Empresa', '@ViewBag.codPlano3Anos');" style="cursor: pointer">
-                   
-
-
-                    @if (@ViewBag.Abrangencia == "CIDADE") { ViewBag.linkPagseguro = "https://pag.ae/7YeirmBHJ"; }
-                    @if (@ViewBag.Abrangencia == "ESTADO") { ViewBag.linkPagseguro = "https://pag.ae/7YeirT1S7"; }
-                    @if (@ViewBag.Abrangencia == "REGIAO") { ViewBag.linkPagseguro = "https://pag.ae/7YeisQeKo"; }
-                    @if (@ViewBag.Abrangencia == "PAIS") { ViewBag.linkPagseguro = "https://pag.ae/7YeitvxHM"; }
-                    @if (@ViewBag.Abrangencia == "CONTINENTAL") { ViewBag.linkPagseguro = "https://pag.ae/7Yeiu8Ajs"; }
-                    @if (@ViewBag.Abrangencia == "GLOBAL") { ViewBag.linkPagseguro = "https://pag.ae/7YeiuBsGa"; }
-
-
-                    @*<input id="btnPagSeguro" type="button" value="PagSeguro" onclick="return enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', '3 Anos','@ViewBag.vlPlano3Anos', '@ViewBag.linkPagseguro','@ViewBag.Empresa','@ViewBag.codPlano3Anos')" class="btn btn-success" />*@
-
+                <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarPlano('@ViewBag.Celular', '@ViewBag.id', '@ViewBag.Abrangencia', '3 Anos', '@ViewBag.vlPlano3Anos', '@ViewBag.Empresa', '@ViewBag.codPlano3Anos');" style="cursor: pointer">
                     <h4>3 Anos</h4>
                     1 parcela de @ViewBag.ValorPlano3Anos <br /> <i>(pode ser dividido pelo PagSeguro em 6 vezes)</i>
                 </div>
@@ -106,8 +71,8 @@
                 </div>
             </div>
         </div>
-        }
-    </div>
+    }
+</div>
     }
 
 
@@ -139,7 +104,36 @@
 
 
 
-    function enviarPlano(celular, idPrestador, abrangencia, plano, valor, linkPagseguro, empresa, tipoPlano) {
+    function enviarPlano(celular, idPrestador, abrangencia, plano, valor, empresa, tipoPlano) {
+
+
+        if (plano=="Mensal") { 
+            if (abrangencia == "CIDADE") { linkPagseguro = "http://pag.ae/7Yeiwb6b3"; }
+            if (abrangencia == "ESTADO") { linkPagseguro = "http://pag.ae/7Yeix1s9n"; }
+            if (abrangencia == "REGIAO") { linkPagseguro = "http://pag.ae/7YeixAK9t"; }
+            if (abrangencia == "PAIS") { linkPagseguro = "http://pag.ae/7YeiyehcJ"; }
+            if (abrangencia == "CONTINENTAL") { linkPagseguro = "http://pag.ae/7YeiyFDr8"; }
+            if (abrangencia == "GLOBAL") { linkPagseguro = "http://pag.ae/7Yeiz6EB6"; }
+        }
+
+        if (plano == "Anual") { 
+            if (abrangencia == "CIDADE") { linkPagseguro = "https://pag.ae/7YeiqBZm3"; }
+            if (abrangencia == "ESTADO") { linkPagseguro = "https://pag.ae/7YeirBJnR"; }
+            if (abrangencia == "REGIAO") { linkPagseguro = "https://pag.ae/7YeisziTR"; }
+            if (abrangencia == "PAIS") { linkPagseguro = "https://pag.ae/7Yeitaf68"; }
+            if (abrangencia == "CONTINENTAL") { linkPagseguro = "https://pag.ae/7YeitW8hR"; }
+            if (abrangencia == "GLOBAL") { linkPagseguro = "https://pag.ae/7YeiuoShN"; }
+        }
+
+        if (plano == "3 Anos") { 
+            if (abrangencia == "CIDADE") { linkPagseguro = "https://pag.ae/7YeirmBHJ"; }
+            if (abrangencia == "ESTADO") { linkPagseguro = "https://pag.ae/7YeirT1S7"; }
+            if (abrangencia == "REGIAO") { linkPagseguro = "https://pag.ae/7YeisQeKo"; }
+            if (abrangencia == "PAIS") { linkPagseguro = "https://pag.ae/7YeitvxHM"; }
+            if (abrangencia == "CONTINENTAL") { linkPagseguro = "https://pag.ae/7Yeiu8Ajs"; }
+            if (abrangencia == "GLOBAL") { linkPagseguro = "https://pag.ae/7YeiuBsGa"; }
+        }
+
 
 
 
@@ -171,7 +165,7 @@
             texto = window.encodeURIComponent(texto);
             window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
 
-        
+
           $.ajax(
                 {
                     type: "POST",

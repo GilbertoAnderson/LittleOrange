@@ -9,6 +9,7 @@
     <Property Name="idCanal" Type="int" Nullable="false" />
     <Property Name="idAbrangencia" Type="int" Nullable="false" />
     <Property Name="idStatus" Type="int" Nullable="false" />
+    <Property Name="Rastreador" Type="varchar" MaxLength="16" />
     <Property Name="dtInicio" Type="datetime" />
     <Property Name="dtTermino" Type="datetime" />
     <Property Name="ValorContrato" Type="decimal" Precision="18" Scale="2" />
@@ -85,9 +86,10 @@
     <Property Name="idParcela" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idAssinatura" Type="int" Nullable="false" />
     <Property Name="idPrestador" Type="int" Nullable="false" />
+    <Property Name="Rastreador" Type="varchar" MaxLength="16" />
     <Property Name="dataVencimento" Type="datetime" Nullable="false" />
     <Property Name="dataPagamento" Type="datetime" />
-    <Property Name="valorDevido" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="valorDevido" Type="decimal" Precision="18" Scale="2" />
     <Property Name="valorPago" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Log" Type="varchar(max)" />
     <Property Name="idStatus" Type="int" Nullable="false" />

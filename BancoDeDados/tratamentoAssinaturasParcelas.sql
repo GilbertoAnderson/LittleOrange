@@ -110,3 +110,18 @@ select * from  tblParcelas
 
 delete from tblParcelas where idParcela  = 9
 update tblParcelas set idStatus = 36 where idParcela = 7
+
+
+
+delete from tblParcelas
+delete from tblAssinaturas
+
+-- heber 11 957929260
+-- rafa 11989151146
+-- carol 11940010901
+update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 1
+update tblPrestador set idstatus = 31, celular= '11 957929260' where idPrestador  = 2
+update tblPrestador set idstatus = 31, celular= '11989151146' where idPrestador  = 3
+update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 4
+update tblPrestador set idstatus = 31, celular= '11940010901' where idPrestador  = 23
+update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 24

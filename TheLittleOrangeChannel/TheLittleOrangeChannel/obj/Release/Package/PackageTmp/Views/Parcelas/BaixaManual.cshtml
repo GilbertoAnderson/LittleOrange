@@ -1,8 +1,8 @@
 ﻿@using TheLittleOrangeChannel.Controllers.Shared;
 
-@model IEnumerable<TheLittleOrangeChannel.Models.tblPrestador>
+@model IEnumerable<TheLittleOrangeChannel.Models.tblParcelas>
 @{
-    ViewBag.Title = ViewBag.FiltroStatus;
+    ViewBag.Title = "Parcelas";
 }
 
 @using (Html.BeginForm())
@@ -21,8 +21,6 @@
                     <p>
                         Procurar por : @Html.TextBox("strCriterio") &nbsp;
                         <input type="submit" value="Procurar" class="btn btn-warning" /> &nbsp;
-                        <a href="@Url.Action("Menu", "Prestadores")"> <input type="button" value="Voltar" class="btn btn-default" /></a>
-                        @* Filtro atual = @ViewBag.FiltroStatus*@
                     </p>
                 }
             </div>
@@ -39,26 +37,22 @@
                 @foreach (var item in Model)
                 {
 
-                   <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarEscolha('@ViewBag.FiltroStatus', '@item.Celular', '@item.Empresa', '@item.idPrestador', '@item.tblCondominio.Nome','@item.tblCondominio.Cidade');" style="cursor: pointer">
+                <a href='@Url.Action("BaixaParcela",  new { id = item.idParcela})'>
+
+                    <div class="list-group-item list-group-item-action list-group-item-orange">
+
+                        <h4> @Html.DisplayFor(modelItem => item.Rastreador)</h4>
+                        @Html.DisplayFor(modelItem => item.dataVencimento) + " - " + @Html.DisplayFor(modelItem => item.tblPrestador.Empresa)
 
 
-                            <h4> @Html.DisplayFor(modelItem => item.Empresa)</h4>
-                            @Html.DisplayFor(modelItem => item.UF) &nbsp;  @Html.DisplayFor(modelItem => item.Cidade) &nbsp;  @Html.DisplayFor(modelItem => item.Celular)
-
-                            @*@if (@ViewBag.FiltroStatus == "Negociando")
-                            {
-                                <a href='@Url.Action("Abrangencia",  new { id = item.idPrestador})'>
-                                    <input id="btnNegociando" type="button" value="Negociar" class="btn btn-success" />
-                                </a>
-                            }*@
-
-                        </div>
-                        }
                     </div>
-                    <div class="col-md-2">
-                        &nbsp;
-                    </div>
-                </div>
+                </a>
+                }
+            </div>
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+        </div>
     }
 </div>
 }
@@ -67,7 +61,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
             $(document).ready(function () {
 
@@ -82,28 +76,10 @@
                     Escolha("Abrangencia", escolha);
                 }*@
 
-            });
-
-            function enviarEscolha(status, celular, empresa, idPrestador, condominio, cidade)
-            {
-                if (status == "Trafego") { enviarTrafego(celular, empresa, condominio, idPrestador) };
-                if (status == "Prospectado") { enviarProspectado(celular, empresa, condominio, idPrestador, cidade) };
-                if (status == "Oportunidade") { enviarOportunidade(celular, idPrestador) };
-                if (status == "Negociando") { enviaAbrangencia(idPrestador) };
-            };
+    });
 
 
-            function enviaAbrangencia(idPrestador)
-            {
-               
-                var url = '@Url.Action("Abrangencia", "Prestadores")?id=' + idPrestador;
-                window.open(url,"_self"); 
-
-            };
-
-
-
-            function enviarTrafego(celular, empresa, condominio, idPrestador) {
+    function enviarTrafego(celular, empresa, condominio, idPrestador) {
 
                 var celular = "55" + celular;
 
@@ -125,13 +101,14 @@
                         "Status": 'Prospectado'
                     },
                     success:
+
                     function (resultado) {
                         alert(resultado);
                     },
                 });
                 location.reload();
 
-           };
+            }
 
 
 
@@ -166,11 +143,11 @@
                 });
                 location.reload();
 
-    };
+            }
 
 
 
-    function enviarOportunidade(celular, idPrestador) {
+            function enviarOportunidade(celular,  idPrestador) {
 
                 var celular = "55" + celular;
 
@@ -206,10 +183,10 @@
                 });
                 location.reload();
 
-    };
+            }
 
 
 
-</script>
+    </script>
 }
 
