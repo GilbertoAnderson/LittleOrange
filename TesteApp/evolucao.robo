@@ -1,0 +1,68 @@
+
+
+
+
+
+
+
+Caso Teste 03.00: Esqueci a senha - usuario incorreto
+    Acessar pagina home do site 
+    Clicar link Esqueceu Senha
+    Preencher Campo Email "${UsuarioIncorreto}"
+    Clicar no botao Pesquisar
+    Mensagem de Erro Esqueceu Senha
+    Fechar Navegador
+
+Caso Teste 03.01: Nova Conta - novo condominio
+    Acessar pagina home do site 
+    Clicar no botao Acessar
+    Wait Until Element Is Visible   id=email 
+    Input Text  id=email    TesteAutomatico@teste.com
+    Preencher Campo Password  
+    Pressionar Entrar
+    Adicionar Condominio
+
+        
+CPF esta sendo usado
+
+
+Adiciona Novo Prestador
+    click element   xpath=//*[@id="idCondominio"]
+    Select From List by Value   xpath=//*[@id="idCondominio"]   Condominio Teste Automatizado 
+    Input Text  id=cpf_Cnpj     11232301027
+    Select Checkbox     myBusiness
+    Input Text  id=empresa     Prestador Teste Automatizado   
+    Select From List by Value   xpath=//*[@id="idEspecialidade"]    Para Casa - Faxineira
+    Input Text  id=cep      09230590   
+    Set Focus To Element  id=endereco    
+    Input Text  id=numero   1300
+    Set Focus To Element    id=complemento   
+    Set Focus To Element   id=bairro   
+    Set Focus To Element  id=cidade   
+    Set Focus To Element  id=uf      
+    Set Focus To Element  id=pais     
+    Input Text  id=email    TesteAutomatico@teste.com   
+    Input Text  id=celular      11911141115      
+    Set Focus To Element  id=fone   
+    Click Element    /html/body/app-root/app-create/app-app/div[2]/form/div/div[17]
+    xpath=/html/body/app-root/app-create/app-app/div[2]/form/div/div[17]
+
+    
+    wait until element is visible   id=idEspecialidade  
+    Get Select From List by index   id=idEspecialidade   5
+
+
+     Click Element     id=fone      
+    Sleep   5 
+    Set Focus To Element  xpath=/html/body/app-root/app-create/app-app/div[2]/form/div/div[17]/button
+    Click Element    xpath=/html/body/app-root/app-create/app-app/div[2]/form/div/div[17]/button
+   Mouse over    ${xpathToIdCheck}
+Page Should Contain Element    xpath=//*[@id="list_of_test_types"]    5s
+Click Element   ${User_Menu Link}
+Mouse Down    xpath=//li[contains(.,'${STR}')]
+Click Element  xpath=//li[contains(.,'${STR}')]
+
+
+    wait until element is visible   id=idEspecialidade  
+    Select From List by index   id=idEspecialidade   5 
+    Input Text  id=cep      09230590   

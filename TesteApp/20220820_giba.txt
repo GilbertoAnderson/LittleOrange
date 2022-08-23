@@ -1,0 +1,35 @@
+20 agosto teste The little Orange
+
+01 - Teste de acessos
+02 - Criacao de morador 
+03 - Criacao de condominio
+04 - Criacao de prestador de serviço 
+05 - Criacao de um novo prestador de serviço (outro usuario)
+
+
+CHAMADAS
+- - - - - - - - - - - - - - - - - - - - - - -
+execute o script sql limpaTesteAutomatizado.sql
+robot teste_01_acessoUsuarioSenha.robot
+robot teste_02_alteraSenha.robot
+robot teste_03_novoMorador.robot
+robot teste_04_novoPrestador.robot
+
+
+RESULTADOS
+- - - - - - - - - - - - - - - - - - - - - - -
+Alterar a posição do carrossel para melhorar a visualização no celular
+colocar antes do titulo ou diminuir o tamanho
+
+Cadastro Morador
+	figuras não aparecem no e-mail, podemos enviar embebed?	
+	será que conseguimos colocar o QR Code para tela de login?
+	ou abra com QR Code
+
+Quando prestador recebe e-mail 
+  alterar botões 
+      - Agora não - levar para a tela de login     https://app.thelittleorange.app/#/login
+	  - Com Certeza - levar para o onepage planos  https://thelittleorange.app/#planos
+  
+  - Não criou o usuario do prestador para ele acessar o sistema
+  - Não enviou a senha para o prestador acessar o sistema 
