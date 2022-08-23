@@ -107,6 +107,7 @@ select * from  tblStatus
 select * from  tblAssinaturas
 select * from  tblParcelas
 
+delete from tblAssinaturas where idAssinatura  >= 9
 
 delete from tblParcelas where idParcela  = 9
 update tblParcelas set idStatus = 36 where idParcela = 7

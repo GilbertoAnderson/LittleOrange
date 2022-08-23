@@ -274,7 +274,13 @@ begin
 	VALUES('PARCELA','PAGA', GETDATE(), 1)
 	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
 	VALUES('PARCELA','CANCELADA', GETDATE(), 1)
-
+	
+-- .................................................................... 15 tblPLANO_ABRANGENCIA
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('PLANO_ABRANGENCIA','ATIVO', GETDATE(), 1)
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('PLANO_ABRANGENCIA','INATIVO', GETDATE(), 1)
+	
 end
 
 
@@ -449,7 +455,8 @@ begin
 		[Celular]			varchar(025)      not null,
 		[dtNascimento]		datetime,
 		[CPF_CNPJ]		    varchar(014),
-		[idStatus]			int              not null,
+		[idStatus]			int              not null,		
+		[dtCriacao]			datetime DEFAULT getdate(), 
 		CONSTRAINT [PK_tblUsuario] PRIMARY KEY CLUSTERED 
 		(
 			[idUsuario] ASC
@@ -914,6 +921,7 @@ begin
 		[idAbrangencia]		int not null,
 		[idPlano]			int not null,
 		[idFormaPagto]		int not null,
+		[idUsuario]			int ,
 		[Empresa]			varchar(240)      not null,
 		[Endereco]			varchar(240),
 		[Numero]			int,
@@ -926,13 +934,14 @@ begin
 		[CodigoIBGE]		varchar(7),
 		[Email]				varchar(240)     not null,
 		[Celular]			varchar(25)      not null,
-		[CPF_CNPJ]		    varchar(014)     , -- CPF: 04305254867 11 casas CNPJ: XX. XXX. XXX/0001-XX
+		[CPF_CNPJ]		    varchar(014), -- CPF: 04305254867 11 casas CNPJ: XX. XXX. XXX/0001-XX
 		[Fone]				varchar(20),
 		Latitude			decimal(9,7),
 		Longitude			decimal(9,7),
 		[QtdeAvaliacao]		int,
 		[NotaAvaliacao]		decimal(3,1),
 		[idStatus]			int             not null,
+		[dtCriacao]			datetime DEFAULT getdate(), 
 		CONSTRAINT [PK_tblPrestador] PRIMARY KEY CLUSTERED 
 		(
 			[idPrestador] ASC
@@ -961,6 +970,10 @@ begin
 		FOREIGN KEY (idCondominio)
 		REFERENCES tblCondominio(idCondominio)
 		
+		ALTER TABLE dbo.tblPrestador
+		ADD CONSTRAINT fk_tblPrestadorUsuario
+		FOREIGN KEY (idUsuario)
+		REFERENCES tblUsuario(idUsuario)
 		
 		ALTER TABLE dbo.tblPrestador
 		ADD CONSTRAINT fk_tblPrestadorCanal
@@ -1279,7 +1292,6 @@ begin
 end
 
 
-
 -- .................................................................... 12 tblCliques
 begin 
 
@@ -1397,7 +1409,7 @@ begin
 		[idCanal]			int not null,
 		[idAbrangencia]		int not null,
 		[idStatus]			int not null,
-		[Rastreador]		varchar(16),
+		[Rastreador]		varchar(18),
 		[dtInicio]			datetime,
 		[dtTermino]			datetime,
 		[ValorContrato]		decimal(18,2),
@@ -1497,66 +1509,313 @@ begin
 end
 
 
--- .................................................................... 13 tblParcelas
-	begin 
+-- .................................................................... 14 tblParcelas
+begin 
 
-		if Exists(Select name from sysobjects where name='tblParcelas')Begin 
-			drop table dbo.tblParcelas
-		End
+	if Exists(Select name from sysobjects where name='tblParcelas')Begin 
+		drop table dbo.tblParcelas
+	End
 		
-		create table dbo.tblParcelas(
-		[idParcela]			int identity(1,1) not null,
-		[idAssinatura]		int not null,
-		[idPrestador]		int not null,
-		[Rastreador]		varchar(16),
-		[dataVencimento]	datetime not null,
-		[dataPagamento]		datetime,
-		[valorDevido]		decimal(18,2),
-		[valorPago]			decimal(18,2),
-		[Log]				varchar(max),
-		[idStatus]			int not null,
+	create table dbo.tblParcelas(
+	[idParcela]			int identity(1,1) not null,
+	[idAssinatura]		int not null,
+	[idPrestador]		int not null,
+	[Rastreador]		varchar(18),
+	[dataVencimento]	datetime not null,
+	[dataPagamento]		datetime,
+	[valorDevido]		decimal(18,2),
+	[valorPago]			decimal(18,2),
+	[Log]				varchar(max),
+	[idStatus]			int not null,
 		
-		CONSTRAINT [PK_tblParcelas] PRIMARY KEY CLUSTERED 
-		(
-			[idParcela] ASC
-		)WITH (
-				PAD_INDEX  = OFF, 
-				STATISTICS_NORECOMPUTE  = OFF, 
-				IGNORE_DUP_KEY = OFF,	
-				ALLOW_ROW_LOCKS  = ON, 
-				ALLOW_PAGE_LOCKS  = ON) 
-				ON [PRIMARY]
-		) ON [PRIMARY]
+	CONSTRAINT [PK_tblParcelas] PRIMARY KEY CLUSTERED 
+	(
+		[idParcela] ASC
+	)WITH (
+			PAD_INDEX  = OFF, 
+			STATISTICS_NORECOMPUTE  = OFF, 
+			IGNORE_DUP_KEY = OFF,	
+			ALLOW_ROW_LOCKS  = ON, 
+			ALLOW_PAGE_LOCKS  = ON) 
+			ON [PRIMARY]
+	) ON [PRIMARY]
 
 
-		ALTER TABLE dbo.tblParcelas
-		ADD CONSTRAINT fk_tblParcelas_Status
-		FOREIGN KEY (idStatus)
-		REFERENCES tblStatus(idStatus)
+	ALTER TABLE dbo.tblParcelas
+	ADD CONSTRAINT fk_tblParcelas_Status
+	FOREIGN KEY (idStatus)
+	REFERENCES tblStatus(idStatus)
 
 		
-		ALTER TABLE dbo.tblParcelas
-		ADD CONSTRAINT fk_tblParcelas_Assinatura
-		FOREIGN KEY (idAssinatura)
-		REFERENCES tblAssinaturas(idAssinatura)
+	ALTER TABLE dbo.tblParcelas
+	ADD CONSTRAINT fk_tblParcelas_Assinatura
+	FOREIGN KEY (idAssinatura)
+	REFERENCES tblAssinaturas(idAssinatura)
 		
-		ALTER TABLE dbo.tblParcelas
-		ADD CONSTRAINT fk_tblParcelas_Prestador
-		FOREIGN KEY (idPrestador)
-		REFERENCES tblPrestador(idPrestador)
+	ALTER TABLE dbo.tblParcelas
+	ADD CONSTRAINT fk_tblParcelas_Prestador
+	FOREIGN KEY (idPrestador)
+	REFERENCES tblPrestador(idPrestador)
 
 
-		insert into tblParcelas( [idAssinatura],[idPrestador],[dataVencimento], [valorDevido],[idStatus]) values(
-		        (select idAssinatura   from tblAssinaturas where idPrestador = (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas')),
-		        (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),
-				GETDATE(),
-				26.00,
-				(select idStatus      from tblStatus    where Objeto  = 'PARCELA'   and Descricao = 'ABERTA')
-		)
+	insert into tblParcelas( [idAssinatura],[idPrestador],[dataVencimento], [valorDevido],[idStatus]) values(
+		    (select idAssinatura   from tblAssinaturas where idPrestador = (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas')),
+		    (select idPrestador   from tblPrestador where Empresa = 'Hospital Veterinário Quatro Patas'),
+			GETDATE(),
+			26.00,
+			(select idStatus      from tblStatus    where Objeto  = 'PARCELA'   and Descricao = 'ABERTA')
+	)
 
-	end
+end
 
 	
+-- .................................................................... 15 tblPlano_Abrangencia
+begin 
+
+	if Exists(Select name from sysobjects where name='tblPlano_Abrangencia')Begin 
+		drop table dbo.tblPlano_Abrangencia
+	End
+		
+	create table dbo.tblPlano_Abrangencia(
+	[idPlanoAbrangencia]	int identity(1,1) not null,
+	[idPlano]				int not null,
+	[idAbrangencia]			int not null,
+	[dataCriacao]			datetime not null,
+	[codPlano]				varchar(4),
+	[linkPagSeguro]			varchar(60),
+	[valor]					decimal(18,2),
+	[Log]					varchar(max),
+	[idStatus]				int not null,
+		
+	CONSTRAINT [PK_tblPlano_Abrangencia] PRIMARY KEY CLUSTERED 
+	(
+		[idPlanoAbrangencia] ASC
+	)WITH (
+			PAD_INDEX  = OFF, 
+			STATISTICS_NORECOMPUTE  = OFF, 
+			IGNORE_DUP_KEY = OFF,	
+			ALLOW_ROW_LOCKS  = ON, 
+			ALLOW_PAGE_LOCKS  = ON) 
+			ON [PRIMARY]
+	) ON [PRIMARY]
+
+
+	ALTER TABLE dbo.tblPlano_Abrangencia
+	ADD CONSTRAINT fk_tblPlano_Abrangencia_Status
+	FOREIGN KEY (idStatus)
+	REFERENCES tblStatus(idStatus)
+
+		
+	ALTER TABLE dbo.tblPlano_Abrangencia
+	ADD CONSTRAINT fk_tblPlano_Abrangencia_Plano
+	FOREIGN KEY (idPlano)
+	REFERENCES tblDominios(idDominio)
+				
+	ALTER TABLE dbo.tblPlano_Abrangencia
+	ADD CONSTRAINT fk_tblPlano_Abrangencia_Abrangencia
+	FOREIGN KEY (idAbrangencia)
+	REFERENCES tblDominios(idDominio)
+
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'MENSAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
+				GETDATE(),'http://pag.ae/7Yeiwb6b3', 26.00, 'criado pelo script','MC01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'MENSAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'ESTADO'),
+				GETDATE(),'http://pag.ae/7Yeix1s9n', 35.00, 'criado pelo script','ME01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'MENSAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'REGIAO'),
+				GETDATE(),'http://pag.ae/7YeixAK9t', 53.00, 'criado pelo script','MR01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'MENSAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'PAIS'),
+				GETDATE(),'http://pag.ae/7YeiyehcJ', 143.00, 'criado pelo script','MP01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'MENSAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CONTINENTAL'),
+				GETDATE(),'http://pag.ae/7YeiyFDr8', 260.00, 'criado pelo script','MT01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'MENSAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'GLOBAL'),
+				GETDATE(),'http://pag.ae/7Yeiz6EB6', 350.00, 'criado pelo script','MG01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'ANUAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
+				GETDATE(),'https://pag.ae/7YeiqBZm3', 280.80, 'criado pelo script','AC01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'ANUAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'ESTADO'),
+				GETDATE(),'https://pag.ae/7YeirBJnR', 378.00, 'criado pelo script','AE01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'ANUAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'REGIAO'),
+				GETDATE(),'https://pag.ae/7YeisziTR', 572.40, 'criado pelo script','AR01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'ANUAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'PAIS'),
+				GETDATE(),'https://pag.ae/7Yeitaf68', 1544.40, 'criado pelo script','AP01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'ANUAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CONTINENTAL'),
+				GETDATE(),'https://pag.ae/7YeitW8hR', 2808.00, 'criado pelo script','AT01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = 'ANUAL'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'GLOBAL'),
+				GETDATE(),'https://pag.ae/7YeiuoShN', 3780.00, 'criado pelo script','AG01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+		
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = '3 ANOS'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CIDADE'),
+				GETDATE(),'https://pag.ae/7YeirmBHJ', 795.60, 'criado pelo script','3C01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = '3 ANOS'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'ESTADO'),
+				GETDATE(),'https://pag.ae/7YeirT1S7', 1071.00, 'criado pelo script','3E01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = '3 ANOS'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'REGIAO'),
+				GETDATE(),'https://pag.ae/7YeisQeKo', 1621.80, 'criado pelo script','3R01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+				
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = '3 ANOS'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'PAIS'),
+				GETDATE(),'https://pag.ae/7YeitvxHM', 4375.80, 'criado pelo script','3P01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+		
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = '3 ANOS'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'CONTINENTAL'),
+				GETDATE(),'https://pag.ae/7Yeiu8Ajs', 7956.00, 'criado pelo script','3T01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+				
+	insert into tblPlano_Abrangencia([idPlano],[idAbrangencia],[dataCriacao],[linkPagSeguro],
+										[valor],[Log],[codPlano],[idStatus]) 
+			values(
+			(select idDominio     from tblDominios  where Objeto  = 'PLANO' and Descricao = '3 ANOS'),
+			(select idDominio     from tblDominios  where Objeto  = 'ABRANGENCIA' and Descricao = 'GLOBAL'),
+				GETDATE(),'https://pag.ae/7Yeiu8Ajs', 7956.00, 'criado pelo script','3G01',
+			(select idStatus      from tblStatus    where Objeto  = 'PLANO_ABRANGENCIA'   and Descricao = 'ATIVO')
+	)
+	
+	
+
+	SELECT  dopl.Descricao 'PLANO', doab.Descricao 'ABRANGENCIA', plab.valor, plab.codPlano, plab.linkPagSeguro, plab.*
+	FROM tblPlano_Abrangencia plab
+	inner join tblDominios dopl  on dopl.idDominio = plab.idPlano
+	inner join tblDominios doab  on doab.idDominio = plab.idAbrangencia
+	where dopl.Descricao = 'MENSAL'
+
+		
+end
+
+	
+
+
+
+
 
 
 	-- ....................................................................

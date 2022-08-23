@@ -38,6 +38,7 @@ update tblEspecialidade set icone = '' where descricao  = ''
 
 -- .................... petz
 insert into tblEspecialidade(Area, Icone, Descricao, idStatus) values('PETS','','Veterinario', (select idStatus from tblStatus where Objeto = 'ESPECIALIDADE' and Descricao = 'ATIVO'))
+insert into tblEspecialidade(Area, Icone, Descricao, idStatus) values(' ','','Outros', (select idStatus from tblStatus where Objeto = 'ESPECIALIDADE' and Descricao = 'ATIVO'))
 
 -- .................... limpeza
 
@@ -124,4 +125,6 @@ insert into tblEspecialidade(Area, Icone, Descricao, idStatus) values('Veiculos'
 insert into tblEspecialidade(Area, Icone, Descricao, idStatus) values('Veiculos','fas fa-car','Troca Óleo', (select idStatus from tblStatus where Objeto = 'ESPECIALIDADE' and Descricao = 'ATIVO'))
 insert into tblEspecialidade(Area, Icone, Descricao, idStatus) values('Veiculos','fas fa-car','Acessórios', (select idStatus from tblStatus where Objeto = 'ESPECIALIDADE' and Descricao = 'ATIVO'))
 insert into tblEspecialidade(Area, Icone, Descricao, idStatus) values('Veiculos','fas fa-car','Acessórios', (select idStatus from tblStatus where Objeto = 'ESPECIALIDADE' and Descricao = 'ATIVO'))
+
+
 

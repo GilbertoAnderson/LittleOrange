@@ -97,8 +97,8 @@ update tblPrestador set idstatus = 34, celular= '11 982581115' where idPrestador
 -- rafa 11989151146
 -- carol 11940010901
 update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 1
-update tblPrestador set idstatus = 31, celular= '11 957929260' where idPrestador  = 2
-update tblPrestador set idstatus = 31, celular= '11989151146' where idPrestador  = 3
+update tblPrestador set idstatus = 34, celular= '11 957929260' where idPrestador  = 2
+update tblPrestador set idstatus = 34, celular= '11989151146' where idPrestador  = 3
 update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 4
 update tblPrestador set idstatus = 31, celular= '11940010901' where idPrestador  = 23
 update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 24

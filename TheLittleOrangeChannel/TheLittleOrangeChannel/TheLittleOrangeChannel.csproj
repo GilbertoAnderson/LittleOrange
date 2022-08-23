@@ -316,6 +316,7 @@
     <Content Include="Views\Parcelas\BaixaManual.cshtml" />
     <Content Include="Views\Prestadores\PrestadoresX.cshtml" />
     <Content Include="Views\Parcelas\ParcelasemAberto.cshtml" />
+    <Content Include="Views\Prestadores\Abrangencia - Cópia .cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

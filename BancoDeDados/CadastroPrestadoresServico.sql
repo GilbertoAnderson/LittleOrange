@@ -82,4 +82,8 @@
 			insert into tblPrestadorEspecialidade(idPrestador, idEspecialidade) values(@idPrestador,@idEspecialidade)
 
 
-	    end			
+	    end
+		
+
+
+		
