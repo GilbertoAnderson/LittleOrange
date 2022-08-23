@@ -18,7 +18,7 @@ declare
 	@idCondominio	int,
 	@idPrestador	int
 
-select @idUsuario = idUsuario  from tblusuario where Nome = 'Morador teste Automatico'
+select @idUsuario = idUsuario  from tblusuario where Nome = 'Morador teste Automatizado'
 select @idCondominio = idCondominio from tblCondominio where nome='Condominio Teste Automatizado'
 
 select @idPrestador = @idPrestador  from tblPrestador  
