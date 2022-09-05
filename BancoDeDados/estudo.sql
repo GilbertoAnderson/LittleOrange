@@ -92,12 +92,13 @@ select * from tblStatus where objeto ='prestador'
 delete from tblParcelas
 delete from tblAssinaturas
 
-update tblPrestador set idstatus = 34, celular= '11 982581115' where idPrestador  = 1
+update tblPrestador set idstatus = 31, celular= '11 997873680' where idPrestador  = 1
 -- heber 11 957929260
 -- rafa 11989151146
 -- carol 11940010901
-update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 1
-update tblPrestador set idstatus = 34, celular= '11 957929260' where idPrestador  = 2
+update tblPrestador set idstatus = 31 where idPrestador  = 25
+update tblPrestador set idstatus = 31, celular= '11 982929864' where idPrestador  = 1
+update tblPrestador set idstatus = 34, celular= '11 982929864' where idPrestador  = 2
 update tblPrestador set idstatus = 34, celular= '11989151146' where idPrestador  = 3
 update tblPrestador set idstatus = 31, celular= '11 982581115' where idPrestador  = 4
 update tblPrestador set idstatus = 31, celular= '11940010901' where idPrestador  = 23
@@ -123,6 +124,7 @@ select * from tblEspecialidade
 select * from tblPrestadorEspecialidade
 
 update tblDominios set descricao = 'CONTINENTE' where idDominio = 6
+update tblDominios set descricao = '1 ANO' where idDominio = 13
 
 select usua.nome, usua.email, usua.senha, perf.descricao from tblUsuario usua
 inner join tblUsuarioPerfil uspe on usua.idUsuario = uspe.idUsuario

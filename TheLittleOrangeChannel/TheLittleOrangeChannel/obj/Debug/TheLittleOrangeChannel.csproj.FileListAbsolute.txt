@@ -1,3 +1,5 @@
+C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csproj.CoreCompileInputs.cache
+C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csprojAssemblyReference.cache
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\TheLittleOrangeChannel.dll.config
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\TheLittleOrangeChannel.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\TheLittleOrangeChannel.pdb
@@ -84,8 +86,6 @@ C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeCha
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\pt-br\System.Web.WebPages.resources.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\pt-br\System.Web.WebPages.Razor.resources.dll
-C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csprojAssemblyReference.cache
-C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csproj.CoreCompileInputs.cache
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.csproj.CopyComplete
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Debug\TheLittleOrangeChannel.pdb

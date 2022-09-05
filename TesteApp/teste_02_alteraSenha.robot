@@ -11,7 +11,7 @@ Resource    resource.robot
 ${UsuarioCorreto}       usuario.teste@thelittleorange.app
 ${UsuarioIncorreto}     usuarioteste@thelittleorange.app
 ${SenhaCorreta}         segredo
-${SenhaNova}            90697947
+${SenhaNova}            50138290
 
 
 *** Test Cases  ***

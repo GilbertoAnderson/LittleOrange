@@ -17,6 +17,7 @@ namespace TheLittleOrangeChannel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblEspecialidade()
         {
+            this.tblPrestadorBase = new HashSet<tblPrestadorBase>();
             this.tblPrestadorEspecialidade = new HashSet<tblPrestadorEspecialidade>();
         }
     
@@ -27,6 +28,8 @@ namespace TheLittleOrangeChannel.Models
         public string Icone { get; set; }
     
         public virtual tblStatus tblStatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPrestadorBase> tblPrestadorBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPrestadorEspecialidade> tblPrestadorEspecialidade { get; set; }
     }

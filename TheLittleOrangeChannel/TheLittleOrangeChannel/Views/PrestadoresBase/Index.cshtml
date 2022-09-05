@@ -1,0 +1,208 @@
+﻿@using TheLittleOrangeChannel.Controllers.Shared;
+
+@model IEnumerable<TheLittleOrangeChannel.Models.tblPrestadorBase>
+@{
+    ViewBag.Title = ViewBag.FiltroStatus;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="bg-fundo">
+        @if (SessionProfile.Logado && (SessionProfile.ADM || SessionProfile.Canal))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>@ViewBag.Title</h2>
+                    @using (Html.BeginForm())
+                    {
+                <p>
+                    Procurar por : @Html.TextBox("strCriterio") &nbsp;
+                    <input type="submit" value="Procurar" class="btn btn-warning" /> &nbsp;
+                    <a href="@Url.Action("Novo", "PrestadoresBase")"> <input type="button" value="Novo"   class="btn btn-default" /></a>
+                </p>
+                    }
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8">
+
+                    @foreach (var item in Model)
+                    {
+
+                    <div class="list-group-item list-group-item-action list-group-item-orange" onclick="enviarEscolha('@ViewBag.FiltroStatus', '@item.Celular', '@item.Empresa', '@item.idPrestador', '@item.tblCondominio.Nome','@item.tblCondominio.Cidade');" style="cursor: pointer">
+
+                        <h4> @Html.DisplayFor(modelItem => item.tblCondominio.Nome) |  @Html.DisplayFor(modelItem => item.tblEspecialidade.Descricao)</h4>
+                        <h3> @Html.DisplayFor(modelItem => item.Empresa) -  @Html.DisplayFor(modelItem => item.Celular)</h3>
+                        @Html.DisplayFor(modelItem => item.Email)
+
+                    </div>
+                    }
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+
+               //' document.getElementById("btnProspectado").style.display = 'none';
+
+               // var criterio = $("#strCriterio").val();
+               // alert(criterio);
+
+                @*var escolha = "@ViewBag.Abrangencia";
+                if (escolha != "") {
+                document.getElementById("divPropostas").style.display = 'none';
+                    Escolha("Abrangencia", escolha);
+                }*@
+
+            });
+
+            function enviarEscolha(status, celular, empresa, idPrestador, condominio, cidade)
+            {
+                if (status == "Trafego") { enviarTrafego(celular, empresa, condominio, idPrestador) };
+                if (status == "Prospectado") { enviarProspectado(celular, empresa, condominio, idPrestador, cidade) };
+                if (status == "Oportunidade") { enviarOportunidade(celular, idPrestador) };
+                if (status == "Negociando") { enviaAbrangencia(idPrestador) };
+            };
+
+
+            function enviaAbrangencia(idPrestador)
+            {
+
+                var url = '@Url.Action("Abrangencia", "Prestadores")?id=' + idPrestador;
+                window.open(url,"_self");
+
+            };
+
+
+
+            function enviarTrafego(celular, empresa, condominio, idPrestador) {
+
+                var celular = "55" + celular;
+
+                var texto = empresa + " sua empresa foi indicada  para fazer parte do " +
+                    "The Little Orange Club, porque você prestou serviços no " + condominio + ". \n \n" +
+                    "Nosso aplicativo é uma plataforma para os moradores localizarem os prestadores de serviço. \n \n" +
+                    "Para que sua empresa possa ser visualizada gratuitamente por todos os moradores do " + condominio + ", confirme seu cadastro em: \n \n" +
+                    "TheLittleOrange.app \n\n";
+
+                texto = window.encodeURIComponent(texto);
+                window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
+
+                $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("AtualizaStatus", "Prestadores")',
+                    data: {
+                        "idPrestador": idPrestador,
+                        "Status": 'Prospectado'
+                    },
+                    success:
+                    function (resultado) {
+                        alert(resultado);
+                    },
+                });
+                location.reload();
+
+           };
+
+
+
+
+            function enviarProspectado(celular, empresa, condominio, idPrestador, cidade) {
+
+                var celular = "55" + celular;
+
+                var texto = "Pronto, sua empresa  já faz parte do The Little Orange Club. \n \n" +
+                    "Este plano é gratuito e a " + empresa + " poderá ser vista somente pelos moradores do " + condominio + "! \n \n" +
+                    "Temos outros planos com maior exposição para a sua empresa, por exemplo: \n" +
+                    "por R$ 26,00 mensais sua empresa será vista na cidade de " + cidade + " inteira! \n \n" +
+                    "Gostaria de conhecer nossos planos? \n\n";
+
+                texto = window.encodeURIComponent(texto);
+                window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
+
+
+                $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("AtualizaStatus", "Prestadores")',
+                    data: {
+                        "idPrestador": idPrestador,
+                        "Status": 'Oportunidade'
+                    },
+                    success:
+
+                    function (resultado) {
+                        alert(resultado);
+                    },
+                });
+                location.reload();
+
+    };
+
+
+
+    function enviarOportunidade(celular, idPrestador) {
+
+                var celular = "55" + celular;
+
+                var texto = "The Little Orange Club \n" +
+                    "Planos Mensais  \n" +
+                    "- - - - - - - - - - - - - - - - - - - - - -\n" +
+                    "Cidade .... R$26,00 \n" +
+                    "Estado .... R$35,00 \n" +
+                    "Região .... R$53,00 \n" +
+                    "País ...... R$143,00 \n" +
+                    "Continental R$260,00 \n" +
+                    "Global .... R$350,00 \n \n" +
+                    "Planos Anuais 10% de desconto parcelado pelo PagSeguro. \n \n" +
+                    "Responda aqui no whatsapp para escolher o melhor plano para sua empresa. \n\n";
+
+                texto = window.encodeURIComponent(texto);
+                window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
+
+
+                $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("AtualizaStatus", "Prestadores")',
+                    data: {
+                        "idPrestador": idPrestador,
+                        "Status": 'Negociando'
+                    },
+                    success:
+
+                    function (resultado) {
+                        alert(resultado);
+                    },
+                });
+                location.reload();
+
+    };
+
+
+
+    </script>
+}
+
+

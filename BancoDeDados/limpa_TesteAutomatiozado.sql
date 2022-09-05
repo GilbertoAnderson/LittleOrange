@@ -25,6 +25,9 @@ select @idUsuario = idUsuario  from tblusuario where Nome = 'Morador teste Autom
 select @idCondominio = idCondominio from tblCondominio where nome='Condominio Teste Automatizado'
 select @idPrestador = idPrestador   from tblPrestador  where empresa='Prestador Teste Automatizado' 
 
+
+delete from tblAvaliacao					where idUsuario	  = @idUsuario
+
 delete from tblPrestadorEspecialidade	where idPrestador = @idPrestador
 delete from tblPrestador				where idPrestador = @idPrestador
 delete from tblUsuarioCondominio		where idUsuario	  = @idUsuario and idCondominio	= @idCondominio
@@ -32,6 +35,9 @@ delete from tblPrestador				where idCondominio= @idCondominio
 delete from tblCondominio				where idCondominio= @idCondominio
 delete from tblusuario					where idUsuario	  = @idUsuario
 
+
+
+delete from tblAvaliacao					where idUsuario	  = @idUsuario
 
 
 

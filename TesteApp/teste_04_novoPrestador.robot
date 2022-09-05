@@ -7,7 +7,7 @@ Resource    resource.robot
 
 *** Variables ***
 ${CONDOMINIO}       Condominio Teste Automatizado 
-${CNPJ}             11232301027
+${CNPJ}             64034210001
 ${EMPRESA}          Prestador Teste Automatizado  
 ${ESPECIALIDADE}    Saúde - Fisioterapeuta
 ${CEP}              09751000

@@ -24,7 +24,9 @@ namespace TheLittleOrangeChannel.Models
             this.tblEspecialidade = new HashSet<tblEspecialidade>();
             this.tblParcelas = new HashSet<tblParcelas>();
             this.tblPerfil = new HashSet<tblPerfil>();
+            this.tblPlano_Abrangencia = new HashSet<tblPlano_Abrangencia>();
             this.tblPrestador = new HashSet<tblPrestador>();
+            this.tblPrestadorBase = new HashSet<tblPrestadorBase>();
             this.tblPrestadorEspecialidade = new HashSet<tblPrestadorEspecialidade>();
             this.tblUsuarioCondominio = new HashSet<tblUsuarioCondominio>();
             this.tblUsuarioPerfil = new HashSet<tblUsuarioPerfil>();
@@ -53,7 +55,11 @@ namespace TheLittleOrangeChannel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPerfil> tblPerfil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPlano_Abrangencia> tblPlano_Abrangencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPrestador> tblPrestador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPrestadorBase> tblPrestadorBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPrestadorEspecialidade> tblPrestadorEspecialidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

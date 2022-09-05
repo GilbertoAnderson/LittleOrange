@@ -47,6 +47,7 @@ SET ANSI_PADDING OFF
 -- .................................................................... 14 tblParcelas
 -- .................................................................... 15 tblContas
 -- .................................................................... 16 tblLancamentos
+-- .................................................................... 17 tblPrestadorBase
 
 
 */
@@ -280,6 +281,13 @@ begin
 	VALUES('PLANO_ABRANGENCIA','ATIVO', GETDATE(), 1)
 	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
 	VALUES('PLANO_ABRANGENCIA','INATIVO', GETDATE(), 1)
+
+	
+-- .................................................................... 17 tblPrestador Base
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('PRESTADORBASE','Cadastrado', GETDATE(), 1)	
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('PRESTADORBASE','Enviado', GETDATE(), 1)
 	
 end
 
@@ -2036,4 +2044,114 @@ drop table dbo.tblExtrato
 		GO
 		SET ANSI_PADDING OFF
 		GO
+
+		
+
+-- .................................................................... 09 tblPrestador
+begin 
+	
+	if Exists(Select name from sysobjects where name='tblPrestadorBase')Begin 
+		drop table dbo.tblPrestadorBase
+	End
+	
+	create table dbo.tblPrestadorBase(
+		[idPrestador]		int identity(1,1) not null,
+		[idCondominio]		int not null,
+		[idCanal]			int not null,
+		[Empresa]			varchar(240)     not null,
+		[Email]				varchar(240),
+		[Celular]			varchar(25)      not null,
+		[CPF_CNPJ]		    varchar(014),
+		[idEspecialidade]	int             not null,
+		[idStatus]			int             not null,
+		[dtCriacao]			datetime DEFAULT getdate(), 
+		CONSTRAINT [PK_tblPrestadorBase] PRIMARY KEY CLUSTERED 
+		(
+			[idPrestador] ASC
+		)WITH (
+				PAD_INDEX  = OFF, 
+				STATISTICS_NORECOMPUTE  = OFF, 
+				IGNORE_DUP_KEY = OFF,	
+				ALLOW_ROW_LOCKS  = ON, 
+				ALLOW_PAGE_LOCKS  = ON) 
+				ON [PRIMARY]
+		) ON [PRIMARY]
+		
+	
+		CREATE INDEX idx_PrestadorBase
+		ON tblPrestadorBase ([Empresa]);
+
+				
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBaseStatus
+		FOREIGN KEY (idStatus)
+		REFERENCES tblStatus(idStatus)
+		
+		
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBaseCondominio
+		FOREIGN KEY (idCondominio)
+		REFERENCES tblCondominio(idCondominio)
+		
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBaseCanal
+		FOREIGN KEY (idCanal)
+		REFERENCES tblUsuario(idUsuario)
+		
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBaseEspecialidade
+		FOREIGN KEY (idEspecialidade)
+		REFERENCES tblEspecialidade(idEspecialidade)
+
+		
+
+		insert into tblPrestadorBase(idcondominio,idCanal, Empresa,Celular,Email, idEspecialidade, idStatus) 
+		values(
+			(select idCondominio from tblcondominio where nome = 'Auguri Residence | Living'), 
+			1,
+			'HDI Seguros', 
+			'11 959153148',
+			'stecorretoradeseguros@hotmail.com',
+			(SELECT idEspecialidade FROM tblEspecialidade WHERE Descricao = 'SEGURO'),
+			(select idStatus      from tblStatus    where Objeto  = 'PRESTADORBASE'   and Descricao = 'Cadastrado')
+		)
+
+
+		insert into tblPrestadorBase(idcondominio,idCanal, Empresa,Celular,Email, idEspecialidade, idStatus) 
+		values(
+			(select idCondominio from tblcondominio where nome = 'Auguri Residence | Living'), 
+			1,
+			'Cia de Teatro Letra Jovem ', 
+			'11 981172969',
+			'cialetrajovem.teatro@gmail.com',
+			(SELECT idEspecialidade FROM tblEspecialidade WHERE Descricao = 'Teatro'),
+			(select idStatus      from tblStatus    where Objeto  = 'PRESTADORBASE'   and Descricao = 'Cadastrado')
+		)
+
+
+		insert into tblPrestadorBase(idcondominio,idCanal, Empresa,Celular,Email, idEspecialidade, idStatus) 
+		values(
+			(select idCondominio from tblcondominio where nome = 'Auguri Residence | Living'), 
+			1,
+			'Marcenária Maná', 
+			' 11 973853417',
+			'',
+			(SELECT idEspecialidade FROM tblEspecialidade WHERE Descricao = 'Marceneiro'),
+			(select idStatus      from tblStatus    where Objeto  = 'PRESTADORBASE'   and Descricao = 'Cadastrado')
+		)
+
+		insert into tblPrestadorBase(idcondominio,idCanal, Empresa,Celular,Email, idEspecialidade, idStatus) 
+		values(
+			(select idCondominio from tblcondominio where nome = 'Auguri Residence | Living'), 
+			1,
+			'Miguel', 
+			'11 952752443',
+			'',
+			(SELECT idEspecialidade FROM tblEspecialidade WHERE Descricao = 'Marceneiro'),
+			(select idStatus      from tblStatus    where Objeto  = 'PRESTADORBASE'   and Descricao = 'Cadastrado')
+		)
+
+
+
+End 	
 

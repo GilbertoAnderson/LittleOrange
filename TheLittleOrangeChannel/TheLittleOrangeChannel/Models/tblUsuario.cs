@@ -22,6 +22,8 @@ namespace TheLittleOrangeChannel.Models
             this.tblCliques = new HashSet<tblCliques>();
             this.tblCondominio = new HashSet<tblCondominio>();
             this.tblPrestador = new HashSet<tblPrestador>();
+            this.tblPrestador1 = new HashSet<tblPrestador>();
+            this.tblPrestadorBase = new HashSet<tblPrestadorBase>();
             this.tblUsuarioCondominio = new HashSet<tblUsuarioCondominio>();
             this.tblUsuarioPerfil = new HashSet<tblUsuarioPerfil>();
         }
@@ -34,6 +36,7 @@ namespace TheLittleOrangeChannel.Models
         public Nullable<System.DateTime> dtNascimento { get; set; }
         public string CPF_CNPJ { get; set; }
         public int idStatus { get; set; }
+        public Nullable<System.DateTime> dtCriacao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAssinaturas> tblAssinaturas { get; set; }
@@ -45,6 +48,10 @@ namespace TheLittleOrangeChannel.Models
         public virtual ICollection<tblCondominio> tblCondominio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPrestador> tblPrestador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPrestador> tblPrestador1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblPrestadorBase> tblPrestadorBase { get; set; }
         public virtual tblStatus tblStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblUsuarioCondominio> tblUsuarioCondominio { get; set; }

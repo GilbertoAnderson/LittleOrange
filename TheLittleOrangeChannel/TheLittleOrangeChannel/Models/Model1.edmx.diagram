@@ -4,21 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6e204407de3a43dc83a939a0691e067e" Name="Diagram1" ZoomLevel="77">
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPrestadorEspecialidade" Width="1.5" PointX="15.75" PointY="24.75" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblAssinaturas" Width="1.5" PointX="16.5" PointY="27.875" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblAvaliacao" Width="1.5" PointX="13.5" PointY="20.5" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblCliques" Width="1.5" PointX="13.5" PointY="28.5" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblCondominio" Width="1.5" PointX="3.25" PointY="23.5" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblDominios" Width="1.5" PointX="6.25" PointY="24.5" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblEspecialidade" Width="1.5" PointX="13.5" PointY="24.75" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblParcelas" Width="1.5" PointX="18.75" PointY="25.25" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPerfil" Width="1.5" PointX="13.5" PointY="37.125" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPrestador" Width="1.5" PointX="8.5" PointY="22" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblStatus" Width="1.5" PointX="11.25" PointY="23.75" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblUsuario" Width="1.5" PointX="1" PointY="23.875" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblUsuarioCondominio" Width="1.5" PointX="16.5" PointY="21.875" />
-        <EntityTypeShape EntityType="TheLittleOrangeModel.tblUsuarioPerfil" Width="1.5" PointX="15.75" PointY="33.25" />
+      <Diagram DiagramId="6e204407de3a43dc83a939a0691e067e" Name="Diagram1" ZoomLevel="19">
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblAssinaturas" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblAvaliacao" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblCliques" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblCondominio" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblDominios" Width="1.5" PointX="8.25" PointY="0.5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblEspecialidade" Width="1.5" PointX="5.625" PointY="22.5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblParcelas" Width="1.5" PointX="12.75" PointY="8.5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPerfil" Width="1.5" PointX="3" PointY="20.75" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPlano_Abrangencia" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPrestador" Width="1.5" PointX="10.5" PointY="3.875" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPrestadorBase" Width="1.5" PointX="7.5" PointY="16.625" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblPrestadorEspecialidade" Width="1.5" PointX="12.75" PointY="18.125" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblStatus" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblUsuario" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblUsuarioCondominio" Width="1.5" PointX="7.5" PointY="5" />
+        <EntityTypeShape EntityType="TheLittleOrangeModel.tblUsuarioPerfil" Width="1.5" PointX="5.25" PointY="18.125" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblAssinaturas_Abrangencia" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblAssinaturas_Canal" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblAssinaturas_Prestador" />
@@ -33,27 +35,35 @@
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblCliques_Status" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblCondominio_Usuario" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblCondominioStatus" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorBaseCondominio" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorCondominio" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioCondominio_Condominio" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPlano_Abrangencia_Abrangencia" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPlano_Abrangencia_Plano" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorAbrangencia" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorFormaPagto" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorPlano" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblEspecialidadeStatus" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorBaseEspecialidade" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Especialidade" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblParcelas_Prestador" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblParcelas_Status" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPerfilStatus" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioPerfil_Perfil" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPlano_Abrangencia_Status" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorCanal" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorEspecialidade_Prestador" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorStatus" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorUsuario" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorBaseCanal" />
+        <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorBaseStatus" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblPrestadorEspecialidad_Status" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioCondominio_Status" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioPerfil_Status" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioStatus" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioCondominio_Usuario" />
         <AssociationConnector Association="TheLittleOrangeModel.fk_tblUsuarioPerfil_Usuario" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

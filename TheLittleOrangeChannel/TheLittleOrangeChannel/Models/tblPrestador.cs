@@ -49,6 +49,8 @@ namespace TheLittleOrangeChannel.Models
         public Nullable<int> Numero { get; set; }
         public Nullable<int> idPlano { get; set; }
         public Nullable<int> idFormaPagto { get; set; }
+        public Nullable<int> idUsuario { get; set; }
+        public Nullable<System.DateTime> dtCriacao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAssinaturas> tblAssinaturas { get; set; }
@@ -66,5 +68,6 @@ namespace TheLittleOrangeChannel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPrestadorEspecialidade> tblPrestadorEspecialidade { get; set; }
         public virtual tblStatus tblStatus { get; set; }
+        public virtual tblUsuario tblUsuario1 { get; set; }
     }
 }

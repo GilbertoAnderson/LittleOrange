@@ -89,26 +89,28 @@ Caso Teste 01.03: Logar App - senha incorreta
 Caso Teste 01.04: Esqueci a senha - botao Cancelar
     Acessar pagina home do site 
     Clicar no botao Acessar
-    Clicar link Esqueceu Senha
-    Preencher Campo Email 
-    Clicar no botao Cancelar    
+    Clicar link Esqueceu Senha   
+    Sleep   2s
+    Click Element    xpath=/html/body/app-root/app-recover/app-app/div[2]/form/div/div[3]/button
     Fechar Navegador
-
 
 
 Caso Teste 01.05: Esqueci a senha - usuario incorreto
     Acessar pagina home do site 
     Clicar no botao Acessar
     Clicar link Esqueceu Senha
-    Preencher Campo Email Incorreto 
-    Clicar no botao Pesquisar
+    Sleep   2s
+    Wait Until Element Is Visible   id=email 
+    Input Text  id=email    ${UsuarioIncorreto}  
+    Click Element    xpath=/html/body/app-root/app-recover/app-app/div[2]/form/div/div[2]/button
     Mensagem de Erro Nao Encontrado
     Fechar Navegador
 
 Caso Teste 01.06: Esqueci a senha - solicita nova senha
     Acessar pagina home do site 
     Clicar no botao Acessar    
-    Clicar link Esqueceu Senha    
+    Clicar link Esqueceu Senha   
+    Sleep   2s 
     Wait Until Element Is Visible   id=email 
     Input Text  id=email    ${UsuarioCorreto}
     Clicar no botao Pesquisar

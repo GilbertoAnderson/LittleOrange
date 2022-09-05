@@ -24,7 +24,6 @@ ${CPF}              113.380.650-33
 ${EMAIL}            usuario.teste@thelittleorange.app
 ${CELULAR}          11 91114 1115 
 ${SENHA}            segredo
-
 *** Test Cases  ***
 
 # .............................................. cria novo usuario para o teste
@@ -47,8 +46,10 @@ Caso Teste 02.01: Cadastra novo morador
     Input Text  id=email            ${EMAIL}
     Input Text  id=celular          ${CELULAR} 
     Input Text  id=senha            ${SENHA}
-    Input Text  id=repita_senha     ${SENHA}
-    Click Element    xpath=/html/body/app-root/app-register/app-app/div[2]/form/div/div[9]/button
+    Input Text  id=repita_senha     ${SENHA}     
+    Click Element     id=senha 
+    Sleep   5s    
+    Click Element   xpath=/html/body/app-root/app-register/app-app/div[2]/form/div/div[9]/button
     Sleep   5s
     Wait Until Element Is Visible   xpath=/html/body/modal-container/div[2]/div/app-modal
     Page Should contain     Cadastro realizado. Agora você pode adicionar seu primeiro condomínio.
