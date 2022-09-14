@@ -8,6 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using TheLittleOrangeChannel.Models;
 using TheLittleOrangeChannel.Controllers.Shared;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace TheLittleOrangeChannel.Controllers
 {
@@ -110,31 +116,70 @@ namespace TheLittleOrangeChannel.Controllers
                     Session["ADM"] = false;
                     Session["Canal"] = false;
 
+
                     if (_tblPerfil.Descricao == "ADM") { Session["ADM"] = true; }
                     if (_tblPerfil.Descricao == "CANAL") { Session["Canal"] = true; }
 
                     SessionProfile session = new SessionProfile();
 
+                    //.................. buscar o token
+
+                    var _apiLogin  = PostCallLogin(_tblUsuario.Email, _tblUsuario.Senha);                    
+                    Session["token"] = _apiLogin.Result.token.ToString();
+
 
                     if (SessionProfile.ADM)
                     {
-                        return RedirectToAction("Menu", "Prestadores");
+                        return RedirectToAction("Index", "PrestadoresBase");
                     }
 
 
                     if (SessionProfile.Canal)
                     {
-                        return RedirectToAction("Menu", "Prestadores");
+                        return RedirectToAction("Index", "PrestadoresBase");
                     }
+
 
                 }
 
+
             }
 
-
-            return RedirectToLocal(returnUrl);
+            return View();
 
         }
+
+        public static async Task<LoginViewModel> PostCallLogin(string email, string senha)
+        {
+
+            using (var client = new HttpClient())
+            {
+
+                LoginViewModel _login = new LoginViewModel();
+                _login.Email = email;
+                _login.Senha = senha;
+
+                client.BaseAddress = new Uri("https://api.thelittleorange.app/");
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<LoginViewModel>("api/Usuario/Autenticar/", _login);
+                postTask.Wait();
+
+                var result = postTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    string responseBody = await result.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<LoginViewModel>(responseBody);
+                }
+            }
+
+            return null;        
+        
+        }
+
+
+
+
 
         [AllowAnonymous]
         public ActionResult LogOff()
@@ -165,10 +210,6 @@ namespace TheLittleOrangeChannel.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
-
-
-
 
 
     }

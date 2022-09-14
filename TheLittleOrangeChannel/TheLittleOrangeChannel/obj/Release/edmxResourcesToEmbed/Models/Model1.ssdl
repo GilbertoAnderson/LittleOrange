@@ -102,6 +102,20 @@
     <Property Name="Descricao" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="idStatus" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblPlano_Abrangencia">
+    <Key>
+      <PropertyRef Name="idPlanoAbrangencia" />
+    </Key>
+    <Property Name="idPlanoAbrangencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idPlano" Type="int" Nullable="false" />
+    <Property Name="idAbrangencia" Type="int" Nullable="false" />
+    <Property Name="dataCriacao" Type="datetime" Nullable="false" />
+    <Property Name="codPlano" Type="varchar" MaxLength="4" />
+    <Property Name="linkPagSeguro" Type="varchar" MaxLength="60" />
+    <Property Name="valor" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Log" Type="varchar(max)" />
+    <Property Name="idStatus" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="tblPrestador">
     <Key>
       <PropertyRef Name="idPrestador" />
@@ -131,6 +145,23 @@
     <Property Name="Numero" Type="int" />
     <Property Name="idPlano" Type="int" />
     <Property Name="idFormaPagto" Type="int" />
+    <Property Name="idUsuario" Type="int" />
+    <Property Name="dtCriacao" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblPrestadorBase">
+    <Key>
+      <PropertyRef Name="idPrestador" />
+    </Key>
+    <Property Name="idPrestador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCondominio" Type="int" Nullable="false" />
+    <Property Name="idCanal" Type="int" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="240" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="240" />
+    <Property Name="Celular" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="CPF_CNPJ" Type="varchar" MaxLength="14" />
+    <Property Name="idEspecialidade" Type="int" Nullable="false" />
+    <Property Name="idStatus" Type="int" Nullable="false" />
+    <Property Name="dtCriacao" Type="datetime" />
   </EntityType>
   <EntityType Name="tblPrestadorEspecialidade">
     <Key>
@@ -165,6 +196,7 @@
     <Property Name="dtNascimento" Type="datetime" />
     <Property Name="CPF_CNPJ" Type="varchar" MaxLength="14" />
     <Property Name="idStatus" Type="int" Nullable="false" />
+    <Property Name="dtCriacao" Type="datetime" />
   </EntityType>
   <EntityType Name="tblUsuarioCondominio">
     <Key>
@@ -401,6 +433,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tblPlano_Abrangencia_Abrangencia">
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
+    <End Role="tblPlano_Abrangencia" Type="Self.tblPlano_Abrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPlano_Abrangencia">
+        <PropertyRef Name="idAbrangencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPlano_Abrangencia_Plano">
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
+    <End Role="tblPlano_Abrangencia" Type="Self.tblPlano_Abrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPlano_Abrangencia">
+        <PropertyRef Name="idPlano" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPlano_Abrangencia_Status">
+    <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+    <End Role="tblPlano_Abrangencia" Type="Self.tblPlano_Abrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStatus">
+        <PropertyRef Name="idStatus" />
+      </Principal>
+      <Dependent Role="tblPlano_Abrangencia">
+        <PropertyRef Name="idStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_tblPrestadorAbrangencia">
     <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
     <End Role="tblPrestador" Type="Self.tblPrestador" Multiplicity="*" />
@@ -410,6 +478,54 @@
       </Principal>
       <Dependent Role="tblPrestador">
         <PropertyRef Name="idAbrangencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBaseCanal">
+    <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idCanal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBaseCondominio">
+    <End Role="tblCondominio" Type="Self.tblCondominio" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCondominio">
+        <PropertyRef Name="idCondominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idCondominio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBaseEspecialidade">
+    <End Role="tblEspecialidade" Type="Self.tblEspecialidade" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEspecialidade">
+        <PropertyRef Name="idEspecialidade" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idEspecialidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBaseStatus">
+    <End Role="tblStatus" Type="Self.tblStatus" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStatus">
+        <PropertyRef Name="idStatus" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -506,6 +622,18 @@
       </Principal>
       <Dependent Role="tblPrestador">
         <PropertyRef Name="idStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorUsuario">
+    <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="0..1" />
+    <End Role="tblPrestador" Type="Self.tblPrestador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="tblPrestador">
+        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -611,7 +739,9 @@
     <EntitySet Name="tblEspecialidade" EntityType="Self.tblEspecialidade" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblParcelas" EntityType="Self.tblParcelas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPerfil" EntityType="Self.tblPerfil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPlano_Abrangencia" EntityType="Self.tblPlano_Abrangencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPrestador" EntityType="Self.tblPrestador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPrestadorBase" EntityType="Self.tblPrestadorBase" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPrestadorEspecialidade" EntityType="Self.tblPrestadorEspecialidade" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblStatus" EntityType="Self.tblStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" Schema="dbo" store:Type="Tables" />
@@ -689,9 +819,37 @@
       <End Role="tblStatus" EntitySet="tblStatus" />
       <End Role="tblPerfil" EntitySet="tblPerfil" />
     </AssociationSet>
+    <AssociationSet Name="fk_tblPlano_Abrangencia_Abrangencia" Association="Self.fk_tblPlano_Abrangencia_Abrangencia">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPlano_Abrangencia" EntitySet="tblPlano_Abrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPlano_Abrangencia_Plano" Association="Self.fk_tblPlano_Abrangencia_Plano">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPlano_Abrangencia" EntitySet="tblPlano_Abrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPlano_Abrangencia_Status" Association="Self.fk_tblPlano_Abrangencia_Status">
+      <End Role="tblStatus" EntitySet="tblStatus" />
+      <End Role="tblPlano_Abrangencia" EntitySet="tblPlano_Abrangencia" />
+    </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorAbrangencia" Association="Self.fk_tblPrestadorAbrangencia">
       <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblPrestador" EntitySet="tblPrestador" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseCanal" Association="Self.fk_tblPrestadorBaseCanal">
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseCondominio" Association="Self.fk_tblPrestadorBaseCondominio">
+      <End Role="tblCondominio" EntitySet="tblCondominio" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseEspecialidade" Association="Self.fk_tblPrestadorBaseEspecialidade">
+      <End Role="tblEspecialidade" EntitySet="tblEspecialidade" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseStatus" Association="Self.fk_tblPrestadorBaseStatus">
+      <End Role="tblStatus" EntitySet="tblStatus" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
     </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorCanal" Association="Self.fk_tblPrestadorCanal">
       <End Role="tblUsuario" EntitySet="tblUsuario" />
@@ -723,6 +881,10 @@
     </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorStatus" Association="Self.fk_tblPrestadorStatus">
       <End Role="tblStatus" EntitySet="tblStatus" />
+      <End Role="tblPrestador" EntitySet="tblPrestador" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorUsuario" Association="Self.fk_tblPrestadorUsuario">
+      <End Role="tblUsuario" EntitySet="tblUsuario" />
       <End Role="tblPrestador" EntitySet="tblPrestador" />
     </AssociationSet>
     <AssociationSet Name="fk_tblUsuarioCondominio_Condominio" Association="Self.fk_tblUsuarioCondominio_Condominio">

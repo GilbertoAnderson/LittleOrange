@@ -16,6 +16,11 @@ namespace TheLittleOrangeChannel.Models
         [Display(Name = "Senha")]
         public string Senha { get; set; }
 
+
+        [Display(Name = "token")]
+        public string token { get; set; }
+
+
         //[Display(Name = "Lembrar-me?")]
         //public bool RememberMe { get; set; }
     }

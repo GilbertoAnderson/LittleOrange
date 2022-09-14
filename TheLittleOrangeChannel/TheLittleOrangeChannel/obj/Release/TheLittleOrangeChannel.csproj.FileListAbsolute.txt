@@ -89,3 +89,5 @@ C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeCha
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.pdb
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\WebDriver.dll
+C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\System.Net.Http.Formatting.dll
+C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\System.Net.Http.Formatting.xml

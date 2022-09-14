@@ -19,7 +19,9 @@ namespace TheLittleOrangeChannel.Controllers.Shared
             ADM,
             Canal,
             PerfisAcesso,
-            Logado
+            Logado,
+            idUsuario,
+            token
 
         }
 
@@ -76,6 +78,42 @@ namespace TheLittleOrangeChannel.Controllers.Shared
 
         }
 
+
+
+        public static int idUsuario
+        {
+            get
+            {
+                if (HttpContext.Current.Session[Key.idUsuario.ToString()] == null)
+                    return 0;
+
+                return (int)HttpContext.Current.Session[Key.idUsuario.ToString()];
+            }
+            set
+            {
+                HttpContext.Current.Session[Key.idUsuario.ToString()] = value;
+            }
+
+        }
+
+
+
+
+        public static string token
+        {
+            get
+            {
+                if (HttpContext.Current.Session[Key.token.ToString()] == null)
+                    return "";
+
+                return (string)HttpContext.Current.Session[Key.token.ToString()];
+            }
+            set
+            {
+                HttpContext.Current.Session[Key.token.ToString()] = value;
+            }
+
+        }
 
 
     }
