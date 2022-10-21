@@ -28,8 +28,12 @@ namespace TheLittleOrangeChannel.Models
         public int idCondominio { get; set; }
         public int idCanal { get; set; }
         public int idAbrangencia { get; set; }
+        public int idPlano { get; set; }
+        public int idFormaPagto { get; set; }
+        public Nullable<int> idUsuario { get; set; }
         public string Empresa { get; set; }
         public string Endereco { get; set; }
+        public Nullable<int> Numero { get; set; }
         public string Complemento { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }
@@ -46,10 +50,6 @@ namespace TheLittleOrangeChannel.Models
         public Nullable<int> QtdeAvaliacao { get; set; }
         public Nullable<decimal> NotaAvaliacao { get; set; }
         public int idStatus { get; set; }
-        public Nullable<int> Numero { get; set; }
-        public Nullable<int> idPlano { get; set; }
-        public Nullable<int> idFormaPagto { get; set; }
-        public Nullable<int> idUsuario { get; set; }
         public Nullable<System.DateTime> dtCriacao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

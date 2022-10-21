@@ -9,7 +9,7 @@
     <Property Name="idCanal" Type="int" Nullable="false" />
     <Property Name="idAbrangencia" Type="int" Nullable="false" />
     <Property Name="idStatus" Type="int" Nullable="false" />
-    <Property Name="Rastreador" Type="varchar" MaxLength="16" />
+    <Property Name="Rastreador" Type="varchar" MaxLength="18" />
     <Property Name="dtInicio" Type="datetime" />
     <Property Name="dtTermino" Type="datetime" />
     <Property Name="ValorContrato" Type="decimal" Precision="18" Scale="2" />
@@ -59,6 +59,7 @@
     <Property Name="idUsuario" Type="int" Nullable="false" />
     <Property Name="idStatus" Type="int" Nullable="false" />
     <Property Name="Numero" Type="int" />
+    <Property Name="dtCriacao" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="tblDominios">
     <Key>
@@ -86,7 +87,7 @@
     <Property Name="idParcela" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idAssinatura" Type="int" Nullable="false" />
     <Property Name="idPrestador" Type="int" Nullable="false" />
-    <Property Name="Rastreador" Type="varchar" MaxLength="16" />
+    <Property Name="Rastreador" Type="varchar" MaxLength="18" />
     <Property Name="dataVencimento" Type="datetime" Nullable="false" />
     <Property Name="dataPagamento" Type="datetime" />
     <Property Name="valorDevido" Type="decimal" Precision="18" Scale="2" />
@@ -124,8 +125,12 @@
     <Property Name="idCondominio" Type="int" Nullable="false" />
     <Property Name="idCanal" Type="int" Nullable="false" />
     <Property Name="idAbrangencia" Type="int" Nullable="false" />
+    <Property Name="idPlano" Type="int" Nullable="false" />
+    <Property Name="idFormaPagto" Type="int" Nullable="false" />
+    <Property Name="idUsuario" Type="int" />
     <Property Name="Empresa" Type="varchar" MaxLength="240" Nullable="false" />
     <Property Name="Endereco" Type="varchar" MaxLength="240" />
+    <Property Name="Numero" Type="int" />
     <Property Name="Complemento" Type="varchar" MaxLength="100" />
     <Property Name="Bairro" Type="varchar" MaxLength="160" />
     <Property Name="Cidade" Type="varchar" MaxLength="160" />
@@ -142,10 +147,6 @@
     <Property Name="QtdeAvaliacao" Type="int" />
     <Property Name="NotaAvaliacao" Type="decimal" Precision="3" Scale="1" />
     <Property Name="idStatus" Type="int" Nullable="false" />
-    <Property Name="Numero" Type="int" />
-    <Property Name="idPlano" Type="int" />
-    <Property Name="idFormaPagto" Type="int" />
-    <Property Name="idUsuario" Type="int" />
     <Property Name="dtCriacao" Type="datetime" />
   </EntityType>
   <EntityType Name="tblPrestadorBase">
@@ -162,6 +163,10 @@
     <Property Name="idEspecialidade" Type="int" Nullable="false" />
     <Property Name="idStatus" Type="int" Nullable="false" />
     <Property Name="dtCriacao" Type="datetime" />
+    <Property Name="idPlano" Type="int" Nullable="false" />
+    <Property Name="idAbrangencia" Type="int" Nullable="false" />
+    <Property Name="diasPromocao" Type="int" />
+    <Property Name="idFormaPagto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblPrestadorEspecialidade">
     <Key>
@@ -481,6 +486,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tblPrestadorBaseAbrangencia">
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idAbrangencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_tblPrestadorBaseCanal">
     <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="1" />
     <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
@@ -514,6 +531,30 @@
       </Principal>
       <Dependent Role="tblPrestadorBase">
         <PropertyRef Name="idEspecialidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBaseFormaPagto">
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idFormaPagto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBasePlano">
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
+    <End Role="tblPrestadorBase" Type="Self.tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idPlano" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -590,7 +631,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_tblPrestadorFormaPagto">
-    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="0..1" />
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
     <End Role="tblPrestador" Type="Self.tblPrestador" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblDominios">
@@ -602,7 +643,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_tblPrestadorPlano">
-    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="0..1" />
+    <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
     <End Role="tblPrestador" Type="Self.tblPrestador" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblDominios">
@@ -835,6 +876,10 @@
       <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblPrestador" EntitySet="tblPrestador" />
     </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseAbrangencia" Association="Self.fk_tblPrestadorBaseAbrangencia">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorBaseCanal" Association="Self.fk_tblPrestadorBaseCanal">
       <End Role="tblUsuario" EntitySet="tblUsuario" />
       <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
@@ -845,6 +890,14 @@
     </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorBaseEspecialidade" Association="Self.fk_tblPrestadorBaseEspecialidade">
       <End Role="tblEspecialidade" EntitySet="tblEspecialidade" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseFormaPagto" Association="Self.fk_tblPrestadorBaseFormaPagto">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBasePlano" Association="Self.fk_tblPrestadorBasePlano">
+      <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
     </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorBaseStatus" Association="Self.fk_tblPrestadorBaseStatus">

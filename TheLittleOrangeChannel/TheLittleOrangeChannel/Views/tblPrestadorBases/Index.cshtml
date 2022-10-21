@@ -1,0 +1,105 @@
+﻿@model IEnumerable<TheLittleOrangeChannel.Models.tblPrestadorBase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Celular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF_CNPJ)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtCriacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.diasPromocao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblCondominio.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblDominios.Objeto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblDominios1.Objeto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblDominios2.Objeto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblEspecialidade.Area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblUsuario.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblStatus.Objeto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Celular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CPF_CNPJ)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtCriacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.diasPromocao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCondominio.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblDominios.Objeto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblDominios1.Objeto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblDominios2.Objeto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblEspecialidade.Area)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblUsuario.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblStatus.Objeto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idPrestador }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idPrestador }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idPrestador })
+        </td>
+    </tr>
+}
+
+</table>

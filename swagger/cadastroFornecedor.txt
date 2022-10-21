@@ -1,0 +1,82 @@
+
+https://api.thelittleorange.app/api/Usuario/Autenticar
+{
+  "Email": "gilberto.anderson@gmail.com",
+  "Senha": "segredo"
+}
+
+
+
+idCondominio = 3
+idCanal = 1
+Empresa = "Uchida Fisioterapia"
+Email = "adrinaomi@gmail.com"
+Celular = "11983230006"
+CPF_CNPJ = "20633365807"
+idAbrangencia = 1
+idStatus  = 32
+
+idEspecialidade = 55
+
+
+{
+  "IdCondominio": 3,
+  "IdCanal": 3,
+  "IdAbrangencia": 1,
+  "Empresa": "Uchida Fisioterapia",
+  "Email": "adrinaomi@gmail.com",
+  "Celular": "11983230006",
+  "Cpf_Cnpj": "20633365807",
+  "IdStatus": 32,
+  "IdPlano": 1,
+  "IdFormaPagto": 0  
+}
+
+{
+  "IdPrestador": 0,
+  "IdCondominio": 3,
+  "IdCanal": 1,
+  "IdAbrangencia": 1,
+  "IdPlano": 0,
+  "IdFormaPagto": 0,
+  "IdUsuario": 0,
+  "Empresa": "Uchida Fisioterapia",
+  "Endereco": "string",
+  "Numero": 0,
+  "Complemento": "string",
+  "Bairro": "string",
+  "Cidade": "string",
+  "UF": "string",
+  "Pais": "string",
+  "CEP": "string",
+  "CodigoIBGE": "string",
+  "Email": "adrinaomi@gmail.com",,
+  "Celular": "11983230006",
+  "Cpf_Cnpj": "20633365807",
+  "Fone": "string",
+  "Latitude": 0,
+  "Longitude": 0,
+  "QtdeAvaliacao": 0,
+  "NotaAvaliacao": 0,
+  "IdStatus": 32,
+  "DtCriacao": "2022-10-20T13:28:35.310Z",
+  "Especialidades": [
+    {
+      "IdEspecialidade": 0,
+      "Area": "string",
+      "Descricao": "string",
+      "Icone": "string",
+      "IdStatus": 0,
+      "PrestadoresEspecialidades": [
+        {
+          "IdPrestador": 0,
+          "IdEspecialidade": 0,
+          "IdStatus": 0,
+          "DtValidade": "2022-10-20T13:28:35.310Z",
+          "Prestador": "string",
+          "Especialidade": "string"
+        }
+      ]
+    }
+  ]
+}

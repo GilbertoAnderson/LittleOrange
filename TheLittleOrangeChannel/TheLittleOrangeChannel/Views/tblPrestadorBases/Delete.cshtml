@@ -1,0 +1,128 @@
+﻿@model TheLittleOrangeChannel.Models.tblPrestadorBase
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblPrestadorBase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF_CNPJ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPF_CNPJ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtCriacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtCriacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diasPromocao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diasPromocao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCondominio.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCondominio.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblDominios.Objeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblDominios.Objeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblDominios1.Objeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblDominios1.Objeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblDominios2.Objeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblDominios2.Objeto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblEspecialidade.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblEspecialidade.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUsuario.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUsuario.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblStatus.Objeto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblStatus.Objeto)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

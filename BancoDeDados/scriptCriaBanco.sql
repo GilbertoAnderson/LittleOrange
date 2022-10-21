@@ -287,6 +287,8 @@ begin
 	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
 	VALUES('PRESTADORBASE','Cadastrado', GETDATE(), 1)	
 	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
+	VALUES('PRESTADORBASE','Indicado', GETDATE(), 1)
+	INSERT INTO tblStatus(Objeto,Descricao,DtCriacao,idAlteracao)
 	VALUES('PRESTADORBASE','Enviado', GETDATE(), 1)
 	
 end
@@ -576,6 +578,7 @@ begin
 		[CodigoIBGE]	varchar(7),
 		Latitude		decimal(9,7),
 		Longitude		decimal(9,7),
+		[dtCriacao]		datetime DEFAULT getdate(), 
 		[idUsuario]		int            not null,  ----- 
 		[idStatus]		int            not null,
 		
@@ -2058,12 +2061,16 @@ begin
 		[idPrestador]		int identity(1,1) not null,
 		[idCondominio]		int not null,
 		[idCanal]			int not null,
+		[idPlano]			int not null,
+		[idAbrangencia]		int not null,
+		[idFormaPagto]		int not null,
 		[Empresa]			varchar(240)     not null,
 		[Email]				varchar(240),
 		[Celular]			varchar(25)      not null,
 		[CPF_CNPJ]		    varchar(014),
-		[idEspecialidade]	int             not null,
-		[idStatus]			int             not null,
+		[idEspecialidade]	int              not null,
+		[idStatus]			int              not null,
+		[diasPromocao]		int,
 		[dtCriacao]			datetime DEFAULT getdate(), 
 		CONSTRAINT [PK_tblPrestadorBase] PRIMARY KEY CLUSTERED 
 		(
@@ -2080,13 +2087,11 @@ begin
 	
 		CREATE INDEX idx_PrestadorBase
 		ON tblPrestadorBase ([Empresa]);
-
 				
 		ALTER TABLE dbo.tblPrestadorBase
 		ADD CONSTRAINT fk_tblPrestadorBaseStatus
 		FOREIGN KEY (idStatus)
-		REFERENCES tblStatus(idStatus)
-		
+		REFERENCES tblStatus(idStatus)		
 		
 		ALTER TABLE dbo.tblPrestadorBase
 		ADD CONSTRAINT fk_tblPrestadorBaseCondominio
@@ -2102,8 +2107,25 @@ begin
 		ADD CONSTRAINT fk_tblPrestadorBaseEspecialidade
 		FOREIGN KEY (idEspecialidade)
 		REFERENCES tblEspecialidade(idEspecialidade)
-
 		
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBaseAbrangencia
+		FOREIGN KEY ([idAbrangencia])
+		REFERENCES tblDominios(idDominio)
+
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBasePlano
+		FOREIGN KEY ([idPlano])
+		REFERENCES tblDominios(idDominio)
+
+		ALTER TABLE dbo.tblPrestadorBase
+		ADD CONSTRAINT fk_tblPrestadorBaseFormaPagto
+		FOREIGN KEY ([idFormaPagto])
+		REFERENCES tblDominios(idDominio)
+	
+
+
+
 
 		insert into tblPrestadorBase(idcondominio,idCanal, Empresa,Celular,Email, idEspecialidade, idStatus) 
 		values(

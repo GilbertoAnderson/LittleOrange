@@ -38,6 +38,7 @@ namespace TheLittleOrangeChannel.Models
         public int idUsuario { get; set; }
         public int idStatus { get; set; }
         public Nullable<int> Numero { get; set; }
+        public System.DateTime dtCriacao { get; set; }
     
         public virtual tblUsuario tblUsuario { get; set; }
         public virtual tblStatus tblStatus { get; set; }

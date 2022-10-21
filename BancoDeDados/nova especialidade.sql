@@ -5,7 +5,7 @@ select *  from tblEspecialidade
 
 
 
-insert into tblEspecialidade(Area, Descricao, idStatus) values('Serviços Gerais','Molduras Quadros',12)
+--insert into tblEspecialidade(Area, Descricao, idStatus) values('Serviços Gerais','Hidraulica',12)
 
 
 

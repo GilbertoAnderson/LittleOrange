@@ -473,15 +473,6 @@ namespace TheLittleOrangeChannel.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
         //POST: Prestadores/Edit/5
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar.
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -491,7 +482,8 @@ namespace TheLittleOrangeChannel.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblPrestador).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
+                db.Entry(tblPrestador).State = System.Data.Entity.EntityState.Modified;
+                //db.Entry(tblPrestador).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -511,7 +503,7 @@ namespace TheLittleOrangeChannel.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblPrestador).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
+                db.Entry(tblPrestador).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -532,7 +524,7 @@ namespace TheLittleOrangeChannel.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblPrestador).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
+                db.Entry(tblPrestador).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -553,7 +545,7 @@ namespace TheLittleOrangeChannel.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblPrestador).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
+                db.Entry(tblPrestador).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -574,7 +566,7 @@ namespace TheLittleOrangeChannel.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblPrestador).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
+                db.Entry(tblPrestador).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -707,7 +699,7 @@ namespace TheLittleOrangeChannel.Controllers
             }
             else
             {
-                //.................. se for renovacao atuala os dados
+                //.................. se for renovacao atualiza os dados
                 string _log = _tblAssinaturafind.Log;
                 _log = _log + " /n /n Atualizado em " + DateTime.Now.ToString("dd/MM/AAAA") + " por " + canal.ToString() + " Valores Anteriores";
                 _log = _log + "idCanal = " + _tblAssinaturafind.idCanal.ToString();

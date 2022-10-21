@@ -24,8 +24,15 @@ namespace TheLittleOrangeChannel.Models
         public int idEspecialidade { get; set; }
         public int idStatus { get; set; }
         public Nullable<System.DateTime> dtCriacao { get; set; }
+        public int idPlano { get; set; }
+        public int idAbrangencia { get; set; }
+        public Nullable<int> diasPromocao { get; set; }
+        public int idFormaPagto { get; set; }
     
         public virtual tblCondominio tblCondominio { get; set; }
+        public virtual tblDominios tblDominios { get; set; }
+        public virtual tblDominios tblDominios1 { get; set; }
+        public virtual tblDominios tblDominios2 { get; set; }
         public virtual tblEspecialidade tblEspecialidade { get; set; }
         public virtual tblUsuario tblUsuario { get; set; }
         public virtual tblStatus tblStatus { get; set; }

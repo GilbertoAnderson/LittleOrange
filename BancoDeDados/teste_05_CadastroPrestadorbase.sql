@@ -12,13 +12,14 @@ select * from tblCondominio
 
 select * from tblStatus
 select * from tblDominios
+/*
 
 DELETE  from tblPrestador WHERE idPrestador = 76
 
 update tblPrestadorEspecialidade
 set dtValidade = GETDATE()
 where idPrestador = 77 and idespecialidade = 54
-
+*/
 --declare 
 --	@idUsuario		int,
 --	@idCondominio	int,
@@ -38,5 +39,9 @@ where idPrestador = 77 and idespecialidade = 54
 delete  from tblPrestadorEspecialidade where idPrestador = (select idPrestador from tblPrestador WHERE email ='prestador.teste@thelittleorange.app')
 delete  from tblPrestador WHERE CPF_CNPJ ='64034210001'
 delete  from tblPrestador WHERE email ='prestador.teste@thelittleorange.app'
+
+
+delete from tblUsuario WHERE CPF_CNPJ ='64034210001'
+delete from tblUsuario WHERE email ='prestador.teste@thelittleorange.app'
 
 */

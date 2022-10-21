@@ -9,7 +9,7 @@
 {
     @Html.AntiForgeryToken()
 
-
+<h1>@ViewBag.TipoPesquisado </h1>
     <div class="bg-fundo">
         @if (SessionProfile.Logado && (SessionProfile.ADM || SessionProfile.Canal))
         {

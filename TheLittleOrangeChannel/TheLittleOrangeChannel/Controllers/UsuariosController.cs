@@ -86,7 +86,7 @@ namespace TheLittleOrangeChannel.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblUsuario).State = (System.Data.Entity.EntityState)System.Data.EntityState.Modified;
+                db.Entry(tblUsuario).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

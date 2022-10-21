@@ -49,6 +49,7 @@
     <EntitySetMapping Name="tblCondominio">
       <EntityTypeMapping TypeName="TheLittleOrangeModel.tblCondominio">
         <MappingFragment StoreEntitySet="tblCondominio">
+          <ScalarProperty Name="dtCriacao" ColumnName="dtCriacao" />
           <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="idStatus" ColumnName="idStatus" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
@@ -133,10 +134,6 @@
       <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPrestador">
         <MappingFragment StoreEntitySet="tblPrestador">
           <ScalarProperty Name="dtCriacao" ColumnName="dtCriacao" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="idFormaPagto" ColumnName="idFormaPagto" />
-          <ScalarProperty Name="idPlano" ColumnName="idPlano" />
-          <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="idStatus" ColumnName="idStatus" />
           <ScalarProperty Name="NotaAvaliacao" ColumnName="NotaAvaliacao" />
           <ScalarProperty Name="QtdeAvaliacao" ColumnName="QtdeAvaliacao" />
@@ -153,8 +150,12 @@
           <ScalarProperty Name="Cidade" ColumnName="Cidade" />
           <ScalarProperty Name="Bairro" ColumnName="Bairro" />
           <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
           <ScalarProperty Name="Endereco" ColumnName="Endereco" />
           <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idFormaPagto" ColumnName="idFormaPagto" />
+          <ScalarProperty Name="idPlano" ColumnName="idPlano" />
           <ScalarProperty Name="idAbrangencia" ColumnName="idAbrangencia" />
           <ScalarProperty Name="idCanal" ColumnName="idCanal" />
           <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
@@ -165,6 +166,10 @@
     <EntitySetMapping Name="tblPrestadorBase">
       <EntityTypeMapping TypeName="TheLittleOrangeModel.tblPrestadorBase">
         <MappingFragment StoreEntitySet="tblPrestadorBase">
+          <ScalarProperty Name="idFormaPagto" ColumnName="idFormaPagto" />
+          <ScalarProperty Name="diasPromocao" ColumnName="diasPromocao" />
+          <ScalarProperty Name="idAbrangencia" ColumnName="idAbrangencia" />
+          <ScalarProperty Name="idPlano" ColumnName="idPlano" />
           <ScalarProperty Name="dtCriacao" ColumnName="dtCriacao" />
           <ScalarProperty Name="idStatus" ColumnName="idStatus" />
           <ScalarProperty Name="idEspecialidade" ColumnName="idEspecialidade" />

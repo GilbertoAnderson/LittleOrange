@@ -24,9 +24,29 @@
                 <ul class="nav navbar-nav">
                     @if (SessionProfile.ADM)
                     {
-                        <li class="dropdown-header">
-                            @Html.ActionLink("Indicação", "Index", "PrestadoresBase")
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Indicação
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">
+                                    @Html.ActionLink("Cadastrado", "Index", "PrestadoresBase",   new { strStatus = "Cadastrado" },null)
+                                </li>
+
+                                <li class="dropdown-header">
+                                    @Html.ActionLink("Indicado", "Index", "PrestadoresBase",  new { strStatus = "Indicado" }, null)
+                                </li>
+
+                                <li class="dropdown-header">
+                                    @Html.ActionLink("Enviado", "Index", "PrestadoresBase", new { strStatus = "Enviado" }, null)
+                                </li>
+                            </ul>
                         </li>
+
+
+                        
                         <li class="dropdown-header">
                             @Html.ActionLink("Fluxo", "Menu", "Prestadores")
                         </li>

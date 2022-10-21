@@ -36,7 +36,7 @@ textarea {
 
     .navbar a, .navbar a:link, .navbar a:visited, .navbar a:active {
         text-decoration: none;
-        color: #FFF;
+        color: #000000;
     }
 
     .navbar a:hover {

@@ -83,7 +83,6 @@ C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeCha
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\pt-br\System.Web.WebPages.resources.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\pt-br\System.Web.WebPages.Razor.resources.dll
-C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.csprojAssemblyReference.cache
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.csproj.CoreCompileInputs.cache
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.csproj.CopyComplete
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.dll
@@ -91,3 +90,4 @@ C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeCha
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\WebDriver.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\System.Net.Http.Formatting.dll
 C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\bin\System.Net.Http.Formatting.xml
+C:\Users\giba_\OneDrive\Trabalho\TheLittleOrange\LittleOrange\TheLittleOrangeChannel\TheLittleOrangeChannel\obj\Release\TheLittleOrangeChannel.csproj.AssemblyReference.cache

@@ -106,6 +106,18 @@
       <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblPrestador" EntitySet="tblPrestador" />
     </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseAbrangencia" Association="TheLittleOrangeModel.fk_tblPrestadorBaseAbrangencia">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBaseFormaPagto" Association="TheLittleOrangeModel.fk_tblPrestadorBaseFormaPagto">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tblPrestadorBasePlano" Association="TheLittleOrangeModel.fk_tblPrestadorBasePlano">
+      <End Role="tblDominios" EntitySet="tblDominios" />
+      <End Role="tblPrestadorBase" EntitySet="tblPrestadorBase" />
+    </AssociationSet>
     <AssociationSet Name="fk_tblPrestadorFormaPagto" Association="TheLittleOrangeModel.fk_tblPrestadorFormaPagto">
       <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblPrestador" EntitySet="tblPrestador" />
@@ -204,7 +216,7 @@
     <Property Name="idCanal" Type="Int32" Nullable="false" />
     <Property Name="idAbrangencia" Type="Int32" Nullable="false" />
     <Property Name="idStatus" Type="Int32" Nullable="false" />
-    <Property Name="Rastreador" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Rastreador" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
     <Property Name="dtInicio" Type="DateTime" Precision="3" />
     <Property Name="dtTermino" Type="DateTime" Precision="3" />
     <Property Name="ValorContrato" Type="Decimal" Precision="18" Scale="2" />
@@ -266,6 +278,7 @@
     <Property Name="idUsuario" Type="Int32" Nullable="false" />
     <Property Name="idStatus" Type="Int32" Nullable="false" />
     <Property Name="Numero" Type="Int32" />
+    <Property Name="dtCriacao" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="tblUsuario" Relationship="TheLittleOrangeModel.fk_tblCondominio_Usuario" FromRole="tblCondominio" ToRole="tblUsuario" />
     <NavigationProperty Name="tblStatus" Relationship="TheLittleOrangeModel.fk_tblCondominioStatus" FromRole="tblCondominio" ToRole="tblStatus" />
     <NavigationProperty Name="tblPrestadorBase" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseCondominio" FromRole="tblCondominio" ToRole="tblPrestadorBase" />
@@ -285,6 +298,9 @@
     <NavigationProperty Name="tblPlano_Abrangencia" Relationship="TheLittleOrangeModel.fk_tblPlano_Abrangencia_Abrangencia" FromRole="tblDominios" ToRole="tblPlano_Abrangencia" />
     <NavigationProperty Name="tblPlano_Abrangencia1" Relationship="TheLittleOrangeModel.fk_tblPlano_Abrangencia_Plano" FromRole="tblDominios" ToRole="tblPlano_Abrangencia" />
     <NavigationProperty Name="tblPrestador" Relationship="TheLittleOrangeModel.fk_tblPrestadorAbrangencia" FromRole="tblDominios" ToRole="tblPrestador" />
+    <NavigationProperty Name="tblPrestadorBase" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseAbrangencia" FromRole="tblDominios" ToRole="tblPrestadorBase" />
+    <NavigationProperty Name="tblPrestadorBase1" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseFormaPagto" FromRole="tblDominios" ToRole="tblPrestadorBase" />
+    <NavigationProperty Name="tblPrestadorBase2" Relationship="TheLittleOrangeModel.fk_tblPrestadorBasePlano" FromRole="tblDominios" ToRole="tblPrestadorBase" />
     <NavigationProperty Name="tblPrestador1" Relationship="TheLittleOrangeModel.fk_tblPrestadorFormaPagto" FromRole="tblDominios" ToRole="tblPrestador" />
     <NavigationProperty Name="tblPrestador2" Relationship="TheLittleOrangeModel.fk_tblPrestadorPlano" FromRole="tblDominios" ToRole="tblPrestador" />
   </EntityType>
@@ -308,7 +324,7 @@
     <Property Name="idParcela" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idAssinatura" Type="Int32" Nullable="false" />
     <Property Name="idPrestador" Type="Int32" Nullable="false" />
-    <Property Name="Rastreador" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Rastreador" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
     <Property Name="dataVencimento" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="dataPagamento" Type="DateTime" Precision="3" />
     <Property Name="valorDevido" Type="Decimal" Precision="18" Scale="2" />
@@ -354,8 +370,12 @@
     <Property Name="idCondominio" Type="Int32" Nullable="false" />
     <Property Name="idCanal" Type="Int32" Nullable="false" />
     <Property Name="idAbrangencia" Type="Int32" Nullable="false" />
+    <Property Name="idPlano" Type="Int32" Nullable="false" />
+    <Property Name="idFormaPagto" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" />
     <Property Name="Empresa" Type="String" Nullable="false" MaxLength="240" FixedLength="false" Unicode="false" />
     <Property Name="Endereco" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="Int32" />
     <Property Name="Complemento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Bairro" Type="String" MaxLength="160" FixedLength="false" Unicode="false" />
     <Property Name="Cidade" Type="String" MaxLength="160" FixedLength="false" Unicode="false" />
@@ -372,10 +392,6 @@
     <Property Name="QtdeAvaliacao" Type="Int32" />
     <Property Name="NotaAvaliacao" Type="Decimal" Precision="3" Scale="1" />
     <Property Name="idStatus" Type="Int32" Nullable="false" />
-    <Property Name="Numero" Type="Int32" />
-    <Property Name="idPlano" Type="Int32" />
-    <Property Name="idFormaPagto" Type="Int32" />
-    <Property Name="idUsuario" Type="Int32" />
     <Property Name="dtCriacao" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tblAssinaturas" Relationship="TheLittleOrangeModel.fk_tblAssinaturas_Prestador" FromRole="tblPrestador" ToRole="tblAssinaturas" />
     <NavigationProperty Name="tblAvaliacao" Relationship="TheLittleOrangeModel.fk_tblAvaliacao_Prestador" FromRole="tblPrestador" ToRole="tblAvaliacao" />
@@ -404,7 +420,14 @@
     <Property Name="idEspecialidade" Type="Int32" Nullable="false" />
     <Property Name="idStatus" Type="Int32" Nullable="false" />
     <Property Name="dtCriacao" Type="DateTime" Precision="3" />
+    <Property Name="idPlano" Type="Int32" Nullable="false" />
+    <Property Name="idAbrangencia" Type="Int32" Nullable="false" />
+    <Property Name="diasPromocao" Type="Int32" />
+    <Property Name="idFormaPagto" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblCondominio" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseCondominio" FromRole="tblPrestadorBase" ToRole="tblCondominio" />
+    <NavigationProperty Name="tblDominios" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseAbrangencia" FromRole="tblPrestadorBase" ToRole="tblDominios" />
+    <NavigationProperty Name="tblDominios1" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseFormaPagto" FromRole="tblPrestadorBase" ToRole="tblDominios" />
+    <NavigationProperty Name="tblDominios2" Relationship="TheLittleOrangeModel.fk_tblPrestadorBasePlano" FromRole="tblPrestadorBase" ToRole="tblDominios" />
     <NavigationProperty Name="tblEspecialidade" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseEspecialidade" FromRole="tblPrestadorBase" ToRole="tblEspecialidade" />
     <NavigationProperty Name="tblUsuario" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseCanal" FromRole="tblPrestadorBase" ToRole="tblUsuario" />
     <NavigationProperty Name="tblStatus" Relationship="TheLittleOrangeModel.fk_tblPrestadorBaseStatus" FromRole="tblPrestadorBase" ToRole="tblStatus" />
@@ -736,8 +759,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tblPrestadorBaseAbrangencia">
+    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="1" />
+    <End Type="TheLittleOrangeModel.tblPrestadorBase" Role="tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idAbrangencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBaseFormaPagto">
+    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="1" />
+    <End Type="TheLittleOrangeModel.tblPrestadorBase" Role="tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idFormaPagto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tblPrestadorBasePlano">
+    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="1" />
+    <End Type="TheLittleOrangeModel.tblPrestadorBase" Role="tblPrestadorBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDominios">
+        <PropertyRef Name="idDominio" />
+      </Principal>
+      <Dependent Role="tblPrestadorBase">
+        <PropertyRef Name="idPlano" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_tblPrestadorFormaPagto">
-    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="0..1" />
+    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="1" />
     <End Type="TheLittleOrangeModel.tblPrestador" Role="tblPrestador" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblDominios">
@@ -749,7 +808,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_tblPrestadorPlano">
-    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="0..1" />
+    <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="1" />
     <End Type="TheLittleOrangeModel.tblPrestador" Role="tblPrestador" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblDominios">

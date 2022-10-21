@@ -8,6 +8,7 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArqyHxhv1G06d2iF2hfyPHAAAAAACAAAAAAAQZgAAAAEAACAAAAB+5N4DxVw1E5wUbM7l6VuRC7j6XON3hsS0gr3Oa2Pf1AAAAAAOgAAAAAIAACAAAAAh6FRnj7SBM/PxuBCmU87W6bpqHrkZcw5v3do8JY9P8CAAAADoVNKgjFT5/LvnDQ164byyeKJAaO/BBSsR3EprE3FTIkAAAADgXicSovwCyNKKjBysuKazpZ9PhNjKd+gYimj/yH/tbp43no4hvTI966gmOgi7PmiR4tdFoHFcSV56qOoX3Tkv</EncryptedPassword>
     <_PublishTargetUrl>ftp://win5108.site4now.net/</_PublishTargetUrl>
+    <History>True|2022-10-21T21:38:01.7812993Z;True|2022-10-21T13:24:50.5537727-03:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -17,10 +18,10 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>10/23/2017 14:15:18</publishTime>
+      <publishTime>02/03/2015 06:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>10/23/2017 14:15:20</publishTime>
+      <publishTime>02/03/2015 06:32:26</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 16:10:50</publishTime>
@@ -224,10 +225,10 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>11/28/2018 14:04:24</publishTime>
     </File>
     <File Include="bin/TheLittleOrangeChannel.dll">
-      <publishTime>09/13/2022 21:43:18</publishTime>
+      <publishTime>10/21/2022 18:32:07</publishTime>
     </File>
     <File Include="bin/TheLittleOrangeChannel.pdb">
-      <publishTime>09/13/2022 21:43:18</publishTime>
+      <publishTime>10/21/2022 18:32:07</publishTime>
     </File>
     <File Include="bin/WebDriver.dll">
       <publishTime>11/22/2021 15:30:10</publishTime>
@@ -260,7 +261,7 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>04/09/2022 11:35:48</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>09/05/2022 18:41:34</publishTime>
+      <publishTime>10/18/2022 15:42:26</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>04/09/2022 11:35:45</publishTime>
@@ -284,7 +285,7 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>04/09/2022 11:35:45</publishTime>
     </File>
     <File Include="Models/Model1.edmx.diagram">
-      <publishTime>09/11/2022 23:01:47</publishTime>
+      <publishTime>10/20/2022 23:42:29</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/09/2022 11:35:48</publishTime>
@@ -397,8 +398,17 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
     <File Include="Views/Prestadores/PrestadoresX.cshtml">
       <publishTime>05/09/2022 19:57:12</publishTime>
     </File>
+    <File Include="Views/PrestadoresBase/Condominio.cshtml">
+      <publishTime>10/18/2022 12:09:30</publishTime>
+    </File>
     <File Include="Views/PrestadoresBase/Create.cshtml">
-      <publishTime>09/05/2022 19:37:41</publishTime>
+      <publishTime>10/21/2022 18:15:33</publishTime>
+    </File>
+    <File Include="Views/PrestadoresBase/Createx.cshtml">
+      <publishTime>10/21/2022 16:33:37</publishTime>
+    </File>
+    <File Include="Views/PrestadoresBase/Createzzz.cshtml">
+      <publishTime>10/21/2022 16:46:32</publishTime>
     </File>
     <File Include="Views/PrestadoresBase/Delete.cshtml">
       <publishTime>09/03/2022 12:42:27</publishTime>
@@ -407,19 +417,34 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>09/03/2022 12:42:30</publishTime>
     </File>
     <File Include="Views/PrestadoresBase/Edit.cshtml">
-      <publishTime>09/07/2022 10:51:44</publishTime>
+      <publishTime>10/20/2022 23:51:13</publishTime>
     </File>
     <File Include="Views/PrestadoresBase/Index.cshtml">
-      <publishTime>09/06/2022 20:24:02</publishTime>
+      <publishTime>10/18/2022 15:05:30</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/09/2022 11:35:45</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/07/2022 10:23:20</publishTime>
+      <publishTime>10/18/2022 15:36:24</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>04/15/2022 20:03:06</publishTime>
+    </File>
+    <File Include="Views/tblPrestadorBases/Create.cshtml">
+      <publishTime>10/21/2022 16:24:40</publishTime>
+    </File>
+    <File Include="Views/tblPrestadorBases/Delete.cshtml">
+      <publishTime>10/21/2022 16:14:25</publishTime>
+    </File>
+    <File Include="Views/tblPrestadorBases/Details.cshtml">
+      <publishTime>10/21/2022 16:14:27</publishTime>
+    </File>
+    <File Include="Views/tblPrestadorBases/Edit.cshtml">
+      <publishTime>10/21/2022 16:14:30</publishTime>
+    </File>
+    <File Include="Views/tblPrestadorBases/Index.cshtml">
+      <publishTime>10/21/2022 16:14:36</publishTime>
     </File>
     <File Include="Views/Usuarios/Create.cshtml">
       <publishTime>04/15/2022 12:44:27</publishTime>
@@ -443,7 +468,7 @@ ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.mi
       <publishTime>04/09/2022 11:35:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/12/2022 20:51:19</publishTime>
+      <publishTime>10/21/2022 13:18:40</publishTime>
     </File>
   </ItemGroup>
 </Project>
