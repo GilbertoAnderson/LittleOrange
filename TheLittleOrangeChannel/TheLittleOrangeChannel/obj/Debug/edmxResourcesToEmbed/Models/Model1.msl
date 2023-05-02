@@ -239,5 +239,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="view_EspecialidadeCondominioCidade">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.view_EspecialidadeCondominioCidade">
+        <MappingFragment StoreEntitySet="view_EspecialidadeCondominioCidade">
+          <ScalarProperty Name="Icone" ColumnName="Icone" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="codigoIBGE" ColumnName="codigoIBGE" />
+          <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_TerceiroCondominioCidade">
+      <EntityTypeMapping TypeName="TheLittleOrangeModel.view_TerceiroCondominioCidade">
+        <MappingFragment StoreEntitySet="view_TerceiroCondominioCidade">
+          <ScalarProperty Name="Abrangencia" ColumnName="Abrangencia" />
+          <ScalarProperty Name="C_codAbrangencia" ColumnName=" codAbrangencia" />
+          <ScalarProperty Name="Indicacoes" ColumnName="Indicacoes" />
+          <ScalarProperty Name="NotaAvaliacao" ColumnName="NotaAvaliacao" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="idPrestador" ColumnName="idPrestador" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="codigoIBGE" ColumnName="codigoIBGE" />
+          <ScalarProperty Name="idCondominio" ColumnName="idCondominio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -5,6 +5,9 @@
 
     var link_x = ViewBag.link;
     var texto_x = ViewBag.texto;
+    var idStatusAtual = ViewBag.StatusAtual;
+    var idStatusCadastrado = ViewBag.StatusCadastrado;
+    var idStatusIndicado = ViewBag.StatusIndicado;
 }
 
 <h2>Prestadores</h2>
@@ -25,6 +28,7 @@
     @Html.HiddenFor(model => model.idFormaPagto)
     @Html.HiddenFor(model => model.dtCriacao)
 
+    <input type="hidden" id="idStatusIndicado" Value="@ViewBag.StatusIndicado" />
 
     <div class="form-group">
         @Html.LabelFor(model => model.idCondominio, "Condominio", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -84,12 +88,12 @@
 
 
     <div class="form-group">
-            @Html.LabelFor(model => model.diasPromocao, "dias Promocao ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.diasPromocao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.diasPromocao, "", new { @class = "text-danger" })
-            </div>
+        @Html.LabelFor(model => model.diasPromocao, "dias Promocao ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.diasPromocao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.diasPromocao, "", new { @class = "text-danger" })
         </div>
+    </div>
 
 
     @*<div class="form-group">
@@ -115,8 +119,19 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <a href=" @Url.Action("Index")" class="btn btn-warning">Sair</a>
-            <button onclick="enviarWhatsApp('@ViewBag.ShortCelular', '@ViewBag.Empresa', '@ViewBag.Condominio', '@ViewBag.Especialidade','@ViewBag.Email')" class="btn btn-success">Abrir Whatsapp</button>
-            <input type="submit" value="Salvar" class="btn btn-default" />
+
+            @if (idStatusAtual == idStatusCadastrado)
+            {
+                <button onclick="enviarWhatsApp('@ViewBag.ShortCelular', '@ViewBag.Empresa', '@ViewBag.Condominio', '@ViewBag.Especialidade','@ViewBag.Email', '@ViewBag.id')" class="btn btn-success">Whatsapp</button>
+            }
+
+
+            @if (idStatusAtual == idStatusIndicado)
+            {
+                <button onclick="enviarWhatsAppIndicado('@ViewBag.ShortCelular', '@ViewBag.Empresa', '@ViewBag.Condominio', '@ViewBag.Especialidade','@ViewBag.Email', '@ViewBag.id')" class="btn btn-success">Whatsapp 2</button>
+            }
+
+            <input id="btnSalvar" type="submit" value="Salvar" class="btn btn-default" id="btnSalvar" />
         </div>
     </div>
 </div>
@@ -138,8 +153,7 @@
 
         });
 
-
-        function enviarWhatsApp(celular, empresa, condominio, especialidade, email) {
+        function enviarWhatsApp(celular, empresa, condominio, especialidade, email, idPrestador) {
 
 
             var msg = "Olá " + empresa + ',  \r\n\r\n '
@@ -161,12 +175,66 @@
                 + "CPF/CNPJ:   \r\n\r\n "
                 + "https://thelittleorange.app";
 
-            //alert(msg);
-
             msg = window.encodeURIComponent(msg);
             window.open("https://api.whatsapp.com/send?phone=55" + celular + "&text=" + msg, "_blank");
 
+            document.getElementById('idStatus').value = document.getElementById('idStatusIndicado').value;
+
+            document.getElementById('btnSalvar').click();
+
+            @*location.reload();
+
+            $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Indicado", "PrestadoresBase")',
+                data: {
+                    "id": idPrestador
+                },
+                success:
+
+                function (resultado) {
+                    alert('Prestador indicado com sucesso!!');
+                },
+            });*@
+
+
+
         }
+
+
+    function enviarWhatsApp2(celular, empresa, condominio, especialidade, email, idPrestador) {
+
+        var diasPromocao = document.getElementById('diasPromocao').value;
+
+        var msg = "Sua empresa foi cadastrada com sucesso!! " + empresa + ',  \r\n\r\n '
+            + "Em breve vai receber um e - mail com as informações de acesso a plataforma The Little Orange. \r\n\r\n"
+            + "Você recebeu " + diasPromocao + " dias gratuitos para ser exibido em todo estado."
+            + "Para aumentar suas visualizações entre no app e complete os dados de sua empresa!\r\n"
+            + "Agora se você quiser ter destaque, pede para seus clientes te avaliarem usando o app."
+            + "Imprima este flyer e deixe bem fácil para o seu cliente ver,\r\n\r\n"
+            + "ele tem um QR Code que leva seu cliente direto para o app,\r\n\r\n"
+            + "ali ele se cadastra e poderá dar uma nota para sua empresa!. \r\n\r\n"
+            + "- - - - - - - - - - - - - - - - -\r\n"
+            + "P R E S T A D O R\r\n"
+            + "- - - - - - - - - - - - - - - - -\r\n"
+            + "Condomínio: " + condominio + "\r\n"
+            + "Empresa: " + empresa + "\r\n"
+            + "Especialidade: " + especialidade + "\r\n"
+            + "Celular: " + celular + "\r\n"
+            + "E-mail: " + email + "\r\n"
+            + "CPF/CNPJ:   \r\n\r\n "
+            + "https://thelittleorange.app";
+
+        msg = window.encodeURIComponent(msg);
+        window.open("https://api.whatsapp.com/send?phone=55" + celular + "&text=" + msg, "_blank");
+
+
+        document.getElementById('btnSalvar').click();
+
+
+        }
+
 
 </script>
  }

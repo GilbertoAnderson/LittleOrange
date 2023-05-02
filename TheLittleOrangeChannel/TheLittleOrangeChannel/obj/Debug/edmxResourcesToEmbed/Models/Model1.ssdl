@@ -222,6 +222,38 @@
     <Property Name="idStatus" Type="int" Nullable="false" />
     <Property Name="dtValidade" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'db_a49cbe_littleorange.dbo.view_EspecialidadeCondominioCidade' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_EspecialidadeCondominioCidade">
+    <Key>
+      <PropertyRef Name="idCondominio" />
+      <PropertyRef Name="Empresa" />
+    </Key>
+    <Property Name="idCondominio" Type="int" Nullable="false" />
+    <Property Name="codigoIBGE" Type="varchar" MaxLength="7" />
+    <Property Name="Nome" Type="varchar" MaxLength="240" />
+    <Property Name="Empresa" Type="varchar" MaxLength="240" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="60" />
+    <Property Name="Icone" Type="varchar" MaxLength="60" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'db_a49cbe_littleorange.dbo.view_TerceiroCondominioCidade' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_TerceiroCondominioCidade">
+    <Key>
+      <PropertyRef Name="idCondominio" />
+      <PropertyRef Name="idPrestador" />
+      <PropertyRef Name="Empresa" />
+    </Key>
+    <Property Name="idCondominio" Type="int" Nullable="false" />
+    <Property Name="codigoIBGE" Type="varchar" MaxLength="7" />
+    <Property Name="Nome" Type="varchar" MaxLength="240" />
+    <Property Name="idPrestador" Type="int" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="240" Nullable="false" />
+    <Property Name="NotaAvaliacao" Type="decimal" Precision="3" Scale="1" />
+    <Property Name="Indicacoes" Type="int" />
+    <Property Name=" codAbrangencia" Type="varchar" MaxLength="3" />
+    <Property Name="Abrangencia" Type="varchar" MaxLength="50" />
+  </EntityType>
   <Association Name="fk_tblAssinaturas_Abrangencia">
     <End Role="tblDominios" Type="Self.tblDominios" Multiplicity="1" />
     <End Role="tblAssinaturas" Type="Self.tblAssinaturas" Multiplicity="*" />
@@ -788,6 +820,29 @@
     <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsuarioCondominio" EntityType="Self.tblUsuarioCondominio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblUsuarioPerfil" EntityType="Self.tblUsuarioPerfil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="view_EspecialidadeCondominioCidade" EntityType="Self.view_EspecialidadeCondominioCidade" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_EspecialidadeCondominioCidade].[idCondominio] AS [idCondominio], 
+    [view_EspecialidadeCondominioCidade].[codigoIBGE] AS [codigoIBGE], 
+    [view_EspecialidadeCondominioCidade].[Nome] AS [Nome], 
+    [view_EspecialidadeCondominioCidade].[Empresa] AS [Empresa], 
+    [view_EspecialidadeCondominioCidade].[Descricao] AS [Descricao], 
+    [view_EspecialidadeCondominioCidade].[Icone] AS [Icone]
+    FROM [dbo].[view_EspecialidadeCondominioCidade] AS [view_EspecialidadeCondominioCidade]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="view_TerceiroCondominioCidade" EntityType="Self.view_TerceiroCondominioCidade" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_TerceiroCondominioCidade].[idCondominio] AS [idCondominio], 
+    [view_TerceiroCondominioCidade].[codigoIBGE] AS [codigoIBGE], 
+    [view_TerceiroCondominioCidade].[Nome] AS [Nome], 
+    [view_TerceiroCondominioCidade].[idPrestador] AS [idPrestador], 
+    [view_TerceiroCondominioCidade].[Empresa] AS [Empresa], 
+    [view_TerceiroCondominioCidade].[NotaAvaliacao] AS [NotaAvaliacao], 
+    [view_TerceiroCondominioCidade].[Indicacoes] AS [Indicacoes], 
+    [view_TerceiroCondominioCidade].[ codAbrangencia] AS [ codAbrangencia], 
+    [view_TerceiroCondominioCidade].[Abrangencia] AS [Abrangencia]
+    FROM [dbo].[view_TerceiroCondominioCidade] AS [view_TerceiroCondominioCidade]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="fk_tblAssinaturas_Abrangencia" Association="Self.fk_tblAssinaturas_Abrangencia">
       <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblAssinaturas" EntitySet="tblAssinaturas" />

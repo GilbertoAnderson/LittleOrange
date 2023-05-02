@@ -463,6 +463,7 @@ begin
 		[Email]				varchar(240)      not null,
 		[Senha]				varchar(020)      not null,
 		[Celular]			varchar(025)      not null,
+		[Nickname]			varchar(025)      null,
 		[dtNascimento]		datetime,
 		[CPF_CNPJ]		    varchar(014),
 		[idStatus]			int              not null,		

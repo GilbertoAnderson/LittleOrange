@@ -194,11 +194,16 @@ namespace TheLittleOrangeChannel.Controllers
                 return HttpNotFound();
             }
 
+            var _StatusCadastrado = db.tblStatus.Where(x => x.Objeto == "PRESTADORBASE" && x.Descricao == "Cadastrado").FirstOrDefault();
+            var _StatusIndicado = db.tblStatus.Where(x => x.Objeto == "PRESTADORBASE" && x.Descricao == "Indicado").FirstOrDefault();
+            
             var _tblespecialidade = db.tblEspecialidade.Where(x => x.idEspecialidade == tblPrestadorBase.idEspecialidade).FirstOrDefault();
             var _tblCondominio = db.tblCondominio.Where(x => x.idCondominio == tblPrestadorBase.idCondominio).FirstOrDefault();
 
             var _Abrangencia = db.tblDominios.Where(x => x.Objeto == "ABRANGENCIA");
-
+            ViewBag.StatusCadastrado = _StatusCadastrado.idStatus;
+            ViewBag.StatusIndicado = _StatusIndicado.idStatus;
+            ViewBag.StatusAtual = tblPrestadorBase.idStatus;
             ViewBag.idAbrangencia = new SelectList(_Abrangencia, "idDominio", "Descricao", tblPrestadorBase.idAbrangencia);
             ViewBag.idEspecialidade = new SelectList(db.tblEspecialidade, "idEspecialidade", "Descricao", tblPrestadorBase.idEspecialidade);
             ViewBag.idCondominio = new SelectList(db.tblCondominio, "idCondominio", "Nome", tblPrestadorBase.idCondominio);
@@ -212,6 +217,7 @@ namespace TheLittleOrangeChannel.Controllers
             ViewBag.Condominio = _tblCondominio.Nome;
             ViewBag.Especialidade = _tblespecialidade.Descricao;
             ViewBag.Email = tblPrestadorBase.Email;
+            ViewBag.id = tblPrestadorBase.idPrestador;
 
 
             var celular = tblPrestadorBase.Celular;
@@ -273,6 +279,7 @@ namespace TheLittleOrangeChannel.Controllers
             }
             tblPrestadorBase.CPF_CNPJ = cpfCnpj;
 
+
             if (ModelState.IsValid)
             {
                 db.Entry(tblPrestadorBase).State = EntityState.Modified;        
@@ -284,13 +291,18 @@ namespace TheLittleOrangeChannel.Controllers
                 string preenchido_cpf = "não";
                 string preenchido_email = "não";
 
-                if (Helper.IsValid(cpfCnpj))
+                if (tblPrestadorBase.CPF_CNPJ != "" && tblPrestadorBase.CPF_CNPJ != null)
                 {
-                    preenchido_cpf = "sim";
+                    if (Helper.IsValid(cpfCnpj))
+                    {
+                        preenchido_cpf = "sim";
+                    }
                 }
 
                 if (tblPrestadorBase.Email != "" && tblPrestadorBase.Email !=  null)
                 {
+                    tblPrestadorBase.Email = tblPrestadorBase.Email.Trim();
+
                     if (Helper.IsValidEmail(tblPrestadorBase.Email))
                     {
                         preenchido_email = "sim";
@@ -301,6 +313,7 @@ namespace TheLittleOrangeChannel.Controllers
                 if (preenchido_email == "sim" & preenchido_cpf == "sim")
                 {
                     var _tblTrafegoStatus = db.tblStatus.Where(x => x.Objeto == "PRESTADOR" && x.Descricao == "Prospectado").FirstOrDefault();
+                    var _tblStatusAtivo = db.tblStatus.Where(x => x.Objeto == "PRESTADOR" && x.Descricao == "ATIVO").FirstOrDefault();
                     var _tblAbrangencia = db.tblDominios.Where(x => x.Objeto == "ABRANGENCIA" && x.Descricao == "CONDOMINIO").FirstOrDefault();
 
                     tblPrestador novoPrestador = new tblPrestador();
@@ -315,6 +328,12 @@ namespace TheLittleOrangeChannel.Controllers
                     novoPrestador.idFormaPagto = tblPrestadorBase.idFormaPagto;
                     novoPrestador.idPlano = tblPrestadorBase.idPlano;
                     // novoPrestador.idUsuario = tblPrestadorBase.idCanal;
+
+                    // .........quando o prestador recebe periodo gratuito de abrangencia
+                    if (tblPrestadorBase.idAbrangencia != _tblAbrangencia.idDominio)
+                    {
+                        novoPrestador.idStatus = _tblStatusAtivo.idStatus;
+                    }
 
                     //......... valores default
                     int idEspecialidade = tblPrestadorBase.idEspecialidade;
@@ -384,25 +403,70 @@ namespace TheLittleOrangeChannel.Controllers
                         _tblAssinaturas.Log = "PROMOCAO NOVO CADASTRO PELO CANAL";
                         db.tblAssinaturas.Add(_tblAssinaturas);
                         db.SaveChanges();
+
+
                     }
 
                     return RedirectToAction("Index");
                 }
                 
+
             }
 
 
+            //ViewBag.idCondominio = new SelectList(db.tblCondominio, "idCondominio", "Nome", tblPrestadorBase.idCondominio);
+            //ViewBag.idCanal = new SelectList(db.tblUsuario, "idUsuario", "Nome", tblPrestadorBase.idCanal);
+            //ViewBag.idStatus = new SelectList(db.tblStatus, "idStatus", "Objeto", tblPrestadorBase.idStatus);
+
+            //var _StatusIndicado = db.tblStatus.Where(x => x.Objeto == "PRESTADORBASE" && x.Descricao == "Indicado").FirstOrDefault();
+            //tblPrestadorBase.idStatus = _StatusIndicado.idStatus;
+            //db.SaveChanges();
+
+            return RedirectToAction("Index");
+            //return RedirectToAction("Edit", tblPrestadorBase.idPrestador);
+            //return View(tblPrestadorBase);
+
+        }
+
+
+
+        public ActionResult Indicadox(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblPrestadorBase tblPrestadorBase = db.tblPrestadorBase.Find(id);
+            if (tblPrestadorBase == null)
+            {
+                return HttpNotFound();
+            }
+
+            var _StatusIndicado = db.tblStatus.Where(x => x.Objeto == "PRESTADORBASE" && x.Descricao == "Indicado").FirstOrDefault();
+
+            if (ModelState.IsValid)
+            {
+                tblPrestadorBase.idStatus = _StatusIndicado.idStatus;
+                db.Entry(tblPrestadorBase).State = EntityState.Modified;
+                var num = db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+          
+            return RedirectToAction("Edit", tblPrestadorBase.idPrestador);
+        }
+
+        public ActionResult Indicado(int id)
+        {
+
+            tblPrestadorBase tblPrestadorBase = db.tblPrestadorBase.Find(id);
+
+            db.Entry(tblPrestadorBase).State = EntityState.Modified;
+            //----------------------------------- atualiza o status da solicitação
             var _StatusIndicado = db.tblStatus.Where(x => x.Objeto == "PRESTADORBASE" && x.Descricao == "Indicado").FirstOrDefault();
             tblPrestadorBase.idStatus = _StatusIndicado.idStatus;
             db.SaveChanges();
 
-            ViewBag.idCondominio = new SelectList(db.tblCondominio, "idCondominio", "Nome", tblPrestadorBase.idCondominio);
-            ViewBag.idCanal = new SelectList(db.tblUsuario, "idUsuario", "Nome", tblPrestadorBase.idCanal);
-            ViewBag.idStatus = new SelectList(db.tblStatus, "idStatus", "Objeto", tblPrestadorBase.idStatus);
-
-
-            return RedirectToAction("Edit", tblPrestadorBase.idPrestador);
-            //return View(tblPrestadorBase);
+            return RedirectToAction("Index");
 
         }
 

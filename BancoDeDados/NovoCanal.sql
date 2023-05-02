@@ -1,5 +1,5 @@
 
-select * from tblUsuario where idUsuario = 29
+select * from tblUsuario where idUsuario = 128
 
 
 
@@ -11,7 +11,7 @@ select * from tblUsuarioPerfil
 
 		insert into tblUsuarioPerfil(idUsuario, idPerfil, [idStatus], [dtValidade]) 
 		values(		
-				(select idUsuario from tblUsuario where Nome      = 'Rafael Rafael'),
+				(select idUsuario from tblUsuario where Nome      = 'Paulo José Ribeiro Silva '),
 				(select idPerfil  from tblPerfil  where Descricao = 'CANAL'),
 				(select idStatus  from tblStatus  where Objeto    = 'USUARIO_PERFIL' and Descricao = 'ATIVO'),
 				dateadd(month,3,GETDATE()))	

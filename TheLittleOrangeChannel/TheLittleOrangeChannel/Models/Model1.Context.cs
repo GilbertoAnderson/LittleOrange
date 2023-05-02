@@ -43,6 +43,8 @@ namespace TheLittleOrangeChannel.Models
         public virtual DbSet<tblUsuario> tblUsuario { get; set; }
         public virtual DbSet<tblUsuarioCondominio> tblUsuarioCondominio { get; set; }
         public virtual DbSet<tblUsuarioPerfil> tblUsuarioPerfil { get; set; }
+        public virtual DbSet<view_EspecialidadeCondominioCidade> view_EspecialidadeCondominioCidade { get; set; }
+        public virtual DbSet<view_TerceiroCondominioCidade> view_TerceiroCondominioCidade { get; set; }
     
         public virtual ObjectResult<string> sp_ConvitePrestador(Nullable<int> idPrestador)
         {

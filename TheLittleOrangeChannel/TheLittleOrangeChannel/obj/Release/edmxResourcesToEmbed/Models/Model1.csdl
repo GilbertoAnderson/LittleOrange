@@ -26,6 +26,8 @@
     <EntitySet Name="tblUsuario" EntityType="TheLittleOrangeModel.tblUsuario" />
     <EntitySet Name="tblUsuarioCondominio" EntityType="TheLittleOrangeModel.tblUsuarioCondominio" />
     <EntitySet Name="tblUsuarioPerfil" EntityType="TheLittleOrangeModel.tblUsuarioPerfil" />
+    <EntitySet Name="view_EspecialidadeCondominioCidade" EntityType="TheLittleOrangeModel.view_EspecialidadeCondominioCidade" />
+    <EntitySet Name="view_TerceiroCondominioCidade" EntityType="TheLittleOrangeModel.view_TerceiroCondominioCidade" />
     <AssociationSet Name="fk_tblAssinaturas_Abrangencia" Association="TheLittleOrangeModel.fk_tblAssinaturas_Abrangencia">
       <End Role="tblDominios" EntitySet="tblDominios" />
       <End Role="tblAssinaturas" EntitySet="tblAssinaturas" />
@@ -518,6 +520,34 @@
     <NavigationProperty Name="tblPerfil" Relationship="TheLittleOrangeModel.fk_tblUsuarioPerfil_Perfil" FromRole="tblUsuarioPerfil" ToRole="tblPerfil" />
     <NavigationProperty Name="tblStatus" Relationship="TheLittleOrangeModel.fk_tblUsuarioPerfil_Status" FromRole="tblUsuarioPerfil" ToRole="tblStatus" />
     <NavigationProperty Name="tblUsuario" Relationship="TheLittleOrangeModel.fk_tblUsuarioPerfil_Usuario" FromRole="tblUsuarioPerfil" ToRole="tblUsuario" />
+  </EntityType>
+  <EntityType Name="view_EspecialidadeCondominioCidade">
+    <Key>
+      <PropertyRef Name="idCondominio" />
+      <PropertyRef Name="Empresa" />
+    </Key>
+    <Property Name="idCondominio" Type="Int32" Nullable="false" />
+    <Property Name="codigoIBGE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="Nome" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="Empresa" Type="String" Nullable="false" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="Descricao" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Icone" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="view_TerceiroCondominioCidade">
+    <Key>
+      <PropertyRef Name="idCondominio" />
+      <PropertyRef Name="idPrestador" />
+      <PropertyRef Name="Empresa" />
+    </Key>
+    <Property Name="idCondominio" Type="Int32" Nullable="false" />
+    <Property Name="codigoIBGE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="Nome" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="idPrestador" Type="Int32" Nullable="false" />
+    <Property Name="Empresa" Type="String" Nullable="false" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="NotaAvaliacao" Type="Decimal" Precision="3" Scale="1" />
+    <Property Name="Indicacoes" Type="Int32" />
+    <Property Name="C_codAbrangencia" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="Abrangencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="fk_tblAssinaturas_Abrangencia">
     <End Type="TheLittleOrangeModel.tblDominios" Role="tblDominios" Multiplicity="1" />

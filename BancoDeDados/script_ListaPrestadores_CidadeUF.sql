@@ -28,7 +28,7 @@ set @CodigoIBGE = null
 set @idCondominio = 52 -- Luciano
 set @idCondominio = 29 -- Naomi
 
-
+set @idCondominio =  61 -- Gilmar
 
 
 
@@ -41,7 +41,7 @@ if @qtdePrestadores = 0 begin
 end
 
 set @sql = ''
-set @sql = @sql + 'select condo.codigoIBGE ,condo.Nome,  prest.Empresa, espec.Descricao '
+set @sql = @sql + 'select condo.codigoIBGE ,condo.Nome,  prest.idPrestador,  prest.Empresa, espec.Descricao '
 set @sql = @sql + 'from       tblCondominio             condo  '
 set @sql = @sql + 'inner join tblPrestador              prest on prest.idCondominio    = condo.idCondominio '
 set @sql = @sql + 'inner join tblPrestadorEspecialidade presp on presp.idPrestador     = prest.idPrestador '
@@ -60,10 +60,10 @@ if @qtdePrestadores = 0  begin
 end else begin
 	set @sql = @sql + 'where condo.idCondominio = ' + convert(varchar,@idCondominio) 
 end
-set @sql = @sql + ' group by condo.Nome, condo.codigoIBGE, prest.Empresa, espec.Descricao '
+set @sql = @sql + ' group by condo.Nome, condo.codigoIBGE, prest.idPrestador, prest.Empresa, espec.Descricao '
 
-print @sql
---exec(@sql)
+--print @sql
+exec(@sql)
 
 
 
