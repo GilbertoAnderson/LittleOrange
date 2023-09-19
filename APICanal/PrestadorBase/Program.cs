@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using prestadorBase.Data;
+using PrestadorBaseAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<prestadorBase.Data.PrestadorBaseDBContext>(
+builder.Services.AddDbContext<PrestadorBaseAPIDBContext>(
         o => o.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 var app = builder.Build();

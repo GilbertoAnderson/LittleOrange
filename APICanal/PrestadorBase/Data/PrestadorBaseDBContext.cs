@@ -1,15 +1,16 @@
 using Microsoft.EntityFrameworkCore;
-using prestadorBase.Models;
+using PrestadorBaseAPI.Models;
 
-namespace prestadorBase.Data
+namespace PrestadorBaseAPI.Data
 {
-    public class PrestadorBaseDBContext : DbContext
+    public class PrestadorBaseAPIDBContext : DbContext
     {
 
-        public PrestadorBaseDBContext(DbContextOptions<PrestadorBaseDBContext> options) : base(options)
+        public PrestadorBaseAPIDBContext(DbContextOptions options) : base(options)
         { }
 
-        public DbSet<PrestadorBase> PrestadoresBase { get; set; }
+        public DbSet<PrestadorBase> Prestadores { get; set; }
+
     }
 
 }

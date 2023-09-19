@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace prestadorBase.Models
+namespace PrestadorBaseAPI.Models
 {
     public class PrestadorBase
     {
@@ -20,4 +20,6 @@ namespace prestadorBase.Models
         public int idEspecialidade { get; set; }
         public int idStatus { get; set; }
     }
+
+
 }
